@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">LeQi</string>
+    <string name="app_name">乐骑</string>
+    <item name="TAG_KEY_URI" type="id"/>
 </resources>

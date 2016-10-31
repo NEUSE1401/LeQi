@@ -2,4 +2,11 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- title顶部距离-->
+    <dimen name="title_padding_top">0dp</dimen>
+    <!-- title文字大小-->
+    <dimen name="title_text_size">18sp</dimen>
+    <!-- 底部导航栏高度-->
+    <dimen name="nav_height">55dp</dimen>
+    <dimen name="nav_text_size">10sp</dimen>
 </resources>

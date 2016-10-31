@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- title顶部距离-->
+    <dimen name="title_padding_top">10dp</dimen>
+</resources>
