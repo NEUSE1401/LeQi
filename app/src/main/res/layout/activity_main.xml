@@ -20,13 +20,11 @@
 
             <la.neu.leqi.customview.AdView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#36ff00">
+                android:layout_height="100dp">
                 <la.neu.leqi.customview.AutoScrollViewPager
                     android:id="@+id/vPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#cc6100"/>
+                    android:layout_height="match_parent" />
             </la.neu.leqi.customview.AdView>
         </LinearLayout>
     </ScrollView>

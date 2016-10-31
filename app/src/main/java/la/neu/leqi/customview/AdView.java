@@ -22,7 +22,7 @@ public class AdView extends LinearLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        heightMeasureSpec=(int)(((double)widthMeasureSpec/21)*9);
+        heightMeasureSpec=(int)(((double)widthMeasureSpec/16)*9);
         int mode = MeasureSpec.getMode(widthMeasureSpec);
         super.onMeasure(MeasureSpec.makeMeasureSpec(widthMeasureSpec, mode), MeasureSpec.makeMeasureSpec(heightMeasureSpec, mode));
     }
