@@ -38,7 +38,7 @@
                 android:id="@+id/activity_pic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/default_background"
+                android:background="@drawable/default_background1"
                 android:scaleType="fitXY"/>
             <!-- 分类栏-->
             <LinearLayout
@@ -224,7 +224,7 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/home_active" />
+                    android:background="@drawable/home_active1" />
             </LinearLayout>
 
             <LinearLayout
@@ -260,7 +260,7 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/cycling" />
+                    android:background="@drawable/cycling1" />
             </LinearLayout>
 
             <LinearLayout
@@ -296,7 +296,7 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/share" />
+                    android:background="@drawable/share1" />
             </LinearLayout>
 
             <LinearLayout
@@ -332,7 +332,7 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/groups" />
+                    android:background="@drawable/groups1" />
             </LinearLayout>
 
             <LinearLayout
@@ -368,7 +368,7 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/flag" />
+                    android:background="@drawable/flag1" />
             </LinearLayout>
 
             <LinearLayout
