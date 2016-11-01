@@ -19,6 +19,17 @@
     <dimen name="kinds_item_padding">4dp</dimen>
     <dimen name="kinds_padding_vertical">10dp</dimen>
     <dimen name="kinds_text_size">10sp</dimen>
+    <!-- 首页列表-->
+    <dimen name="item_padding">5dp</dimen>
+    <dimen name="item_main_text_size">18dp</dimen>
+    <dimen name="item_sub_text_size">10dp</dimen>
+    <dimen name="item_small_text_size">7dp</dimen>
+    <!-- 活动-->
+    <dimen name="activity_item_height">60dp</dimen>
+    <!-- 分享-->
+    <dimen name="share_item_height">200dp</dimen>
+    <!-- 自行车-->
+    <dimen name="bicycle_item_height">250dp</dimen>
     <!--菜单头部-->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>

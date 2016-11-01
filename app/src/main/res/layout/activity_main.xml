@@ -61,7 +61,6 @@
                         android:layout_height="0dp"
                         android:layout_weight="2"
                         android:gravity="center">
-
                         <la.neu.leqi.customview.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -187,14 +186,13 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
             </LinearLayout>
             <!-- 信息展示栏-->
-            <LinearLayout
+            <ListView
+                android:id="@+id/share_list"
                 android:layout_width="match_parent"
-                android:layout_height="1000dp">
-
-            </LinearLayout>
+                android:layout_height="wrap_content">
+            </ListView>
         </LinearLayout>
     </ScrollView>
     <!-- 导航栏-->
