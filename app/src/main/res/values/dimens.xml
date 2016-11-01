@@ -4,9 +4,19 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- title顶部距离-->
     <dimen name="title_padding_top">0dp</dimen>
+    <dimen name="title_padding_horizontal">10dp</dimen>
     <!-- title文字大小-->
-    <dimen name="title_text_size">18sp</dimen>
-    <!-- 底部导航栏高度-->
+    <dimen name="title_text_size">20sp</dimen>
+    <!-- 头像大小-->
+    <dimen name="title_icon_size">35dp</dimen>
+    <dimen name="title_icon_info_size">8dp</dimen>
+    <!-- 底部导航栏-->
     <dimen name="nav_height">55dp</dimen>
     <dimen name="nav_text_size">10sp</dimen>
+    <dimen name="nav_item_padding">8dp</dimen>
+    <!--首页分类图标 -->
+    <dimen name="kinds_height">85dp</dimen>
+    <dimen name="kinds_item_padding">4dp</dimen>
+    <dimen name="kinds_padding_vertical">10dp</dimen>
+    <dimen name="kinds_text_size">10sp</dimen>
 </resources>

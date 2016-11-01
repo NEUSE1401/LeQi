@@ -106,6 +106,7 @@ public class ImageLoader {
         }
     }
 
+
     public static ImageLoader build(Context context) {
         return new ImageLoader(context);
     }
@@ -121,7 +122,7 @@ public class ImageLoader {
     }
 
     public void bindBitmap(final String uri, final ImageView imageView) {
-        bindBitmap(uri, imageView, 0, 0);
+        bindBitmap(uri, imageView,0,0);
     }
 
     public void bindBitmap(final String uri, final ImageView imageView, final int reqWidth, final int reqHeight) {
