@@ -5,15 +5,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/personal_information"
+            android:icon="@drawable/personal_info"
             android:title="我的信息" />
         <item
             android:id="@+id/personal_share"
+            android:icon="@drawable/personal_share"
             android:title="我的分享" />
         <item
             android:id="@+id/personal_activity"
+            android:icon="@drawable/personal_release"
             android:title="我的活动" />
         <item
             android:id="@+id/personal_collect"
+            android:icon="@drawable/personal_collect"
             android:title="我的收藏" />
     </group>
 
@@ -21,6 +25,7 @@
         <menu>
             <item
                 android:id="@+id/setting"
+                android:icon="@drawable/setting"
                 android:title="设置" />
 
         </menu>
