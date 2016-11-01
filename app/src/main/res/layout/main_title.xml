@@ -21,7 +21,7 @@
         android:layout_alignParentRight="true">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/user_icon"
+            android:id="@+id/user_face"
             android:layout_width="@dimen/title_icon_size"
             android:layout_height="@dimen/title_icon_size"
             android:src="@drawable/default_icon"

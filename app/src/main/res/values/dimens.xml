@@ -19,4 +19,8 @@
     <dimen name="kinds_item_padding">4dp</dimen>
     <dimen name="kinds_padding_vertical">10dp</dimen>
     <dimen name="kinds_text_size">10sp</dimen>
+    <!--菜单头部-->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+
 </resources>
