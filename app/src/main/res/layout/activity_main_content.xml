@@ -256,6 +256,8 @@
         </LinearLayout>
         <!-- 车铺按钮 -->
         <LinearLayout
+            android:clickable="true"
+            android:id="@+id/bicycle_shop"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -264,6 +266,7 @@
             android:weightSum="3">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -292,6 +295,8 @@
         </LinearLayout>
         <!-- 分享按钮 -->
         <LinearLayout
+            android:id="@+id/share"
+            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -328,6 +333,8 @@
         </LinearLayout>
         <!-- 俱乐部按钮 -->
         <LinearLayout
+            android:id="@+id/club"
+            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -364,6 +371,8 @@
         </LinearLayout>
         <!-- 活动按钮 -->
         <LinearLayout
+            android:id="@+id/activity"
+            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

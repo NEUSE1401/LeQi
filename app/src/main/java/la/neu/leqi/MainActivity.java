@@ -1,6 +1,7 @@
 package la.neu.leqi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.synnapps.carouselview.CarouselView;
@@ -41,6 +43,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
     final int LEFT = 1;
     private GestureDetector gestureDetector;
 
+    private LinearLayout bicylceShop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,18 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         bicycleAdapter.addGood(good3);
         bicycleAdapter.addGood(good4);
         bicycle_list.setAdapter(bicycleAdapter);
+
+//       导航栏跳转
+        bicylceShop= (LinearLayout) findViewById(R.id.bicycle_shop);
+        bicylceShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,ShopActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
 
