@@ -10,7 +10,7 @@
 
     <!--主页内容include进来-->
     <include
-        layout="@layout/activity_main"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
