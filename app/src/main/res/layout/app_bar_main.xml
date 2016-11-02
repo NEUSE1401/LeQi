@@ -7,18 +7,21 @@
     android:fitsSystemWindows="true"
     app:statusBarScrim="@android:color/transparent"
     tools:context=".MainActivity">
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:paddingTop="@dimen/title_padding_top"
         android:fitsSystemWindows="true">
+
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize">
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:fitsSystemWindows="true">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:paddingLeft="@dimen/title_padding_horizontal"
                 android:paddingRight="@dimen/title_padding_horizontal">
                 <!-- 头像-->
@@ -46,13 +49,17 @@
                         android:background="@drawable/icon_point" />
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="乐骑"
-                    android:textColor="@color/title_text_color"
-                    android:textSize="@dimen/title_text_size" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="乐骑"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="@dimen/title_text_size" />
+                </LinearLayout>
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>

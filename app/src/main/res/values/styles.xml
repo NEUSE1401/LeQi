@@ -5,5 +5,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="toolbarStyle">@style/PaddingToolbar</item>
+    </style>
+
+    <style name="PaddingToolbar" parent="Widget.AppCompat.Toolbar"> 
+        <item name="contentInsetStart">0dp</item>
     </style>
 </resources>

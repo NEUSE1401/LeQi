@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">乐骑</string>
+    <string name="separator">--</string>
     <item name="TAG_KEY_URI" type="id"/>
 </resources>
