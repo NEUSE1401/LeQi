@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,11 +25,24 @@ public class PersonalInformationActivity extends Activity{
     private TextView age;
     private TextView district;
     private TextView contactWay;
+    private TextView back_title;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_personal_information);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_title);
+        back_title = (TextView)findViewById(R.id.back_title);
+        back_title.setText("乐骑");
+        imageView  =(ImageView)findViewById(R.id.back_icon);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         changeAge= (LinearLayout) findViewById(R.id.change_age);
         changeContactWay= (LinearLayout) findViewById(R.id.change_contact);
         changeDistrict= (LinearLayout) findViewById(R.id.change_district);

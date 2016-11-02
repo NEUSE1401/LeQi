@@ -19,8 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PersonalInformationActivity"></activity>
-        <activity android:name=".ChangePersonalInfoActivity"></activity>
+        <activity
+            android:name=".PersonalInformationActivity"
+            android:theme="@style/CustomTitleTheme"/>
+        <activity android:name=".ChangePersonalInfoActivity"/>
     </application>
 
 </manifest>

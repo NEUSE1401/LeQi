@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomTitleTheme" parent="android:Theme.Light">
+        <item name="android:windowTitleSize">@dimen/title_height</item>
+        <item name="android:windowTitleBackgroundStyle">@style/windowTitleBackgroundStyle</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+</resources>

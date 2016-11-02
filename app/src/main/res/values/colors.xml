@@ -2,6 +2,8 @@
 <resources>
     <!-- 主基调-->
     <color name="colorPrimary">#03a9f4</color>
+    <!-- 淡色基调-->
+    <color name="colorLight">#46c0ff</color>
     <!-- 深色基调-->
     <color name="colorPrimaryDark">#01579b</color>
     <!-- 强调基调-->

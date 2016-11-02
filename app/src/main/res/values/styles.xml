@@ -11,4 +11,12 @@
     <style name="PaddingToolbar" parent="Widget.AppCompat.Toolbar"> 
         <item name="contentInsetStart">0dp</item>
     </style>
+
+    <style name="CustomTitleTheme" parent="android:Theme.Light">
+        <item name="android:windowTitleSize">@dimen/title_height</item>
+        <item name="android:windowTitleBackgroundStyle">@style/windowTitleBackgroundStyle</item>
+    </style>
+    <style name="windowTitleBackgroundStyle">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 </resources>
