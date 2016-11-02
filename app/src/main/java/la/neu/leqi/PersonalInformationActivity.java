@@ -60,7 +60,7 @@ public class PersonalInformationActivity extends Activity{
         contactWay= (TextView) findViewById(R.id.contact_way);
         district= (TextView) findViewById(R.id.district);
         sex= (TextView) findViewById(R.id.sex);
-
+        age.setText(year+"-"+month+"-"+day);
 
         changeNickName.setOnClickListener(new ChangePersonalInfoListener(nickName.getText().toString()));
         changeSex.setOnClickListener(new ChangePersonalInfoListener(sex.getText().toString()));
@@ -102,13 +102,18 @@ public class PersonalInformationActivity extends Activity{
         @Override
         public void onDateSet(DatePicker view, int myyear, int monthOfYear, int dayOfMonth) {
             //修改year、month、day的变量值，以便以后单击按钮时，DatePickerDialog上显示上一次修改后的值
-            String remind;
-           if(myyear==year&&(monthOfYear+1)==month&&dayOfMonth==day){
-               remind="未改变";
-               Toast toast=Toast.makeText(PersonalInformationActivity.this,remind,Toast.LENGTH_LONG);
-               toast.show();
-               return;
-           }
+//            String remind;
+//           if(myyear==year&&(monthOfYear+1)==month&&dayOfMonth==day){
+//               remind="未改变";
+//               Toast toast=Toast.makeText(PersonalInformationActivity.this,remind,Toast.LENGTH_LONG);
+//               toast.show();
+//
+//           }else{
+//               year=myyear;
+//               month=monthOfYear+1;
+//               day=dayOfMonth;
+//               age.setText(year+"-"+month+"-"+day);
+//           }
             year=myyear;
             month=monthOfYear+1;
             day=dayOfMonth;

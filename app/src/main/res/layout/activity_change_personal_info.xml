@@ -18,8 +18,9 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:background="@drawable/edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/change_editText" />
     </LinearLayout>
 
@@ -53,8 +54,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
+            android:textSize="20dp"
             android:id="@+id/change_sure"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_width="150dp"
             android:text="确 定"
             android:background="@drawable/button"/>

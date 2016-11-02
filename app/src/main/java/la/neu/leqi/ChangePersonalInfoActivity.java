@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,6 +21,8 @@ public class ChangePersonalInfoActivity extends Activity {
     private LinearLayout changeArea;
     private LinearLayout changeSexArea;
     private Button changeCommit;
+    private TextView back_title;
+    private ImageView imageView;
 
 
     private String contentAfterChange;
@@ -27,8 +31,18 @@ public class ChangePersonalInfoActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_change_personal_info);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_title);
+        back_title = (TextView)findViewById(R.id.back_title);
 
+        imageView  =(ImageView)findViewById(R.id.back_icon);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         changeArea= (LinearLayout) findViewById(R.id.change_area);
         changeSexArea= (LinearLayout) findViewById(R.id.change_sex_area);
         changeCommit= (Button) findViewById(R.id.change_sure);
@@ -38,10 +52,13 @@ public class ChangePersonalInfoActivity extends Activity {
         contentBeforChange=intent.getStringExtra("contentBefore");
 
         if(id==R.id.change_nickname){
+            back_title.setText("修改昵称");
             setChangeEditText( contentBeforChange);
         }else if(id==R.id.change_contact){
+            back_title.setText("修改联系方式");
             setChangeEditText( contentBeforChange);
         }else if(id==R.id.change_sex){
+            back_title.setText("修改性别");
             setSexChooseRadioButton( contentBeforChange);
         }
 

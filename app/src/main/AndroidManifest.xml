@@ -22,7 +22,8 @@
         <activity
             android:name=".PersonalInformationActivity"
             android:theme="@style/CustomTitleTheme"/>
-        <activity android:name=".ChangePersonalInfoActivity"/>
+        <activity android:name=".ChangePersonalInfoActivity"
+            android:theme="@style/CustomTitleTheme"/>
     </application>
 
 </manifest>
