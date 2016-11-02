@@ -16,12 +16,47 @@
         android:id="@+id/change_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/change_remind"/>
+            android:id="@+id/change_editText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/change_sex_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioGroup
+            android:id="@+id/sex_radiogroup"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:id="@+id/man"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女"
+                android:id="@+id/women"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/change_sure"
+            android:layout_height="30dp"
+            android:layout_width="150dp"
+            android:text="确 定"
+            android:background="@drawable/button"/>
     </LinearLayout>
 </LinearLayout>

@@ -3,6 +3,7 @@ package la.neu.leqi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import la.neu.leqi.listener.AdViewListener;
+import la.neu.leqi.listener.MenuClickListener;
 import la.neu.leqi.tools.image.ImageLoader;
 
 
@@ -27,7 +29,7 @@ public class MainActivity extends Activity {
     private CarouselView CarouselView;
     private CircleImageView userFace;
     private DrawerLayout drawerLayout;
-
+    private NavigationView menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,5 +62,8 @@ public class MainActivity extends Activity {
                 drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
+
+        menu= (NavigationView) findViewById(R.id.nav_view);
+        menu.setNavigationItemSelectedListener(new MenuClickListener(MainActivity.this,drawerLayout));
     }
 }
