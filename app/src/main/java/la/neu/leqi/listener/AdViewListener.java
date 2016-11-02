@@ -46,9 +46,13 @@ public class AdViewListener implements ImageListener, ViewPager.OnPageChangeList
     }
     @Override
     public void setImageForPosition(int position, ImageView imageView) {
+        System.out.println("setImageForPosition"+position);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setBackgroundResource(R.drawable.default_background);
-        imageViews.put(position, imageView);
+        if(!imageViews.containsKey(position)) {
+            System.out.println("put"+position);
+            imageViews.put(position, imageView);
+        }
         imageLoader.bindBitmap(urlList.get(position), imageView);
     }
 
@@ -64,7 +68,6 @@ public class AdViewListener implements ImageListener, ViewPager.OnPageChangeList
      */
     @Override
     public void onPageSelected(int position) {
-//        System.out.println(position);
         final ImageView imageView = imageViews.get(position);
         setImageForPosition(position, imageView);
     }
