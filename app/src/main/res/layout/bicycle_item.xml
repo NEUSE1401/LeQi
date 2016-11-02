@@ -44,11 +44,13 @@
                     android:id="@+id/original_price_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/item_sub_text_size"
                     android:textColor="@color/colorImportant" />
                 <TextView
                     android:id="@+id/current_price_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:textSize="@dimen/item_small_text_size"
                     android:textColor="@color/colorDefault" />
             </LinearLayout>
@@ -90,14 +92,16 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/original_price"
+                    android:id="@+id/original_price_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/item_sub_text_size"
                     android:textColor="@color/colorImportant" />
                 <TextView
-                    android:id="@+id/current_price"
+                    android:id="@+id/current_price_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:textSize="@dimen/item_small_text_size"
                     android:textColor="@color/colorDefault" />
             </LinearLayout>
