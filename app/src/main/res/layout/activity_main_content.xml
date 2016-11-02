@@ -11,6 +11,7 @@
 
     <!-- 主体部分-->
     <ScrollView
+        android:id="@+id/touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/nav"

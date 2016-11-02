@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
     <!--主页内容include进来-->
     <include
         layout="@layout/activity_main_bar"
@@ -21,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:clickable="true"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/menu_head"
         app:menu="@menu/menu_content" />

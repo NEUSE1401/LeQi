@@ -11,8 +11,9 @@
 
         <ImageView
             android:id="@+id/back_icon"
-            android:layout_width="30dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
+            android:scaleType="fitStart"
             android:layout_centerVertical="true"
             android:src="@drawable/back"/>
 

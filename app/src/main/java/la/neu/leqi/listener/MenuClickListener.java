@@ -26,6 +26,7 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
+        drawerLayout.closeDrawer(Gravity.LEFT);
         if(id== R.id.personal_information){
             Intent intent=new Intent(context, PersonalInformationActivity.class);
             context.startActivity(intent);
@@ -39,7 +40,7 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
         }else if(id==R.id.setting){
 
         }
-        drawerLayout.closeDrawer(Gravity.LEFT);
-        return true;
+
+        return false;
     }
 }

@@ -6,6 +6,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="toolbarStyle">@style/PaddingToolbar</item>
+
     </style>
 
     <style name="PaddingToolbar" parent="Widget.AppCompat.Toolbar"> 
