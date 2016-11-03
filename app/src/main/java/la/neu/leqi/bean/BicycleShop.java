@@ -33,6 +33,8 @@ public class BicycleShop {
         this.tele = tele;
         this.collectCount = collectCount;
         this.address = address;
+
+        shopPics=new ArrayList<String>();
     }
 
     public int getShopId() {

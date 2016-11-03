@@ -5,8 +5,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,9 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import la.neu.leqi.adapter.BicycleShopListViewItemAdapter;
+import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.customview.SquareImageView;
 import la.neu.leqi.listener.MenuClickListener;
+import la.neu.leqi.tools.image.ImageLoader;
 
 public class BicycleShopListActivity extends Activity {
 
@@ -67,6 +72,23 @@ public class BicycleShopListActivity extends Activity {
         bicycleShopText.setTextColor(Color.parseColor("#12b6f6"));
 
         ListView listView= (ListView) findViewById(R.id.bicycle_listview);
+        ImageLoader imageLoader=new ImageLoader(this);
+        BicycleShop shop1=new BicycleShop("2b101","槲荷缎花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
+        BicycleShop shop2=new BicycleShop("2b102","花花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
+        ArrayList<String> pic=new ArrayList<>();
+        pic.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
+        shop1.setShopPics(pic);
+        ArrayList<BicycleShop> shops=new ArrayList<>();
+        shops.add(shop1);
+        shops.add(shop2);
+        shops.add(shop1);
+        shops.add(shop2);
+        shops.add(shop1);
+        shops.add(shop2);
+        shops.add(shop1);
+        shops.add(shop2);
+        BicycleShopListViewItemAdapter adapter=new BicycleShopListViewItemAdapter(shops,this,imageLoader);
+        listView.setAdapter(adapter);
 
     }
 
