@@ -3,9 +3,7 @@ package la.neu.leqi;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,13 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.LineNumberReader;
-
 import la.neu.leqi.shopfragment.ShopActivityContent;
 import la.neu.leqi.shopfragment.ShopAllGoodContent;
 import la.neu.leqi.shopfragment.ShopHomePageContent;
-import la.neu.leqi.shopfragment.ShopLatestGoogContent;
-import la.neu.leqi.tools.image.ImageLoader;
+import la.neu.leqi.shopfragment.ShopLatestGoodContent;
 
 public class ShopActivity extends Activity implements View.OnClickListener{
 
@@ -44,9 +39,6 @@ public class ShopActivity extends Activity implements View.OnClickListener{
     private FragmentManager fr;
     private FragmentTransaction ft;
 
-    private ImageLoader imageLoader;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +46,6 @@ public class ShopActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_shop);
 
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_title);
-        imageLoader = new ImageLoader(this);
         back_title = (TextView)findViewById(R.id.back_title);
         back_title.setText("...");
         imageView  =(ImageView)findViewById(R.id.back_icon);
@@ -105,7 +96,7 @@ public class ShopActivity extends Activity implements View.OnClickListener{
                 changeToShopAllGood();
                 break;
             case R.id.shop_latest_linear:
-                ft.replace(R.id.shop_content,new ShopLatestGoogContent());
+                ft.replace(R.id.shop_content,new ShopLatestGoodContent());
                 changeToShopLatestGood();
                 break;
             case R.id.shop_activity_linear:

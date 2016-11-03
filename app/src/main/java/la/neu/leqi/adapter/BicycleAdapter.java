@@ -24,9 +24,9 @@ public class BicycleAdapter extends BaseAdapter {
     private ArrayList<Good> goods;
     private ImageLoader imageLoader;
 
-    public BicycleAdapter(ImageLoader imageLoader) {
+    public BicycleAdapter(ImageLoader imageLoader,Context context) {
         this.imageLoader = imageLoader;
-        this.imageLoader = imageLoader;
+        this.context = context;
         goods = new ArrayList<>();
     }
 

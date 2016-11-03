@@ -21,7 +21,6 @@ import la.neu.leqi.tools.image.ImageLoader;
 public class AdViewListener implements ImageListener, ViewPager.OnPageChangeListener {
     private ArrayList<String> urlList;
     private Map<Integer, ImageView> imageViews;
-    private Context context;
     private ImageLoader imageLoader;
     private CarouselView carouselView;
 
@@ -30,7 +29,17 @@ public class AdViewListener implements ImageListener, ViewPager.OnPageChangeList
         this.imageLoader = imageLoader;
         this.carouselView = carouselView;
     }
-
+    public AdViewListener(Context context, CarouselView carouselView) {
+        this.urlList = new ArrayList<>();
+        this.imageLoader = ImageLoader.build(context);
+        this.carouselView = carouselView;
+    }
+    public AdViewListener(ArrayList<String> urlList, Context context, CarouselView carouselView) {
+        this.urlList = urlList;
+        this.imageViews = new HashMap<>();
+        this.imageLoader = ImageLoader.build(context);
+        this.carouselView = carouselView;
+    }
     public AdViewListener(ArrayList<String> urlList, ImageLoader imageLoader, CarouselView carouselView) {
         this.urlList = urlList;
         this.imageViews = new HashMap<>();

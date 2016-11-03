@@ -87,7 +87,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         menu.setNavigationItemSelectedListener(new MenuClickListener(MainActivity.this, drawerLayout));
         //商品列表
         final ListView bicycle_list = (ListView) findViewById(R.id.bicycle_list);
-        final BicycleAdapter bicycleAdapter = new BicycleAdapter(imageLoader);
+        final BicycleAdapter bicycleAdapter = new BicycleAdapter(imageLoader,this);
         final ArrayList<String> pics1 = new ArrayList<>();
         pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
         Good good1 = new Good(1, "自行车", 19.9, 18.8, pics1);

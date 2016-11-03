@@ -13,7 +13,7 @@ import la.neu.leqi.R;
  * Created by lenovo on 2016/11/2.
  */
 
-public class ShopLatestGoogContent extends Fragment {
+public class ShopLatestGoodContent extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
