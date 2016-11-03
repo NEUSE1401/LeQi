@@ -24,7 +24,8 @@ public class ShopActivityContentItemAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ImageLoader imageLoader;
 
-    public ShopActivityContentItemAdapter(LayoutInflater inflater,ImageLoader imageLoader){
+    public ShopActivityContentItemAdapter(LayoutInflater inflater,ImageLoader imageLoader,ArrayList<ShopActivityBean> shopActivities){
+        this.shopActivities=shopActivities;
         this.inflater=inflater;
         this.imageLoader=imageLoader;
     }
@@ -69,11 +70,11 @@ public class ShopActivityContentItemAdapter extends BaseAdapter {
         if(activityPics.size()==0){
             viewHolder.imageView.setImageResource(R.drawable.default_background);
         }else {
-
+            imageLoader.bindBitmap(activityPics.get(0),viewHolder.imageView);
         }
+        viewHolder.textView.setText(shopActivity.getTitle());
 
-
-        return null;
+        return view;
     }
 
     class ViewHolder{
