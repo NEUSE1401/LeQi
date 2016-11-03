@@ -2,19 +2,19 @@ package la.neu.leqi;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.synnapps.carouselview.CarouselView;
@@ -22,7 +22,7 @@ import com.synnapps.carouselview.CarouselView;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import la.neu.leqi.adapter.BicycleAdapter;
+import la.neu.leqi.adapter.MainActivityAdapter;
 import la.neu.leqi.bean.Good;
 import la.neu.leqi.listener.AdViewListener;
 import la.neu.leqi.listener.MenuClickListener;
@@ -54,21 +54,6 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         imageLoader = new ImageLoader(this);
-        //滚动广告栏
-        final CarouselView carouselView = (CarouselView) findViewById(R.id.vPager);
-        final ArrayList<String> viewList = new ArrayList<>();
-        viewList.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
-        viewList.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
-        viewList.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
-        viewList.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        viewList.add("http://neu.la/leqi/img/slider/Homeslider5.jpg");
-        final AdViewListener adViewListener = new AdViewListener(viewList, imageLoader, carouselView);
-        carouselView.setPageCount(5);
-        carouselView.setImageListener(adViewListener);
-        carouselView.addOnPageChangeListener(adViewListener);
-        //乐骑活动显示
-        final ImageView activity_pic = (ImageView) findViewById(R.id.activity_pic);
-        imageLoader.bindBitmap("http://neu.la/leqi/img/slider/Homeslider4.jpg", activity_pic);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //滑动触发
 //        View touch_view = findViewById(R.id.touch_view);
@@ -86,8 +71,8 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         menu = (NavigationView) findViewById(R.id.nav_view);
         menu.setNavigationItemSelectedListener(new MenuClickListener(MainActivity.this, drawerLayout));
         //商品列表
-        final ListView bicycle_list = (ListView) findViewById(R.id.bicycle_list);
-        final BicycleAdapter bicycleAdapter = new BicycleAdapter(imageLoader,this);
+        final ListView activity_main_list = (ListView) findViewById(R.id.activity_main_list);
+        final MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(imageLoader, this);
         final ArrayList<String> pics1 = new ArrayList<>();
         pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
         Good good1 = new Good(1, "自行车", 19.9, 18.8, pics1);
@@ -100,13 +85,12 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         final ArrayList<String> pics4 = new ArrayList<>();
         pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
         Good good4 = new Good(4, "自行车", 19.9, 18.8, pics4);
-        bicycleAdapter.addGood(good1);
-        bicycleAdapter.addGood(good2);
-        bicycleAdapter.addGood(good3);
-        bicycleAdapter.addGood(good4);
-        bicycle_list.setAdapter(bicycleAdapter);
-
-//       导航栏跳转
+        mainActivityAdapter.addGood(good1);
+        mainActivityAdapter.addGood(good2);
+        mainActivityAdapter.addGood(good3);
+        mainActivityAdapter.addGood(good4);
+        activity_main_list.setAdapter(mainActivityAdapter);
+        //导航栏跳转
         bicycleShop = (LinearLayout) findViewById(R.id.bicycle_shop);
         bicycleShop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,5 +160,20 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         return gestureDetector.onTouchEvent(motionEvent);
     }
 
-
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        totalHeight += (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight;
+        listView.setLayoutParams(params);
+    }
 }

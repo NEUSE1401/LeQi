@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main_bar"
-    tools:context="la.neu.leqi.MainActivity">
+    android:layout_height="match_parent">
+    <!-- 广告栏-->
+    <la.neu.leqi.customview.AdLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- 主体部分-->
-    <ListView
-        android:id="@+id/activity_main_list"
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/vPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:fillColor="#FFFFFFFF"
+            app:pageColor="#00000000"
+            app:radius="3dp"
+            app:slideInterval="3000"
+            app:strokeColor="#FF777777"
+            app:strokeWidth="1dp" />
+    </la.neu.leqi.customview.AdLayout>
+    <!-- 活动栏-->
+    <la.neu.leqi.customview.ActivityLayout
+        android:id="@+id/activity_pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/nav"/>
-    <!-- 导航栏-->
+        android:background="@drawable/default_background"
+        android:scaleType="fitXY"/>
+    <!-- 分类栏-->
     <LinearLayout
-        android:id="@+id/nav"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/nav_height"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/nav_background"
-        android:orientation="horizontal"
-        android:weightSum="5">
-        <!-- 首页按钮 -->
+        android:layout_height="@dimen/kinds_height"
+        android:paddingTop="@dimen/kinds_padding_vertical"
+        android:paddingBottom="@dimen/kinds_padding_vertical"
+        android:weightSum="4">
+        <!-- 旧物-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="@dimen/nav_item_padding"
+            android:padding="@dimen/kinds_item_padding"
             android:weightSum="3">
 
             <LinearLayout
@@ -39,13 +48,11 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:gravity="center">
-
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/home_active" />
+                    android:background="#aaaaaa" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -55,25 +62,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="首页"
-                    android:textColor="@color/navActiveTextColor"
-                    android:textSize="@dimen/nav_text_size" />
+                    android:text="旧物"
+                    android:textColor="@color/kindsTextColor"
+                    android:textSize="@dimen/kinds_text_size" />
             </LinearLayout>
 
         </LinearLayout>
-        <!-- 车铺按钮 -->
+        <!-- 新闻-->
         <LinearLayout
-            android:clickable="true"
-            android:id="@+id/bicycle_shop"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="@dimen/nav_item_padding"
+            android:padding="@dimen/kinds_item_padding"
             android:weightSum="3">
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -82,9 +86,8 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/cycling" />
+                    android:background="#aaaaaa" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -94,21 +97,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="车铺"
-                    android:textColor="@color/navTextColor"
-                    android:textSize="@dimen/nav_text_size" />
+                    android:text="新闻"
+                    android:textColor="@color/kindsTextColor"
+                    android:textSize="@dimen/kinds_text_size" />
             </LinearLayout>
 
         </LinearLayout>
-        <!-- 分享按钮 -->
+        <!-- 推荐-->
         <LinearLayout
-            android:id="@+id/share"
-            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="@dimen/nav_item_padding"
+            android:padding="@dimen/kinds_item_padding"
             android:weightSum="3">
 
             <LinearLayout
@@ -120,9 +121,8 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/share" />
+                    android:background="#aaaaaa" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -132,21 +132,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="分享"
-                    android:textColor="@color/navTextColor"
-                    android:textSize="@dimen/nav_text_size" />
+                    android:text="推荐"
+                    android:textColor="@color/kindsTextColor"
+                    android:textSize="@dimen/kinds_text_size" />
             </LinearLayout>
 
         </LinearLayout>
-        <!-- 俱乐部按钮 -->
+        <!-- 租车-->
         <LinearLayout
-            android:id="@+id/club"
-            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="@dimen/nav_item_padding"
+            android:padding="@dimen/kinds_item_padding"
             android:weightSum="3">
 
             <LinearLayout
@@ -158,9 +156,8 @@
                 <la.neu.leqi.customview.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/groups" />
+                    android:background="#aaaaaa" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -170,49 +167,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="俱乐部"
-                    android:textColor="@color/navTextColor"
-                    android:textSize="@dimen/nav_text_size" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <!-- 活动按钮 -->
-        <LinearLayout
-            android:id="@+id/activity"
-            android:clickable="true"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:padding="@dimen/nav_item_padding"
-            android:weightSum="3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:gravity="center">
-
-                <la.neu.leqi.customview.SquareImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/flag" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="活动"
-                    android:textColor="@color/navTextColor"
-                    android:textSize="@dimen/nav_text_size" />
+                    android:text="租车"
+                    android:textColor="@color/kindsTextColor"
+                    android:textSize="@dimen/kinds_text_size" />
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
