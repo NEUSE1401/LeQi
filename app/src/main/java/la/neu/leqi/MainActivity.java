@@ -91,11 +91,11 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         mainActivityAdapter.addGood(good4);
         activity_main_list.setAdapter(mainActivityAdapter);
         //导航栏跳转
-        bicycleShop = (LinearLayout) findViewById(R.id.bicycle_shop);
+        bicycleShop = (LinearLayout) findViewById(R.id.bar_bicycle_shop_linear);
         bicycleShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ShopActivity.class);
+                Intent intent = new Intent(MainActivity.this, BicycleShopListActivity.class);
                 startActivity(intent);
             }
         });

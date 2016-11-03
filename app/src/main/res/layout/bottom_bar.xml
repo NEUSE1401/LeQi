@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main_bar"
-    tools:context="la.neu.leqi.MainActivity">
-
-    <!-- 主体部分-->
-    <ListView
-        android:id="@+id/activity_main_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/nav"/>
-    <!-- 导航栏-->
+    android:layout_height="wrap_content">
     <LinearLayout
-        android:id="@+id/nav"
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_height"
         android:layout_alignParentBottom="true"
@@ -27,6 +13,7 @@
         android:weightSum="5">
         <!-- 首页按钮 -->
         <LinearLayout
+            android:id="@+id/bar_first_page_linear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -41,9 +28,10 @@
                 android:gravity="center">
 
                 <la.neu.leqi.customview.SquareImageView
+                    android:id="@+id/bar_first_page_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/home_active" />
+                    android:background="@drawable/home" />
             </LinearLayout>
 
             <LinearLayout
@@ -53,10 +41,11 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/bar_first_page_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="首页"
-                    android:textColor="@color/navActiveTextColor"
+                    android:textColor="@color/navTextColor"
                     android:textSize="@dimen/nav_text_size" />
             </LinearLayout>
 
@@ -80,6 +69,7 @@
                 android:gravity="center">
 
                 <la.neu.leqi.customview.SquareImageView
+                    android:id="@+id/bar_bicycle_shop_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/cycling" />
@@ -92,6 +82,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/bar_bicycle_shop_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="车铺"
@@ -102,7 +93,7 @@
         </LinearLayout>
         <!-- 分享按钮 -->
         <LinearLayout
-            android:id="@+id/share"
+            android:id="@+id/bar_share_linear"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -118,6 +109,7 @@
                 android:gravity="center">
 
                 <la.neu.leqi.customview.SquareImageView
+                    android:id="@+id/bar_share_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/share" />
@@ -130,6 +122,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/bar_share_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="分享"
@@ -140,7 +133,7 @@
         </LinearLayout>
         <!-- 俱乐部按钮 -->
         <LinearLayout
-            android:id="@+id/club"
+            android:id="@+id/bar_club_linear"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -156,6 +149,7 @@
                 android:gravity="center">
 
                 <la.neu.leqi.customview.SquareImageView
+                    android:id="@+id/bar_club_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/groups" />
@@ -168,6 +162,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/bar_club_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="俱乐部"
@@ -178,7 +173,7 @@
         </LinearLayout>
         <!-- 活动按钮 -->
         <LinearLayout
-            android:id="@+id/activity"
+            android:id="@+id/bar_activity_linear"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -194,6 +189,7 @@
                 android:gravity="center">
 
                 <la.neu.leqi.customview.SquareImageView
+                    android:id="@+id/bar_activity_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/flag" />
@@ -206,6 +202,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/bar_activity_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="活动"
@@ -215,5 +212,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
