@@ -1,7 +1,6 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +69,7 @@ public class MainActivityAdapter extends BaseAdapter {
         return view;
     }
 
+    //加载首页头部
     private View getHeadView(View view, ViewGroup viewGroup) {
         if(head_view==null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_main_content_head, viewGroup, false);
@@ -98,6 +98,7 @@ public class MainActivityAdapter extends BaseAdapter {
         return head_view;
     }
 
+    //加载商品列表
     private View getBicycleView(int i, View view, ViewGroup viewGroup) {
         i = i - 1;
         BicycleViewHolder viewHolder;
@@ -163,6 +164,7 @@ public class MainActivityAdapter extends BaseAdapter {
         return view;
     }
 
+    //加载
     private static class BicycleViewHolder {
         ImageView image_left;
         TextView title_left;
@@ -172,6 +174,13 @@ public class MainActivityAdapter extends BaseAdapter {
         TextView title_right;
         TextView original_price_right;
         TextView current_price_right;
+    }
+
+    private static class ActivityViewHolder{
+        ImageView activity_image;
+        TextView activity_title;
+        TextView activity_start_time;
+        TextView activity_end_time;
     }
 
 }

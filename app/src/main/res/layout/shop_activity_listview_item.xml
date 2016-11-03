@@ -10,6 +10,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="130dp"
+            android:scaleType="fitXY"
             android:id="@+id/shop_activity_content_listview_item_pic"/>
         <TextView
             android:layout_width="match_parent"

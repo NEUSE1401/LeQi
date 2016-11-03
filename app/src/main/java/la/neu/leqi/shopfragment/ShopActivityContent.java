@@ -35,7 +35,6 @@ public class ShopActivityContent extends Fragment {
         shopActivitys.add(new ShopActivityBean("2B103大促销","全部半价","2016-11-1","2016-12-12","2016-11-1",pic,2));
         ShopActivityContentItemAdapter adapter=new ShopActivityContentItemAdapter(inflater,imageLoader,shopActivitys);
         listView.setAdapter(adapter);
-
         return view;
     }
 }

@@ -8,9 +8,9 @@
     android:orientation="vertical"
     tools:context="la.neu.leqi.ShopActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -175,10 +175,10 @@
                 android:orientation="vertical"
                 android:id="@+id/shop_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
 
 </LinearLayout>

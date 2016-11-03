@@ -9,3 +9,5 @@
 .externalNativeBuild
 /.idea/
 /app/src/main/AndroidManifest.xml
+/hs_err_pid4696.log
+/replay_pid4696.log
