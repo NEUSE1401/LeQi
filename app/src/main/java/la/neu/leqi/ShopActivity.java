@@ -100,7 +100,7 @@ public class ShopActivity extends Activity implements View.OnClickListener{
                 changeToShopLatestGood();
                 break;
             case R.id.shop_activity_linear:
-                ft.replace(R.id.shop_activity_linear,new ShopActivityContent());
+                ft.replace(R.id.shop_content,new ShopActivityContent());
                 changeToShopActivity();
                 break;
         }
