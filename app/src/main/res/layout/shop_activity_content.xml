@@ -7,7 +7,7 @@
     <ListView
         android:id="@+id/shop_activity_content_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </ListView>
 </LinearLayout>

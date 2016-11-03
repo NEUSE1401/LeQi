@@ -32,9 +32,9 @@ public class ShopActivityContent extends Fragment {
         ArrayList<String> pic=new ArrayList<>();
         pic.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
         shopActivitys.add(new ShopActivityBean("2B101大促销","花花大甩卖","2016-11-1","2016-12-12","2016-11-1",pic,1));
-        shopActivitys.add(new ShopActivityBean("2B101大促销","全部半价","2016-11-1","2016-12-12","2016-11-1",new ArrayList<String>(),2));
+        shopActivitys.add(new ShopActivityBean("2B103大促销","全部半价","2016-11-1","2016-12-12","2016-11-1",pic,2));
         ShopActivityContentItemAdapter adapter=new ShopActivityContentItemAdapter(inflater,imageLoader,shopActivitys);
-
+        listView.setAdapter(adapter);
 
         return view;
     }
