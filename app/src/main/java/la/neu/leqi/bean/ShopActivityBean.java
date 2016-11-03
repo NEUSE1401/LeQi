@@ -7,12 +7,12 @@ import java.util.ArrayList;
  */
 
 public class ShopActivityBean {
-    int activityId;
-    String title;
-    String description;
-    String startTime;
-    String endTime;
-    String releaseTime;
+    private int activityId;
+    private String title;
+    private String description;
+    private String startTime;
+    private String endTime;
+    private String releaseTime;
     private ArrayList<String> pic_listp;
 
     public ShopActivityBean(String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int activityId) {
@@ -21,6 +21,14 @@ public class ShopActivityBean {
         this.startTime = startTime;
         this.endTime = endTime;
         this.releaseTime = releaseTime;
+        this.pic_listp = pic_listp;
+        this.activityId = activityId;
+    }
+
+    public ShopActivityBean( int activityId,String title, String startTime, String endTime, ArrayList<String> pic_listp) {
+        this.title = title;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.pic_listp = pic_listp;
         this.activityId = activityId;
     }

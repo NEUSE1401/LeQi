@@ -7,6 +7,7 @@
 
     <ImageView
         android:layout_width="@dimen/activity_item_height"
+        android:scaleType="fitXY"
         android:layout_height="@dimen/activity_item_height"
         android:id="@+id/activity_image" />
 

@@ -11,20 +11,25 @@ import android.widget.TextView;
 import com.synnapps.carouselview.CarouselView;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 import la.neu.leqi.R;
 import la.neu.leqi.bean.Good;
+import la.neu.leqi.bean.Share;
+import la.neu.leqi.bean.ShopActivityBean;
 import la.neu.leqi.listener.AdViewListener;
 import la.neu.leqi.tools.image.ImageLoader;
 
 /**
  * @author HeXunshi
- *         自行车适配器
+ *         主界面适配器
  */
 
 public class MainActivityAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Good> goods;
+    private ArrayList<ShopActivityBean> activities;
+    private ArrayList<Share> shares;
     private ImageLoader imageLoader;
 
     //储存Head对象
@@ -34,11 +39,13 @@ public class MainActivityAdapter extends BaseAdapter {
         this.imageLoader = imageLoader;
         this.context = context;
         goods = new ArrayList<>();
+        activities = new ArrayList<>();
+        shares = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return goods.size() / 2 + 1;
+        return goods.size() / 2 + activities.size() + shares.size() / 2 + 1 + 3;
     }
 
     @Override
@@ -55,23 +62,51 @@ public class MainActivityAdapter extends BaseAdapter {
         return context;
     }
 
+    //添加商品
     public void addGood(Good good) {
         goods.add(good);
+    }
+
+    //添加活动
+    public void addActivity(ShopActivityBean activity) {
+        activities.add(activity);
+    }
+
+    //添加分享
+    public void addShard(Share share) {
+        shares.add(share);
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (i == 0) {
             return getHeadView(view, viewGroup);
-        } else if (i <= goods.size() / 2) {
+        } else if (i == 1) {
+            return getTitle("热门商品", view, viewGroup);
+        } else if (i <= goods.size() / 2 + 1) {
             return getBicycleView(i, view, viewGroup);
+        } else if (i == goods.size() / 2 + 2) {
+            return getTitle("活动展示", view, viewGroup);
+        } else if (i <= goods.size() / 2 + activities.size() + 2) {
+            return getActivityView(i, view, viewGroup);
+        } else if (i == goods.size() / 2 + activities.size() + 3) {
+            return getTitle("行程分享", view, viewGroup);
+        } else if (i <= goods.size() / 2 + activities.size() + shares.size() / 2 + 3) {
+            return getShareView(i, view, viewGroup);
         }
+        return view;
+    }
+
+    private View getTitle(String title, View view, ViewGroup viewGroup) {
+        view = LayoutInflater.from(getContext()).inflate(R.layout.activity_main_title_item, viewGroup, false);
+        TextView title_view = (TextView) view.findViewById(R.id.title);
+        title_view.setText(title);
         return view;
     }
 
     //加载首页头部
     private View getHeadView(View view, ViewGroup viewGroup) {
-        if(head_view==null) {
+        if (head_view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.activity_main_content_head, viewGroup, false);
             view.setTag("head");
             final String tag = (String) view.getTag();
@@ -100,7 +135,7 @@ public class MainActivityAdapter extends BaseAdapter {
 
     //加载商品列表
     private View getBicycleView(int i, View view, ViewGroup viewGroup) {
-        i = i - 1;
+        i = i - 1 - 1;
         BicycleViewHolder viewHolder;
         if (view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.bicycle_item, viewGroup, false);
@@ -117,7 +152,7 @@ public class MainActivityAdapter extends BaseAdapter {
         } else {
             final Object tag = view.getTag();
             if (tag != null && tag instanceof BicycleViewHolder) {
-                viewHolder = (BicycleViewHolder) view.getTag();
+                viewHolder = (BicycleViewHolder) tag;
             } else {
                 view = LayoutInflater.from(getContext()).inflate(R.layout.bicycle_item, viewGroup, false);
                 viewHolder = new BicycleViewHolder();
@@ -147,7 +182,6 @@ public class MainActivityAdapter extends BaseAdapter {
         current_price_left.setText(String.valueOf("￥" + good_left.getCurrent_price()));
         image_left.setImageResource(R.drawable.default_background);
         if (good_left.getPic_list().size() == 0) {
-            image_left.setTag("");
             image_left.setImageResource(R.drawable.default_background);
         } else {
             imageLoader.bindBitmap(good_left.getPic_list().get(0), image_left);
@@ -164,7 +198,98 @@ public class MainActivityAdapter extends BaseAdapter {
         return view;
     }
 
-    //加载
+    //加载活动列表
+    private View getActivityView(int i, View view, ViewGroup viewGroup) {
+        i = i - goods.size() / 2 - 1 - 2;
+        ActivityViewHolder viewHolder;
+        if (view == null) {
+            viewHolder = new ActivityViewHolder();
+            view = LayoutInflater.from(getContext()).inflate(R.layout.activity_item, viewGroup, false);
+            viewHolder.activity_image = (ImageView) view.findViewById(R.id.activity_image);
+            viewHolder.activity_title = (TextView) view.findViewById(R.id.activity_title);
+            viewHolder.activity_start_time = (TextView) view.findViewById(R.id.activity_start_time);
+            viewHolder.activity_end_time = (TextView) view.findViewById(R.id.activity_end_time);
+            view.setTag(viewHolder);
+        } else {
+            final Object tag = view.getTag();
+            if (tag != null && tag instanceof ActivityViewHolder) {
+                viewHolder = (ActivityViewHolder) tag;
+            } else {
+                viewHolder = new ActivityViewHolder();
+                view = LayoutInflater.from(getContext()).inflate(R.layout.activity_item, viewGroup, false);
+                viewHolder.activity_image = (ImageView) view.findViewById(R.id.activity_image);
+                viewHolder.activity_title = (TextView) view.findViewById(R.id.activity_title);
+                viewHolder.activity_start_time = (TextView) view.findViewById(R.id.activity_start_time);
+                viewHolder.activity_end_time = (TextView) view.findViewById(R.id.activity_end_time);
+                view.setTag(viewHolder);
+            }
+        }
+        ImageView activity_image = viewHolder.activity_image;
+        TextView activity_title = viewHolder.activity_title;
+        TextView activity_start_time = viewHolder.activity_start_time;
+        TextView activity_end_time = viewHolder.activity_end_time;
+        final ShopActivityBean activity = activities.get(i);
+        final ArrayList<String> pic_listp = activity.getPic_listp();
+        if (pic_listp.size() == 0) {
+            activity_image.setImageResource(R.drawable.default_background);
+        } else {
+            imageLoader.bindBitmap(pic_listp.get(0), activity_image);
+        }
+        activity_title.setText(activity.getTitle());
+        activity_start_time.setText(activity.getStartTime());
+        activity_end_time.setText(activity.getEndTime());
+        return view;
+    }
+
+    //加载分享列表
+    private View getShareView(int i, View view, ViewGroup viewGroup) {
+        i = i - goods.size() / 2 - activities.size() - 1 -3;
+        ShareViewHolder viewHolder;
+        if (view == null) {
+            viewHolder = new ShareViewHolder();
+            view = LayoutInflater.from(getContext()).inflate(R.layout.share_item, viewGroup, false);
+            viewHolder.image_left = (ImageView) view.findViewById(R.id.image_left);
+            viewHolder.title_left = (TextView) view.findViewById(R.id.title_left);
+            viewHolder.title_right = (TextView) view.findViewById(R.id.title_right);
+            viewHolder.image_right = (ImageView) view.findViewById(R.id.image_right);
+            view.setTag(viewHolder);
+        } else {
+            final Object tag = view.getTag();
+            if (tag != null && tag instanceof ShareViewHolder) {
+                viewHolder = (ShareViewHolder) tag;
+            } else {
+                viewHolder = new ShareViewHolder();
+                view = LayoutInflater.from(getContext()).inflate(R.layout.share_item, viewGroup, false);
+                viewHolder.image_left = (ImageView) view.findViewById(R.id.image_left);
+                viewHolder.title_left = (TextView) view.findViewById(R.id.title_left);
+                viewHolder.title_right = (TextView) view.findViewById(R.id.title_right);
+                viewHolder.image_right = (ImageView) view.findViewById(R.id.image_right);
+                view.setTag(viewHolder);
+            }
+        }
+        TextView title_left = viewHolder.title_left;
+        ImageView image_left = viewHolder.image_left;
+        TextView title_right = viewHolder.title_right;
+        ImageView image_right = viewHolder.image_right;
+        final Share share_left = shares.get(2 * i);
+        final Share share_right = shares.get(2 * i + 1);
+        final ArrayList<String> pic_list_left = share_left.getPic_list();
+        final ArrayList<String> pic_list_right = share_right.getPic_list();
+        if (pic_list_left.size() == 0) {
+            image_left.setImageResource(R.drawable.default_background);
+        } else {
+            imageLoader.bindBitmap(pic_list_left.get(0), image_left);
+        }
+        title_left.setText(share_left.getTheme());
+        if (pic_list_right.size() == 0) {
+            image_right.setImageResource(R.drawable.default_background);
+        } else {
+            imageLoader.bindBitmap(pic_list_right.get(0), image_right);
+        }
+        title_right.setText(share_right.getTheme());
+        return view;
+    }
+
     private static class BicycleViewHolder {
         ImageView image_left;
         TextView title_left;
@@ -176,11 +301,18 @@ public class MainActivityAdapter extends BaseAdapter {
         TextView current_price_right;
     }
 
-    private static class ActivityViewHolder{
+    private static class ActivityViewHolder {
         ImageView activity_image;
         TextView activity_title;
         TextView activity_start_time;
         TextView activity_end_time;
+    }
+
+    private static class ShareViewHolder {
+        private TextView title_left;
+        private ImageView image_left;
+        private TextView title_right;
+        private ImageView image_right;
     }
 
 }

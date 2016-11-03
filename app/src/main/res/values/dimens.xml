@@ -26,7 +26,7 @@
     <dimen name="item_sub_text_size">15sp</dimen>
     <dimen name="item_small_text_size">12sp</dimen>
     <!-- 活动-->
-    <dimen name="activity_item_height">65dp</dimen>
+    <dimen name="activity_item_height">75dp</dimen>
     <!-- 分享-->
     <dimen name="share_item_height">200dp</dimen>
     <!-- 自行车-->
