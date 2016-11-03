@@ -24,9 +24,9 @@ public class BicycleAdapter extends BaseAdapter {
     private ArrayList<Good> goods;
     private ImageLoader imageLoader;
 
-    public BicycleAdapter(Context context) {
-        this.context = context;
-        imageLoader = new ImageLoader(context);
+    public BicycleAdapter(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
+        this.imageLoader = imageLoader;
         goods = new ArrayList<>();
     }
 
@@ -51,11 +51,10 @@ public class BicycleAdapter extends BaseAdapter {
 
     public void addGood(Good good){
         goods.add(good);
-        notifyDataSetChanged();
     }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
         if (view == null) {
             view= LayoutInflater.from(getContext()).inflate(R.layout.bicycle_item,viewGroup,false);
             viewHolder = new ViewHolder();
@@ -79,30 +78,37 @@ public class BicycleAdapter extends BaseAdapter {
         TextView title_right=viewHolder.title_right;
         TextView original_price_right=viewHolder.original_price_right;
         TextView current_price_right=viewHolder.current_price_right;
-        int height = image_left.getHeight();
-        int width = image_left.getWidth();
         Good good_left = goods.get(2*i);
         Good good_right = goods.get(2*i+1);
         title_left.setText(good_left.getName());
-        original_price_left.setText("￥"+String.valueOf(good_left.getOriginal_price()));
-        current_price_left.setText("￥"+String.valueOf(good_left.getCurrent_price()));
-        image_left.setTag(good_left.getPic_list().get(0));
-        imageLoader.bindBitmap(good_left.getPic_list().get(0),image_left,height,width);
+        original_price_left.setText(String.valueOf("￥"+good_left.getOriginal_price()));
+        current_price_left.setText(String.valueOf("￥"+good_left.getCurrent_price()));
+        image_left.setImageResource(R.drawable.default_background);
+        if(good_left.getPic_list().size()==0) {
+            imageLoader.bindBitmap("", image_left);
+        }else{
+            imageLoader.bindBitmap(good_left.getPic_list().get(0), image_left);
+        }
         title_right.setText(good_right.getName());
-        original_price_right.setText("￥"+ String.valueOf(good_right.getOriginal_price()));
-        current_price_right.setText("￥"+ String.valueOf(good_right.getCurrent_price()));
-        imageLoader.bindBitmap(good_right.getPic_list().get(0),image_right,height,width);
+        original_price_right.setText(String.valueOf("￥"+good_right.getOriginal_price()));
+        current_price_right.setText(String.valueOf("￥"+ good_right.getCurrent_price()));
+        image_right.setImageResource(R.drawable.default_background);
+        if(good_right.getPic_list().size()==0) {
+            imageLoader.bindBitmap("", image_right);
+        }else{
+            imageLoader.bindBitmap(good_right.getPic_list().get(0), image_right);
+        }
         return view;
     }
 
     private static class ViewHolder {
-        public ImageView image_left;
-        public TextView title_left;
-        public TextView original_price_left;
-        public TextView current_price_left;
-        public ImageView image_right;
-        public TextView title_right;
-        public TextView original_price_right;
-        public TextView current_price_right;
+        ImageView image_left;
+        TextView title_left;
+        TextView original_price_left;
+        TextView current_price_left;
+        ImageView image_right;
+        TextView title_right;
+        TextView original_price_right;
+        TextView current_price_right;
     }
 }

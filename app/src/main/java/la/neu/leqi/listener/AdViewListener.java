@@ -25,19 +25,17 @@ public class AdViewListener implements ImageListener, ViewPager.OnPageChangeList
     private ImageLoader imageLoader;
     private CarouselView carouselView;
 
-    public AdViewListener(Context context, CarouselView carouselView) {
+    public AdViewListener(ImageLoader imageLoader, CarouselView carouselView) {
         this.urlList = new ArrayList<>();
-        this.context = context;
+        this.imageLoader = imageLoader;
         this.carouselView = carouselView;
-        imageLoader = new ImageLoader(context);
     }
 
-    public AdViewListener(ArrayList<String> urlList, Context context, CarouselView carouselView) {
+    public AdViewListener(ArrayList<String> urlList, ImageLoader imageLoader, CarouselView carouselView) {
         this.urlList = urlList;
         this.imageViews = new HashMap<>();
-        this.context = context;
+        this.imageLoader = imageLoader;
         this.carouselView = carouselView;
-        imageLoader = new ImageLoader(context);
     }
 
     public void addUrl(String url){

@@ -39,11 +39,12 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
     private CircleImageView userFace;
     private DrawerLayout drawerLayout;
     private NavigationView menu;
+    private ImageLoader imageLoader;
     final int RIGHT = 0;
     final int LEFT = 1;
     private GestureDetector gestureDetector;
+    private LinearLayout bicycleShop;
 
-    private LinearLayout bicylceShop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+        imageLoader = new ImageLoader(this);
         //滚动广告栏
         final CarouselView carouselView = (CarouselView) findViewById(R.id.vPager);
         final ArrayList<String> viewList = new ArrayList<>();
@@ -60,12 +62,11 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         viewList.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
         viewList.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
         viewList.add("http://neu.la/leqi/img/slider/Homeslider5.jpg");
-        final AdViewListener adViewListener = new AdViewListener(viewList, this, carouselView);
+        final AdViewListener adViewListener = new AdViewListener(viewList, imageLoader, carouselView);
         carouselView.setPageCount(5);
         carouselView.setImageListener(adViewListener);
         carouselView.addOnPageChangeListener(adViewListener);
         //乐骑活动显示
-        final ImageLoader imageLoader = new ImageLoader(this);
         final ImageView activity_pic = (ImageView) findViewById(R.id.activity_pic);
         imageLoader.bindBitmap("http://neu.la/leqi/img/slider/Homeslider4.jpg", activity_pic);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -86,19 +87,19 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         menu.setNavigationItemSelectedListener(new MenuClickListener(MainActivity.this, drawerLayout));
         //商品列表
         final ListView bicycle_list = (ListView) findViewById(R.id.bicycle_list);
-        final BicycleAdapter bicycleAdapter = new BicycleAdapter(this);
+        final BicycleAdapter bicycleAdapter = new BicycleAdapter(imageLoader);
         final ArrayList<String> pics1 = new ArrayList<>();
         pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        Good good1 = new Good(1, "自行车", 19.9, 18.8,pics1);
+        Good good1 = new Good(1, "自行车", 19.9, 18.8, pics1);
         final ArrayList<String> pics2 = new ArrayList<>();
         pics2.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
-        Good good2 = new Good(2, "自行车", 19.9, 18.8,pics2);
+        Good good2 = new Good(2, "自行车", 19.9, 18.8, pics2);
         final ArrayList<String> pics3 = new ArrayList<>();
         pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
-        Good good3= new Good(3, "自行车", 19.9, 18.8,pics3);
+        Good good3 = new Good(3, "自行车", 19.9, 18.8, pics3);
         final ArrayList<String> pics4 = new ArrayList<>();
-        pics3.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
-        Good good4= new Good(4, "自行车", 19.9, 18.8,pics4);
+        pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
+        Good good4 = new Good(4, "自行车", 19.9, 18.8, pics4);
         bicycleAdapter.addGood(good1);
         bicycleAdapter.addGood(good2);
         bicycleAdapter.addGood(good3);
@@ -106,11 +107,11 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         bicycle_list.setAdapter(bicycleAdapter);
 
 //       导航栏跳转
-        bicylceShop= (LinearLayout) findViewById(R.id.bicycle_shop);
-        bicylceShop.setOnClickListener(new View.OnClickListener() {
+        bicycleShop = (LinearLayout) findViewById(R.id.bicycle_shop);
+        bicycleShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,ShopActivity.class);
+                Intent intent = new Intent(MainActivity.this, ShopActivity.class);
                 startActivity(intent);
             }
         });

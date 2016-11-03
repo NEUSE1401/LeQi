@@ -19,6 +19,7 @@ import la.neu.leqi.shopfragment.ShopActivityContent;
 import la.neu.leqi.shopfragment.ShopAllGoodContent;
 import la.neu.leqi.shopfragment.ShopHomePageContent;
 import la.neu.leqi.shopfragment.ShopLatestGoogContent;
+import la.neu.leqi.tools.image.ImageLoader;
 
 public class ShopActivity extends Activity implements View.OnClickListener{
 
@@ -43,6 +44,8 @@ public class ShopActivity extends Activity implements View.OnClickListener{
     private FragmentManager fr;
     private FragmentTransaction ft;
 
+    private ImageLoader imageLoader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class ShopActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_shop);
 
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_title);
+        imageLoader = new ImageLoader(this);
         back_title = (TextView)findViewById(R.id.back_title);
         back_title.setText("...");
         imageView  =(ImageView)findViewById(R.id.back_icon);

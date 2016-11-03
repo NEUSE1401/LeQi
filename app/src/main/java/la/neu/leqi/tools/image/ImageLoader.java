@@ -67,7 +67,7 @@ public class ImageLoader {
         public void handleMessage(Message msg) {
             LoaderResult result = (LoaderResult) msg.obj;
             ImageView imageView = result.imageView;
-            //imageView.setImageBitmap(result.bitmap);
+            imageView.setImageBitmap(result.bitmap);
             String uri = (String) imageView.getTag(TAG_KEY_URI);
             if (uri.equals(result.uri)) {
                 imageView.setImageBitmap(result.bitmap);
@@ -122,7 +122,7 @@ public class ImageLoader {
     }
 
     public void bindBitmap(final String uri, final ImageView imageView) {
-        bindBitmap(uri, imageView,0,0);
+        bindBitmap(uri, imageView, 0, 0);
     }
 
     public void bindBitmap(final String uri, final ImageView imageView, final int reqWidth, final int reqHeight) {
@@ -214,6 +214,7 @@ public class ImageLoader {
             FileInputStream fileInputStream = (FileInputStream) snapshot.getInputStream(DISK_CACHE_INDEX);
             FileDescriptor fileDescriptor = fileInputStream.getFD();
             bitmap = mImageResizer.decodeSampledBitmapFromFileDescriptor(fileDescriptor, reqWidth, reqHeight);
+            fileInputStream.close();
         }
         if (bitmap != null) {
             addBitmapToMemoryCache(key, bitmap);
@@ -268,6 +269,9 @@ public class ImageLoader {
             System.out.print(e.toString());
             Log.e(TAG, "Error in downloadBitmap:" + e);
         } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
             try {
                 if (in != null) {
                     in.close();
@@ -275,24 +279,20 @@ public class ImageLoader {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-
         }
         return bitmap;
     }
 
     private String hashKeyFormUrl(String url) {
-        String cachekey;
+        String cacheKey;
         try {
             final MessageDigest mDigest = MessageDigest.getInstance("MD5");
             mDigest.update(url.getBytes());
-            cachekey = bytesToHexString(mDigest.digest());
+            cacheKey = bytesToHexString(mDigest.digest());
         } catch (NoSuchAlgorithmException e) {
-            cachekey = String.valueOf(url.hashCode());
+            cacheKey = String.valueOf(url.hashCode());
         }
-        return cachekey;
+        return cacheKey;
     }
 
     private String bytesToHexString(byte[] bytes) {

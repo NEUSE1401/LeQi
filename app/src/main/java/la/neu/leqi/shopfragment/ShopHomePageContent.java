@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import la.neu.leqi.R;
 import la.neu.leqi.listener.AdViewListener;
+import la.neu.leqi.tools.image.ImageLoader;
 
 /**
  * Created by lenovo on 2016/11/2.
@@ -26,6 +27,7 @@ public class ShopHomePageContent extends Fragment {
     private TextView owner;
     private TextView description;
     private TextView contact;
+    private ImageLoader imageLoader;
 
     @Nullable
     @Override
