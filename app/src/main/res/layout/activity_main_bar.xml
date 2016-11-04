@@ -67,5 +67,4 @@
 
     <include layout="@layout/activity_main_content" />
 
-
 </android.support.design.widget.CoordinatorLayout>

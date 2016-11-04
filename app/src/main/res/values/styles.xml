@@ -5,8 +5,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation</item>
         <item name="toolbarStyle">@style/PaddingToolbar</item>
-
     </style>
 
     <style name="PaddingToolbar" parent="Widget.AppCompat.Toolbar"> 
@@ -17,7 +17,37 @@
         <item name="android:windowTitleSize">@dimen/title_height</item>
         <item name="android:windowTitleBackgroundStyle">@style/windowTitleBackgroundStyle</item>
     </style>
+
     <style name="windowTitleBackgroundStyle">
         <item name="android:background">@color/colorPrimary</item>
+    </style>
+      
+
+    <style name="Animation">
+               
+        <item name="android:activityOpenEnterAnimation">@null</item>
+               
+        <item name="android:activityOpenExitAnimation">@null</item>
+               
+        <item name="android:activityCloseEnterAnimation">@null</item>
+               
+        <item name="android:activityCloseExitAnimation">@null</item>
+               
+        <item name="android:taskOpenEnterAnimation">@null</item>
+               
+        <item name="android:taskOpenExitAnimation">@null</item>
+               
+        <item name="android:taskCloseEnterAnimation">@null</item>
+               
+        <item name="android:taskCloseExitAnimation">@null</item>
+               
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+               
+        <item name="android:taskToFrontExitAnimation">@null</item>
+               
+        <item name="android:taskToBackEnterAnimation">@null</item>
+               
+        <item name="android:taskToBackExitAnimation">@null</item>
+           
     </style>
 </resources>
