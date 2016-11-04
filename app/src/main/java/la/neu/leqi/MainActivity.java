@@ -2,6 +2,7 @@ package la.neu.leqi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.synnapps.carouselview.CarouselView;
 
@@ -26,6 +28,7 @@ import la.neu.leqi.adapter.MainActivityAdapter;
 import la.neu.leqi.bean.Good;
 import la.neu.leqi.bean.Share;
 import la.neu.leqi.bean.ShopActivityBean;
+import la.neu.leqi.customview.SquareImageView;
 import la.neu.leqi.listener.AdViewListener;
 import la.neu.leqi.listener.MenuClickListener;
 import la.neu.leqi.tools.image.ImageLoader;
@@ -37,7 +40,6 @@ import la.neu.leqi.tools.image.ImageLoader;
  */
 public class MainActivity extends Activity implements View.OnTouchListener, GestureDetector.OnGestureListener {
 
-    private CarouselView CarouselView;
     private CircleImageView userFace;
     private DrawerLayout drawerLayout;
     private NavigationView menu;
@@ -52,11 +54,17 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         super.onCreate(savedInstanceState);
         //自定义title
         setContentView(R.layout.activity_main);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         imageLoader = new ImageLoader(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        findBarComponent();
+        firstPagePic.setImageResource(R.drawable.home_active);
+        firstPageText.setTextColor(Color.parseColor("#12b6f6"));
         //滑动触发
 //        View touch_view = findViewById(R.id.touch_view);
 //        gestureDetector = new GestureDetector(MainActivity.this, this);
@@ -109,8 +117,8 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         mainActivityAdapter.addShard(share4);
         activity_main_list.setAdapter(mainActivityAdapter);
         //导航栏跳转
-        bicycleShop = (LinearLayout) findViewById(R.id.bar_bicycle_shop_linear);
-        bicycleShop.setOnClickListener(new View.OnClickListener() {
+
+        bicycleShopLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, BicycleShopListActivity.class);
@@ -194,4 +202,42 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         params.height = totalHeight;
         listView.setLayoutParams(params);
     }
+
+    private void findBarComponent() {
+        firstPageLinear = (LinearLayout) findViewById(R.id.bar_first_page_linear);
+        bicycleShopLinear = (LinearLayout) findViewById(R.id.bar_bicycle_shop_linear);
+        shareLinear = (LinearLayout) findViewById(R.id.bar_share_linear);
+        clubLinear = (LinearLayout) findViewById(R.id.bar_club_linear);
+        activityLinear = (LinearLayout) findViewById(R.id.bar_activity_linear);
+
+        firstPagePic = (SquareImageView) findViewById(R.id.bar_first_page_pic);
+        bicycleShopPic = (SquareImageView) findViewById(R.id.bar_bicycle_shop_pic);
+        sharePic = (SquareImageView) findViewById(R.id.bar_share_pic);
+        clubPic = (SquareImageView) findViewById(R.id.bar_club_pic);
+        activityPic = (SquareImageView) findViewById(R.id.bar_activity_pic);
+
+        firstPageText = (TextView) findViewById(R.id.bar_first_page_text);
+        bicycleShopText = (TextView) findViewById(R.id.bar_bicycle_shop_text);
+        shareText = (TextView) findViewById(R.id.bar_share_text);
+        clubText = (TextView) findViewById(R.id.bar_club_text);
+        activityText = (TextView) findViewById(R.id.bar_activity_text);
+    }
+
+    private LinearLayout bicycleShopLinear;
+    private LinearLayout firstPageLinear;
+    private LinearLayout shareLinear;
+    private LinearLayout clubLinear;
+    private LinearLayout activityLinear;
+
+    private SquareImageView bicycleShopPic;
+    private SquareImageView firstPagePic;
+    private SquareImageView sharePic;
+    private SquareImageView clubPic;
+    private SquareImageView activityPic;
+
+    private TextView bicycleShopText;
+    private TextView firstPageText;
+    private TextView shareText;
+    private TextView clubText;
+    private TextView activityText;
 }
