@@ -14,6 +14,8 @@ public class ShopActivityBean {
     private String endTime;
     private String releaseTime;
     private ArrayList<String> pic_listp;
+    private int count;
+
 
     public ShopActivityBean(String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int activityId) {
         this.title = title;
@@ -25,15 +27,24 @@ public class ShopActivityBean {
         this.activityId = activityId;
     }
 
-    public ShopActivityBean( int activityId,String title, String startTime, String endTime, ArrayList<String> pic_listp) {
+    public ShopActivityBean( int activityId,String title, String startTime, String endTime, ArrayList<String> pic_list,int count) {
         this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.pic_listp = pic_listp;
+        this.pic_listp = pic_list;
         this.activityId = activityId;
+        this.count =count;
     }
 
     public ShopActivityBean() {
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getActivityId() {

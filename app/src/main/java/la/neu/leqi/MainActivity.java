@@ -11,15 +11,10 @@ import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.synnapps.carouselview.CarouselView;
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 
 import java.util.ArrayList;
 
@@ -28,9 +23,8 @@ import la.neu.leqi.adapter.MainActivityAdapter;
 import la.neu.leqi.bean.Good;
 import la.neu.leqi.bean.Share;
 import la.neu.leqi.bean.ShopActivityBean;
-import la.neu.leqi.customview.SquareImageView;
-import la.neu.leqi.listener.AdViewListener;
 import la.neu.leqi.listener.MenuClickListener;
+import la.neu.leqi.tools.builder.BottomNavigationBarBuilder;
 import la.neu.leqi.tools.image.ImageLoader;
 
 
@@ -38,7 +32,7 @@ import la.neu.leqi.tools.image.ImageLoader;
  * @author HeXunshi
  *         首页Activity
  */
-public class MainActivity extends Activity implements View.OnTouchListener, GestureDetector.OnGestureListener {
+public class MainActivity extends Activity implements View.OnTouchListener, GestureDetector.OnGestureListener,BottomNavigationBar.OnTabSelectedListener {
 
     private CircleImageView userFace;
     private DrawerLayout drawerLayout;
@@ -47,24 +41,30 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
     final int RIGHT = 0;
     final int LEFT = 1;
     private GestureDetector gestureDetector;
-    private LinearLayout bicycleShop;
+
+    private BottomNavigationBar bottomNavigationBar;
+    private final Class<?>[] classes ={null,BicycleShopListActivity.class,null,null,ActivityListActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //自定义title
         setContentView(R.layout.activity_main);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+        //导航栏
+        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+        BottomNavigationBarBuilder.build(bottomNavigationBar,0);
+        bottomNavigationBar.setTabSelectedListener(this);
+
         imageLoader = new ImageLoader(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        findBarComponent();
-        firstPagePic.setImageResource(R.drawable.home_active);
-        firstPageText.setTextColor(Color.parseColor("#12b6f6"));
+//        findBarComponent();
+//        firstPagePic.setImageResource(R.drawable.home_active);
+//        firstPageText.setTextColor(Color.parseColor("#12b6f6"));
         //滑动触发
 //        View touch_view = findViewById(R.id.touch_view);
 //        gestureDetector = new GestureDetector(MainActivity.this, this);
@@ -99,10 +99,10 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         mainActivityAdapter.addGood(good2);
         mainActivityAdapter.addGood(good3);
         mainActivityAdapter.addGood(good4);
-        final ShopActivityBean activityBean1 = new ShopActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1);
-        final ShopActivityBean activityBean2 = new ShopActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2);
-        final ShopActivityBean activityBean3 = new ShopActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3);
-        final ShopActivityBean activityBean4 = new ShopActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4);
+        final ShopActivityBean activityBean1 = new ShopActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1,10);
+        final ShopActivityBean activityBean2 = new ShopActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2,100);
+        final ShopActivityBean activityBean3 = new ShopActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3,45);
+        final ShopActivityBean activityBean4 = new ShopActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4,20);
         mainActivityAdapter.addActivity(activityBean1);
         mainActivityAdapter.addActivity(activityBean2);
         mainActivityAdapter.addActivity(activityBean3);
@@ -117,18 +117,16 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         mainActivityAdapter.addShard(share4);
         activity_main_list.setAdapter(mainActivityAdapter);
         //导航栏跳转
-
-        bicycleShopLinear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BicycleShopListActivity.class);
-                startActivity(intent);
-            }
-        });
-
+//        bicycleShopLinear.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, BicycleShopListActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
 
     }
-
 
     //处理滑动后操作
     public void doResult(int action) {
@@ -186,58 +184,23 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         return gestureDetector.onTouchEvent(motionEvent);
     }
 
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            return;
+    @Override
+    public void onTabSelected(int position) {
+        if(classes[position]!=null){
+            final Intent intent = new Intent();
+            intent.setClass(MainActivity.this,classes[position]);
+            startActivity(intent);
+            finish();
         }
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        totalHeight += (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        params.height = totalHeight;
-        listView.setLayoutParams(params);
     }
 
-    private void findBarComponent() {
-        firstPageLinear = (LinearLayout) findViewById(R.id.bar_first_page_linear);
-        bicycleShopLinear = (LinearLayout) findViewById(R.id.bar_bicycle_shop_linear);
-        shareLinear = (LinearLayout) findViewById(R.id.bar_share_linear);
-        clubLinear = (LinearLayout) findViewById(R.id.bar_club_linear);
-        activityLinear = (LinearLayout) findViewById(R.id.bar_activity_linear);
+    @Override
+    public void onTabUnselected(int position) {
 
-        firstPagePic = (SquareImageView) findViewById(R.id.bar_first_page_pic);
-        bicycleShopPic = (SquareImageView) findViewById(R.id.bar_bicycle_shop_pic);
-        sharePic = (SquareImageView) findViewById(R.id.bar_share_pic);
-        clubPic = (SquareImageView) findViewById(R.id.bar_club_pic);
-        activityPic = (SquareImageView) findViewById(R.id.bar_activity_pic);
-
-        firstPageText = (TextView) findViewById(R.id.bar_first_page_text);
-        bicycleShopText = (TextView) findViewById(R.id.bar_bicycle_shop_text);
-        shareText = (TextView) findViewById(R.id.bar_share_text);
-        clubText = (TextView) findViewById(R.id.bar_club_text);
-        activityText = (TextView) findViewById(R.id.bar_activity_text);
     }
 
-    private LinearLayout bicycleShopLinear;
-    private LinearLayout firstPageLinear;
-    private LinearLayout shareLinear;
-    private LinearLayout clubLinear;
-    private LinearLayout activityLinear;
+    @Override
+    public void onTabReselected(int position) {
 
-    private SquareImageView bicycleShopPic;
-    private SquareImageView firstPagePic;
-    private SquareImageView sharePic;
-    private SquareImageView clubPic;
-    private SquareImageView activityPic;
-
-    private TextView bicycleShopText;
-    private TextView firstPageText;
-    private TextView shareText;
-    private TextView clubText;
-    private TextView activityText;
+    }
 }

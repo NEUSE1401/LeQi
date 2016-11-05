@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
@@ -122,7 +123,14 @@ public class ImageLoader {
     }
 
     public void bindBitmap(final String uri, final ImageView imageView) {
-        bindBitmap(uri, imageView, 0, 0);
+        final Drawable drawable = imageView.getDrawable();
+        int width =  200;
+        int height = 200;
+        if(drawable!=null) {
+            width = drawable.getIntrinsicWidth();
+            height = drawable.getIntrinsicHeight();
+        }
+        bindBitmap(uri, imageView, width, height);
     }
 
     public void bindBitmap(final String uri, final ImageView imageView, final int reqWidth, final int reqHeight) {
