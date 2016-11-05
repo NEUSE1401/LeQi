@@ -15,6 +15,7 @@ public class Good {
     private int hit;
     private String onsale_time;
     private ArrayList<String> pic_list;
+    private ArrayList<String> paremeters;
 
     public Good() {
     }
@@ -127,5 +128,13 @@ public class Good {
 
     public void setPic_list(ArrayList<String> pic_list) {
         this.pic_list = pic_list;
+    }
+
+    public ArrayList<String> getParemeters() {
+        return paremeters;
+    }
+
+    public void setParemeters(ArrayList<String> paremeters) {
+        this.paremeters = paremeters;
     }
 }

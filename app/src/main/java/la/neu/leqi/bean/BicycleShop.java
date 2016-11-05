@@ -1,12 +1,13 @@
 package la.neu.leqi.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by lenovo on 2016/11/3.
  */
 
-public class BicycleShop {
+public class BicycleShop implements Serializable{
     private int shopId;
     private String shopName;
     private String ownerName;

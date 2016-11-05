@@ -34,5 +34,6 @@
     <!--菜单头部-->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
-
+    <!--具体商店-->
+    <dimen name="concrete_item_text_size">20dp</dimen>
 </resources>

@@ -1,6 +1,8 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import la.neu.leqi.R;
+import la.neu.leqi.ShopActivity;
 import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.tools.image.ImageLoader;
 
@@ -61,7 +64,7 @@ public class BicycleShopListViewItemAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        BicycleShop shop=shops.get(i);
+        final BicycleShop shop=shops.get(i);
         viewHolder.name.setText(shop.getShopName());
         viewHolder.address.setText(shop.getAddress());
         viewHolder.level.setText(shop.getLevel()+"");
@@ -71,6 +74,17 @@ public class BicycleShopListViewItemAdapter extends BaseAdapter {
         }else {
             imageLoader.bindBitmap(pics.get(0),viewHolder.pic);
         }
+        //点击跳转
+        view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent=new Intent(context, ShopActivity.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("shop",shop);
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
+            }
+        });
         return view;
     }
 

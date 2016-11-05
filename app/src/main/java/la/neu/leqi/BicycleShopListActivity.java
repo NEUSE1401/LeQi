@@ -20,8 +20,12 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import la.neu.leqi.adapter.BicycleShopListViewItemAdapter;
+import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.customview.SquareImageView;
 import la.neu.leqi.listener.MenuClickListener;
+import la.neu.leqi.tools.builder.BottomNavigationBarBuilder;
+import la.neu.leqi.tools.image.ImageLoader;
 
 public class BicycleShopListActivity extends Activity implements BottomNavigationBar.OnTabSelectedListener{
 
@@ -30,7 +34,7 @@ public class BicycleShopListActivity extends Activity implements BottomNavigatio
     private NavigationView menu;
 
     private BottomNavigationBar bottomNavigationBar;
-    private final Class<?>[] classes ={MainActivity.class,null,null,null,null};
+    private final Class<?>[] classes ={null,BicycleShopListActivity.class,null,null,ActivityListActivity.class};
 
     private SquareImageView bicycleShopPic;
     private SquareImageView firstPagePic;
@@ -38,11 +42,11 @@ public class BicycleShopListActivity extends Activity implements BottomNavigatio
     private SquareImageView clubPic;
     private SquareImageView activityPic;
 
-    private TextView bicycleShopText;
-    private TextView firstPageText;
-    private TextView shareText;
-    private TextView clubText;
-    private TextView activityText;
+//    private TextView bicycleShopText;
+//    private TextView firstPageText;
+//    private TextView shareText;
+//    private TextView clubText;
+//    private TextView activityText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +73,25 @@ public class BicycleShopListActivity extends Activity implements BottomNavigatio
         menu = (NavigationView) findViewById(R.id.nav_view);
         menu.setNavigationItemSelectedListener(new MenuClickListener(BicycleShopListActivity.this, drawerLayout));
 
-        findBarComponent();
-
-        bicycleShopPic.setImageResource(R.drawable.cycling_active);
-        bicycleShopText.setTextColor(Color.parseColor("#12b6f6"));
 
         ListView listView= (ListView) findViewById(R.id.bicycle_listview);
+        ImageLoader imageLoader=new ImageLoader(this);
+        BicycleShop shop1=new BicycleShop("2b101","槲荷缎花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
+        BicycleShop shop2=new BicycleShop("2b102","花花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
+        ArrayList<String> pic=new ArrayList<>();
+        pic.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
+        shop1.setShopPics(pic);
+        ArrayList<BicycleShop> shops=new ArrayList<>();
+        shops.add(shop1);
+        shops.add(shop2);
+        shops.add(shop1);
+        shops.add(shop2);
+        shops.add(shop1);
+        shops.add(shop2);
+        shops.add(shop1);
+        shops.add(shop2);
+        BicycleShopListViewItemAdapter adapter=new BicycleShopListViewItemAdapter(shops,this,imageLoader);
+        listView.setAdapter(adapter);
 
     }
 
