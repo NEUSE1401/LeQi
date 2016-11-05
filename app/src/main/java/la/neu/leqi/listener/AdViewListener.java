@@ -2,6 +2,7 @@ package la.neu.leqi.listener;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.synnapps.carouselview.CarouselView;

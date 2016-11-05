@@ -15,9 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/bottom"/>
+        android:layout_above="@+id/bottom_navigation_bar"/>
     <!-- 导航栏-->
-    <include layout="@layout/bottom_bar"
-        android:id="@+id/bottom"/>
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom" />
+    <!--<include layout="@layout/bottom_bar"-->
+        <!--android:id="@+id/bottom"/>-->
 
 </RelativeLayout>

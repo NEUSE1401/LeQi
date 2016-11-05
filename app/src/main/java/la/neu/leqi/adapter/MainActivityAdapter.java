@@ -1,6 +1,7 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,6 +128,7 @@ public class MainActivityAdapter extends BaseAdapter {
             carouselView.addOnPageChangeListener(adViewListener);
             //乐骑活动显示
             final ImageView activity_pic = (ImageView) view.findViewById(R.id.activity_pic);
+            activity_pic.setImageResource(R.drawable.default_background);
             imageLoader.bindBitmap("http://neu.la/leqi/img/slider/Homeslider4.jpg", activity_pic);
             head_view = view;
         }
@@ -181,18 +183,14 @@ public class MainActivityAdapter extends BaseAdapter {
         original_price_left.setText(String.valueOf("￥" + good_left.getOriginal_price()));
         current_price_left.setText(String.valueOf("￥" + good_left.getCurrent_price()));
         image_left.setImageResource(R.drawable.default_background);
-        if (good_left.getPic_list().size() == 0) {
-            image_left.setImageResource(R.drawable.default_background);
-        } else {
+        if (good_left.getPic_list().size() != 0) {
             imageLoader.bindBitmap(good_left.getPic_list().get(0), image_left);
         }
         title_right.setText(good_right.getName());
         original_price_right.setText(String.valueOf("￥" + good_right.getOriginal_price()));
         current_price_right.setText(String.valueOf("￥" + good_right.getCurrent_price()));
         image_right.setImageResource(R.drawable.default_background);
-        if (good_right.getPic_list().size() == 0) {
-            imageLoader.bindBitmap("", image_right);
-        } else {
+        if (good_right.getPic_list().size() != 0) {
             imageLoader.bindBitmap(good_right.getPic_list().get(0), image_right);
         }
         return view;
@@ -209,6 +207,7 @@ public class MainActivityAdapter extends BaseAdapter {
             viewHolder.activity_title = (TextView) view.findViewById(R.id.activity_title);
             viewHolder.activity_start_time = (TextView) view.findViewById(R.id.activity_start_time);
             viewHolder.activity_end_time = (TextView) view.findViewById(R.id.activity_end_time);
+            viewHolder.activity_count = (TextView) view.findViewById(R.id.activity_count);
             view.setTag(viewHolder);
         } else {
             final Object tag = view.getTag();
@@ -221,6 +220,7 @@ public class MainActivityAdapter extends BaseAdapter {
                 viewHolder.activity_title = (TextView) view.findViewById(R.id.activity_title);
                 viewHolder.activity_start_time = (TextView) view.findViewById(R.id.activity_start_time);
                 viewHolder.activity_end_time = (TextView) view.findViewById(R.id.activity_end_time);
+                viewHolder.activity_count = (TextView) view.findViewById(R.id.activity_count);
                 view.setTag(viewHolder);
             }
         }
@@ -228,22 +228,23 @@ public class MainActivityAdapter extends BaseAdapter {
         TextView activity_title = viewHolder.activity_title;
         TextView activity_start_time = viewHolder.activity_start_time;
         TextView activity_end_time = viewHolder.activity_end_time;
+        TextView activity_count = viewHolder.activity_count;
         final ShopActivityBean activity = activities.get(i);
-        final ArrayList<String> pic_listp = activity.getPic_listp();
-        if (pic_listp.size() == 0) {
-            activity_image.setImageResource(R.drawable.default_background);
-        } else {
-            imageLoader.bindBitmap(pic_listp.get(0), activity_image);
+        final ArrayList<String> pic_list = activity.getPic_listp();
+        activity_image.setImageResource(R.drawable.default_background);
+        if (pic_list.size() != 0) {
+            imageLoader.bindBitmap(pic_list.get(0), activity_image);
         }
         activity_title.setText(activity.getTitle());
         activity_start_time.setText(activity.getStartTime());
         activity_end_time.setText(activity.getEndTime());
+        activity_count.setText(String.valueOf(activity.getCount()));
         return view;
     }
 
     //加载分享列表
     private View getShareView(int i, View view, ViewGroup viewGroup) {
-        i = i - goods.size() / 2 - activities.size() - 1 -3;
+        i = i - goods.size() / 2 - activities.size() - 1 - 3;
         ShareViewHolder viewHolder;
         if (view == null) {
             viewHolder = new ShareViewHolder();
@@ -275,15 +276,13 @@ public class MainActivityAdapter extends BaseAdapter {
         final Share share_right = shares.get(2 * i + 1);
         final ArrayList<String> pic_list_left = share_left.getPic_list();
         final ArrayList<String> pic_list_right = share_right.getPic_list();
-        if (pic_list_left.size() == 0) {
-            image_left.setImageResource(R.drawable.default_background);
-        } else {
+        image_left.setImageResource(R.drawable.default_background);
+        if (pic_list_left.size() != 0) {
             imageLoader.bindBitmap(pic_list_left.get(0), image_left);
         }
         title_left.setText(share_left.getTheme());
-        if (pic_list_right.size() == 0) {
-            image_right.setImageResource(R.drawable.default_background);
-        } else {
+        image_right.setImageResource(R.drawable.default_background);
+        if (pic_list_right.size() != 0) {
             imageLoader.bindBitmap(pic_list_right.get(0), image_right);
         }
         title_right.setText(share_right.getTheme());
@@ -306,6 +305,7 @@ public class MainActivityAdapter extends BaseAdapter {
         TextView activity_title;
         TextView activity_start_time;
         TextView activity_end_time;
+        TextView activity_count;
     }
 
     private static class ShareViewHolder {
