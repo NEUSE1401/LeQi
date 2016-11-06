@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.MenuItem;
 
+import la.neu.leqi.ConcreteGoodActivity;
 import la.neu.leqi.PersonalInformationActivity;
 import la.neu.leqi.R;
 
@@ -38,7 +39,8 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
         }else if(id==R.id.personal_share){
 
         }else if(id==R.id.setting){
-
+            Intent intent=new Intent(context, ConcreteGoodActivity.class);
+            context.startActivity(intent);
         }
 
         return false;
