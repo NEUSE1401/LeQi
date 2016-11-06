@@ -34,7 +34,7 @@ public class BicycleShopListActivity extends Activity implements BottomNavigatio
     private NavigationView menu;
 
     private BottomNavigationBar bottomNavigationBar;
-    private final Class<?>[] classes ={null,BicycleShopListActivity.class,null,null,ActivityListActivity.class};
+    private final Class<?>[] classes ={MainActivity.class,BicycleShopListActivity.class,null,null,ActivityListActivity.class};
 
     private SquareImageView bicycleShopPic;
     private SquareImageView firstPagePic;

@@ -5,4 +5,5 @@ package la.neu.leqi.bean;
  */
 
 public class Clinet {
+
 }

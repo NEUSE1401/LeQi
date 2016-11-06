@@ -43,7 +43,7 @@
         <activity android:name=".ConcreteGoodActivity"
             android:theme="@style/CustomTitleTheme">
         </activity>
-        <activity android:name=".BicycleShopListActivity" />
+
         <activity android:name=".ActivityListActivity"></activity>
     </application>
 
