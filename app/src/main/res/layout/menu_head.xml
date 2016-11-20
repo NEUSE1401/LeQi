@@ -30,6 +30,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="个性签名：hello，玉林！" />
+        android:text="个性签名：hello，leqi！" />
 
 </LinearLayout>

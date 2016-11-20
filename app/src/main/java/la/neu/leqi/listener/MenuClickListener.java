@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 
 import la.neu.leqi.ConcreteGoodActivity;
+import la.neu.leqi.LogAndRegesterActivity;
 import la.neu.leqi.PersonalInformationActivity;
 import la.neu.leqi.R;
 
@@ -40,6 +41,9 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
 
         }else if(id==R.id.setting){
             Intent intent=new Intent(context, ConcreteGoodActivity.class);
+            context.startActivity(intent);
+        }else if(id==R.id.log_out){
+            Intent intent=new Intent(context, LogAndRegesterActivity.class);
             context.startActivity(intent);
         }
 

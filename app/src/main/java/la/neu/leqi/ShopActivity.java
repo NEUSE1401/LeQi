@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import la.neu.leqi.shopfragment.ShopActivityContent;
-import la.neu.leqi.shopfragment.ShopAllGoodContent;
-import la.neu.leqi.shopfragment.ShopHomePageContent;
-import la.neu.leqi.shopfragment.ShopLatestGoodContent;
+import la.neu.leqi.fragment.ShopActivityContent;
+import la.neu.leqi.fragment.ShopAllGoodContent;
+import la.neu.leqi.fragment.ShopHomePageContent;
+import la.neu.leqi.fragment.ShopLatestGoodContent;
 
 public class ShopActivity extends Activity implements View.OnClickListener{
 

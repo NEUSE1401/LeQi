@@ -1,4 +1,4 @@
-package la.neu.leqi.shopfragment;
+package la.neu.leqi.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
