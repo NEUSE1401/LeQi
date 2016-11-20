@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import la.neu.leqi.fragment.Log;
@@ -15,7 +16,7 @@ public class LogAndRegesterActivity extends Activity implements View.OnClickList
     private LinearLayout logLinear;
     private LinearLayout regesterLinear;
     private LinearLayout content;
-
+    private ImageView back;
     private FragmentManager fr;
     private FragmentTransaction ft;
     @Override
@@ -25,10 +26,16 @@ public class LogAndRegesterActivity extends Activity implements View.OnClickList
         logLinear= (LinearLayout) findViewById(R.id.log_linear);
         regesterLinear= (LinearLayout) findViewById(R.id.regester_linear);
         content= (LinearLayout) findViewById(R.id.log_and_regester_content);
+        back= (ImageView) findViewById(R.id.back);
 
         logLinear.setOnClickListener(this);
         regesterLinear.setOnClickListener(this);
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         fr=getFragmentManager();
         ft=fr.beginTransaction();
 
