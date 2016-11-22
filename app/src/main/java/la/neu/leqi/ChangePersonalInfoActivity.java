@@ -2,9 +2,12 @@ package la.neu.leqi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,7 +28,7 @@ public class ChangePersonalInfoActivity extends Activity {
 
     private String contentAfterChange;
     private int id;
-    private String contentBeforChange;
+    private String contentBeforeChange;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +36,6 @@ public class ChangePersonalInfoActivity extends Activity {
         setContentView(R.layout.activity_change_personal_info);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_title);
         back_title = (TextView)findViewById(R.id.back_title);
-
         imageView  =(ImageView)findViewById(R.id.back_icon);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,17 +49,17 @@ public class ChangePersonalInfoActivity extends Activity {
 
         Intent intent=getIntent();
         id=intent.getIntExtra("viewId",0);
-        contentBeforChange=intent.getStringExtra("contentBefore");
+        contentBeforeChange=intent.getStringExtra("contentBefore");
 
         if(id==R.id.change_nickname){
             back_title.setText("修改昵称");
-            setChangeEditText( contentBeforChange);
+            setChangeEditText( contentBeforeChange);
         }else if(id==R.id.change_contact){
             back_title.setText("修改联系方式");
-            setChangeEditText( contentBeforChange);
+            setChangeEditText( contentBeforeChange);
         }else if(id==R.id.change_sex){
             back_title.setText("修改性别");
-            setSexChooseRadioButton( contentBeforChange);
+            setSexChooseRadioButton( contentBeforeChange);
         }
 
         changeCommit.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,7 @@ public class ChangePersonalInfoActivity extends Activity {
             private String changeRemind="";
             @Override
             public void onClick(View view) {
-                if(contentAfterChange.equals(contentBeforChange)){
+                if(contentAfterChange.equals(contentBeforeChange)){
                     changeRemind="未改变";
                     Toast toast=Toast.makeText(ChangePersonalInfoActivity.this,changeRemind,Toast.LENGTH_LONG);
                     toast.show();

@@ -57,7 +57,6 @@ public class LogAndRegisterActivity extends Activity implements View.OnClickList
         });
         fr = getFragmentManager();
         ft = fr.beginTransaction();
-
         ft.replace(R.id.log_and_register_content, new Log());
         ft.commit();
     }
