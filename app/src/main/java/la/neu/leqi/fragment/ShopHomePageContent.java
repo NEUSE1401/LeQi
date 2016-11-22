@@ -17,6 +17,7 @@ import la.neu.leqi.listener.AdViewListener;
 import la.neu.leqi.tools.image.ImageLoader;
 
 /**
+ *
  * Created by lenovo on 2016/11/2.
  */
 
