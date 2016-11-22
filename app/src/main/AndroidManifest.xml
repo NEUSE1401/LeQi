@@ -42,7 +42,7 @@
             android:name=".ConcreteGoodActivity"
             android:theme="@style/CustomTitleTheme"></activity>
         <activity android:name=".ActivityListActivity" />
-        <activity android:name=".LogAndRegesterActivity"></activity>
+        <activity android:name=".LogAndRegisterActivity"></activity>
     </application>
 
 </manifest>

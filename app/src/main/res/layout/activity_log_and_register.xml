@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_log_and_regester"
+    android:id="@+id/activity_log_and_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="la.neu.leqi.LogAndRegesterActivity">
+    tools:context="la.neu.leqi.LogAndRegisterActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:id="@+id/regester_linear"
+            android:id="@+id/register_linear"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
@@ -77,7 +77,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/log_and_regester_content"
+        android:id="@+id/log_and_register_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

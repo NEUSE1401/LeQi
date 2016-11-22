@@ -17,7 +17,7 @@ import la.neu.leqi.R;
  * Created by lenovo on 2016/11/20.
  */
 
-public class Regester extends Fragment {
+public class Register extends Fragment {
     private EditText name;
     private EditText pass;
     private EditText repetPass;
@@ -26,11 +26,11 @@ public class Regester extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.regester, null);
-        name= (EditText) view.findViewById(R.id.regest_user_name);
-        pass= (EditText) view.findViewById(R.id.regest_user_pass);
-        repetPass= (EditText) view.findViewById(R.id.regest_repet_user_pass);
-        regester= (Button) view.findViewById(R.id.regester);
+        View view=inflater.inflate(R.layout.register, null);
+        name= (EditText) view.findViewById(R.id.regist_user_name);
+        pass= (EditText) view.findViewById(R.id.regist_user_pass);
+        repetPass= (EditText) view.findViewById(R.id.regist_repet_user_pass);
+        regester= (Button) view.findViewById(R.id.register);
 
 
         regester.setOnClickListener(new View.OnClickListener() {
