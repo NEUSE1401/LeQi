@@ -6,5 +6,5 @@
         android:topLeftRadius="20px"
         android:topRightRadius="20px"/>
 
-    <solid android:color="#ffbcbe"/>
+    <solid android:color="@color/logLightColor"/>
 </shape>

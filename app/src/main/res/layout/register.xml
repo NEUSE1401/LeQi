@@ -1,68 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <EditText
-            android:hint="用户名"
-            android:id="@+id/regist_user_name"
+    <LinearLayout
+        android:id="@+id/register_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="80dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColorHint="#7b7a7a"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/regist_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="用户名"
+                android:textColorHint="#7b7a7a" />
+        </LinearLayout>
 
-        <EditText
-            android:hint="密码"
-            android:id="@+id/regist_user_pass"
-            android:inputType="textPassword"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColorHint="#7b7a7a"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:hint="确认密码"
-            android:id="@+id/regist_repet_user_pass"
-            android:inputType="textPassword"
+            <EditText
+                android:id="@+id/regist_user_pass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="密码"
+                android:inputType="textPassword"
+                android:textColorHint="#7b7a7a" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColorHint="#7b7a7a"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/register"
-            android:textSize="20dp"
-            android:text="注  册"
-            android:background="@drawable/button"
-            android:layout_height="40dp"
-            android:layout_width="150dp"/>
+            <EditText
+                android:id="@+id/regist_repet_user_pass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="确认密码"
+                android:inputType="textPassword"
+                android:textColorHint="#7b7a7a" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button"
+                android:text="注  册"
+                android:textColor="@color/logTextColor"
+                android:textSize="20sp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

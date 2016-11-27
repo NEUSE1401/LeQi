@@ -22,4 +22,8 @@
     <!--具体商店-->
     <color name="shopTextRed">#a00808</color>
     <color name="shopTextGray">#999ca9</color>
+    <!--登录注册-->
+    <color name="logMainColor">#03a9f4</color>
+    <color name="logLightColor">#46c0ff</color>
+    <color name="logTextColor">#ffffff</color>
 </resources>

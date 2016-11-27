@@ -1,57 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-
-        android:orientation="horizontal"
+        android:id="@+id/login_linear"
+        android:orientation="vertical"
+        android:paddingBottom="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <EditText
-            android:textColorHint="#7b7a7a"
-            android:hint="用户名"
-            android:id="@+id/user_name"
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
+            <requestFocus />
+            <EditText
+                android:textColorHint="#7b7a7a"
+                android:hint="用户名"
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:weightSum="10"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <EditText
-            android:textColorHint="#7b7a7a"
-            android:hint="密码"
-            android:id="@+id/user_pass"
-            android:inputType="textPassword"
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-           />
-    </LinearLayout>
+            android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/user_log"
-            android:textSize="20dp"
-            android:text="登   录"
-            android:background="@drawable/button"
-            android:layout_height="40dp"
-            android:layout_width="150dp"/>
+
+            <EditText
+                android:textColorHint="#7b7a7a"
+                android:hint="密码"
+                android:id="@+id/user_pass"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:focusable="true"
+                android:id="@+id/user_log"
+                android:textSize="20dp"
+                android:text="登   录"
+                android:textColor="@color/logTextColor"
+                android:background="@drawable/button"
+                android:layout_height="40dp"
+                android:layout_width="150dp"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

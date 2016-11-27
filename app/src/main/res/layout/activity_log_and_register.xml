@@ -1,105 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_log_and_register"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="la.neu.leqi.LogAndRegisterActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".LogAndRegisterActivity">
 
-    <FrameLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#e18080">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:clickable="true"
-            android:src="@drawable/back" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="乐 骑"
-                android:textSize="20dp" />
+                android:layout_height="250dp"
+                android:background="@color/logMainColor">
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="乐 骑"
+                        android:textColor="@color/logTextColor"
+                        android:textSize="40sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="leqi"
+                        android:textColor="@color/logTextColor"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_gravity="bottom"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="leqi"
-                android:textSize="20dp" />
-        </LinearLayout>
-    </FrameLayout>
+                android:layout_height="wrap_content">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:id="@+id/log_linear"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#e18080"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView2"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="登录"
-                    android:textSize="20dp" />
-            </LinearLayout>
+                    android:layout_height="45dp"
+                    android:background="@color/logMainColor"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-            <LinearLayout
-                android:id="@+id/register_linear"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#e18080"
-                android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/log_linear"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView3"
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="登录"
+                            android:textColor="@color/logTextColor"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/register_linear"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="注册"
+                            android:textColor="@color/logTextColor"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/log_arrow"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="注册"
-                    android:textSize="20dp" />
-            </LinearLayout>
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/log_arrow"
-            android:src="@drawable/arrow"
-            android:layout_gravity="bottom"
-            android:scaleType="matrix"
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-    </FrameLayout>
+                    android:layout_height="10dp"
+                    android:layout_gravity="bottom"
+                    android:scaleType="matrix"
+                    android:src="@drawable/arrow" />
+            </FrameLayout>
 
-    <LinearLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:src="@drawable/back" />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/log_and_register_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    </LinearLayout>
-</LinearLayout>
+    </android.support.v4.view.ViewPager>
+</android.support.design.widget.CoordinatorLayout>

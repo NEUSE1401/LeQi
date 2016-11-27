@@ -1,47 +1,81 @@
 package la.neu.leqi.fragment;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import la.neu.leqi.MainActivity;
 import la.neu.leqi.R;
-
-/**
- * Created by lenovo on 2016/11/20.
- */
+import la.neu.leqi.thread.LoginWebThread;
 
 public class Log extends Fragment {
     private EditText name;
     private EditText pass;
     private Button log;
+    private LinearLayout loginLinear;
+    private boolean isCreate=false;
 
-
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.log, null);
-        name= (EditText) view.findViewById(R.id.user_name);
-        pass= (EditText) view.findViewById(R.id.user_pass);
-        log= (Button) view.findViewById(R.id.user_log);
-
-        String nameS=name.getText().toString();
-        String passS=pass.getText().toString();
-
+        isCreate = true;
+        View view = inflater.inflate(R.layout.log, null);
+        name = (EditText) view.findViewById(R.id.user_name);
+        pass = (EditText) view.findViewById(R.id.user_pass);
+        log = (Button) view.findViewById(R.id.user_log);
+        loginLinear = (LinearLayout)view.findViewById(R.id.login_linear);
+        loginLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+                }
+            }
+        });
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(container.getContext(), "账号密码错误", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),MainActivity.class);
-                startActivity(intent);
+                final String nameS = name.getText().toString();
+                final String passS = pass.getText().toString();
+                final LoginWebThread loginWebThread = new LoginWebThread(handler, nameS, passS);
+                loginWebThread.start();
             }
         });
-        return view ;
+        return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(!isVisibleToUser&&isCreate){
+            name.setText("");
+            pass.setText("");
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+            }
+        }
     }
 }
