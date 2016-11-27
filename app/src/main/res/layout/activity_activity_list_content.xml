@@ -7,14 +7,31 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_activity_list_bar"
     tools:context="la.neu.leqi.ActivityListActivity">
+
+    <ListView
+        android:layout_below="@+id/type_select"
+        android:id="@+id/activity_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation_bar"/>
+    <!-- 导航栏-->
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom" />
+
     <LinearLayout
         android:id="@+id/type_select"
-        android:layout_alignParentTop="true"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="@drawable/top_bottom_border"
         android:layout_height="50dp"
-        android:weightSum="3">
+        android:weightSum="3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <LinearLayout
             android:id="@+id/general_button"
             android:clickable="true"
@@ -58,17 +75,4 @@
                 android:text="最近"/>
         </LinearLayout>
     </LinearLayout>
-    <ListView
-        android:layout_below="@+id/type_select"
-        android:id="@+id/activity_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation_bar"/>
-    <!-- 导航栏-->
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/bottom_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom" />
 </RelativeLayout>

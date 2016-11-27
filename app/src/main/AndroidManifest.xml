@@ -40,9 +40,12 @@
         <activity android:name=".BicycleShopListActivity" />
         <activity
             android:name=".ConcreteGoodActivity"
-            android:theme="@style/CustomTitleTheme"/>
+            android:theme="@style/CustomTitleTheme" />
         <activity android:name=".ActivityListActivity" />
-        <activity android:name=".LogAndRegisterActivity"/>
+        <activity android:name=".LogAndRegisterActivity" />
+        <activity android:name=".MyCollectActivity"
+                  android:theme="@style/CustomTitleTheme" >
+        </activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@
         <item
             android:id="@+id/personal_activity"
             android:icon="@drawable/personal_release"
-            android:title="我的活动" />
+            android:title="我的发布" />
         <item
             android:id="@+id/personal_collect"
             android:icon="@drawable/personal_collect"

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import la.neu.leqi.ConcreteGoodActivity;
 import la.neu.leqi.LogAndRegisterActivity;
+import la.neu.leqi.MyCollectActivity;
 import la.neu.leqi.PersonalInformationActivity;
 import la.neu.leqi.R;
 
@@ -35,7 +36,8 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
         }else if(id==R.id.personal_activity){
 
         }else if(id==R.id.personal_collect){
-
+            Intent intent=new Intent(context, MyCollectActivity.class);
+            context.startActivity(intent);
         }else if(id==R.id.personal_share){
 
         }else if(id==R.id.setting){
