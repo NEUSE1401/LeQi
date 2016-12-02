@@ -33,7 +33,7 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
     private ImageLoader imageLoader;
     private ListView activity_list;
     private BottomNavigationBar bottomNavigationBar;
-    private final Class<?>[] classes = {MainActivity.class, BicycleShopListActivity.class, null, null, null};
+    private final Class<?>[] classes ={MainActivity.class,BicycleShopListActivity.class,null,ClubListActivity.class,null};
 
     private LinearLayout general_button;
     private LinearLayout hot_button;

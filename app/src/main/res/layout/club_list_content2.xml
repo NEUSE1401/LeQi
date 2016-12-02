@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="la.neu.leqi.MainActivity">
+
+    <TableLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:id="@+id/search_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <TableRow
+            android:background="#03a9f4"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:layout_weight="1">
+            <EditText
+
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_column="0"
+                android:layout_weight="0.9"
+                android:background="#ffff"
+                android:hint="搜索"
+                android:maxLines="1"
+                android:paddingLeft="5dp" />
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="#03a9f4"
+                android:src="@drawable/search"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                />
+        </TableRow>
+    </TableLayout>
+
+    <ListView
+        android:layout_below="@+id/search_layout"
+        android:id="@+id/club_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation_bar">
+
+    </ListView>
+
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom" />
+</RelativeLayout>

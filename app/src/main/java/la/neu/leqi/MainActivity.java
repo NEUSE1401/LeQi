@@ -43,7 +43,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
     private GestureDetector gestureDetector;
 
     private BottomNavigationBar bottomNavigationBar;
-    private final Class<?>[] classes ={null,BicycleShopListActivity.class,null,null,ActivityListActivity.class};
+    private final Class<?>[] classes ={null,BicycleShopListActivity.class,null,ClubListActivity.class,ActivityListActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -43,9 +43,10 @@
             android:theme="@style/CustomTitleTheme" />
         <activity android:name=".ActivityListActivity" />
         <activity android:name=".LogAndRegisterActivity" />
-        <activity android:name=".MyCollectActivity"
-                  android:theme="@style/CustomTitleTheme" >
-        </activity>
+        <activity
+            android:name=".MyCollectActivity"
+            android:theme="@style/CustomTitleTheme"></activity>
+        <activity android:name=".ClubListActivity"></activity>
     </application>
 
 </manifest>
