@@ -1,25 +1,30 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import la.neu.leqi.ConcreteActivityActivity;
+import la.neu.leqi.ConcreteClubActivity;
 import la.neu.leqi.R;
-import la.neu.leqi.bean.ShopActivityBean;
+import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.tools.image.ImageLoader;
 
 /**
  * 活动适配器
  */
 
-public class ActivityListViewAdapter extends BaseAdapter {
-    private ArrayList<ShopActivityBean> activities;
+public class ActivityListViewAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
+    private ArrayList<ActivityBean> activities;
     private ImageLoader imageLoader;
     private Context context;
 
@@ -64,7 +69,7 @@ public class ActivityListViewAdapter extends BaseAdapter {
         TextView activity_start_time = viewHolder.activity_start_time;
         TextView activity_end_time = viewHolder.activity_end_time;
         TextView activity_count = viewHolder.activity_count;
-        final ShopActivityBean activity = activities.get(i);
+        final ActivityBean activity = activities.get(i);
         final ArrayList<String> pic_list = activity.getPic_listp();
         activity_image.setImageResource(R.drawable.default_background);
         if (pic_list.size() != 0) {
@@ -81,9 +86,19 @@ public class ActivityListViewAdapter extends BaseAdapter {
         return context;
     }
 
-    public void add(ShopActivityBean shopActivityBean){
-        activities.add(shopActivityBean);
+    public void add(ActivityBean activityBean){
+        activities.add(activityBean);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent=new Intent(context, ConcreteActivityActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("activity",activities.get(i));
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
     private static class ActivityViewHolder {
         ImageView activity_image;
         TextView activity_title;

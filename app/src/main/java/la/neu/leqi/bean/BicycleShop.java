@@ -17,7 +17,7 @@ public class BicycleShop implements Serializable{
     private int collectCount;
     private String address;
 
-    private ArrayList<ShopActivityBean> shopActivities;
+    private ArrayList<ActivityBean> shopActivities;
     private ArrayList<Clinet> clientCollect;
     private ArrayList<String> shopPics;
     private ArrayList<Advertisement> advertisements;
@@ -94,11 +94,11 @@ public class BicycleShop implements Serializable{
         this.collectCount = collectCount;
     }
 
-    public ArrayList<ShopActivityBean> getShopActivities() {
+    public ArrayList<ActivityBean> getShopActivities() {
         return shopActivities;
     }
 
-    public void setShopActivities(ArrayList<ShopActivityBean> shopActivities) {
+    public void setShopActivities(ArrayList<ActivityBean> shopActivities) {
         this.shopActivities = shopActivities;
     }
 

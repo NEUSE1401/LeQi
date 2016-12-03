@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import la.neu.leqi.R;
 import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.bean.Club;
-import la.neu.leqi.bean.ShopActivityBean;
+import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.tools.image.ImageLoader;
 
 /**
@@ -23,7 +23,7 @@ import la.neu.leqi.tools.image.ImageLoader;
 public class MyCollectAdapter extends BaseAdapter {
     private ArrayList<BicycleShop> collectShops;
     private ArrayList<Club> collectClubs;
-    private ArrayList<ShopActivityBean> collectShopActivities;
+    private ArrayList<ActivityBean> collectShopActivities;
     private Context context;
     private ImageLoader imageLoader;
 
@@ -144,7 +144,7 @@ public class MyCollectAdapter extends BaseAdapter {
                 view.setTag(viewHolder);
             }
         }
-        final ShopActivityBean activity = collectShopActivities.get(i);
+        final ActivityBean activity = collectShopActivities.get(i);
         final ArrayList<String> pic_list = activity.getPic_listp();
         viewHolder.activity_image.setImageResource(R.drawable.default_background);
         if (pic_list.size() != 0) {
@@ -175,7 +175,7 @@ public class MyCollectAdapter extends BaseAdapter {
     public void addShop(BicycleShop shop){
         collectShops.add(shop);
     }
-    public void addShopActivity(ShopActivityBean shopActivity){
+    public void addShopActivity(ActivityBean shopActivity){
         collectShopActivities.add(shopActivity);
     }
     public void addClub(Club club){

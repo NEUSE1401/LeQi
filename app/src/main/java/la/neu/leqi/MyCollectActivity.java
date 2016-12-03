@@ -1,7 +1,6 @@
 package la.neu.leqi;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 import la.neu.leqi.adapter.MyCollectAdapter;
 import la.neu.leqi.bean.BicycleShop;
-import la.neu.leqi.bean.ShopActivityBean;
+import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.tools.image.ImageLoader;
 
 public class MyCollectActivity extends Activity {
@@ -51,10 +50,10 @@ public class MyCollectActivity extends Activity {
         final ArrayList<String> pics4 = new ArrayList<>();
         pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
 
-        final ShopActivityBean activityBean1 = new ShopActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1,10);
-        final ShopActivityBean activityBean2 = new ShopActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2,100);
-        final ShopActivityBean activityBean3 = new ShopActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3,45);
-        final ShopActivityBean activityBean4 = new ShopActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4,20);
+        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1,10);
+        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2,100);
+        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3,45);
+        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4,20);
         adapter.addShopActivity(activityBean1);
         adapter.addShopActivity(activityBean2);
         adapter.addShopActivity(activityBean3);

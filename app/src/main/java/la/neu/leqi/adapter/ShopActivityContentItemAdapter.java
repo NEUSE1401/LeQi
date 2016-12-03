@@ -10,8 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import la.neu.leqi.R;
-import la.neu.leqi.ShopActivity;
-import la.neu.leqi.bean.ShopActivityBean;
+import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.tools.image.ImageLoader;
 
 /**
@@ -20,11 +19,11 @@ import la.neu.leqi.tools.image.ImageLoader;
 
 public class ShopActivityContentItemAdapter extends BaseAdapter {
 
-    ArrayList<ShopActivityBean> shopActivities;
+    ArrayList<ActivityBean> shopActivities;
     private LayoutInflater inflater;
     private ImageLoader imageLoader;
 
-    public ShopActivityContentItemAdapter(LayoutInflater inflater,ImageLoader imageLoader,ArrayList<ShopActivityBean> shopActivities){
+    public ShopActivityContentItemAdapter(LayoutInflater inflater,ImageLoader imageLoader,ArrayList<ActivityBean> shopActivities){
         this.shopActivities=shopActivities;
         this.inflater=inflater;
         this.imageLoader=imageLoader;
@@ -65,7 +64,7 @@ public class ShopActivityContentItemAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder)view.getTag();
         }
-        ShopActivityBean shopActivity=shopActivities.get(i);
+        ActivityBean shopActivity=shopActivities.get(i);
         ArrayList<String> activityPics=shopActivity.getPic_listp();
         if(activityPics.size()==0){
             viewHolder.imageView.setImageResource(R.drawable.default_background);

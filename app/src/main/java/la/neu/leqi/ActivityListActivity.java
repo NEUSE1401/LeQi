@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import la.neu.leqi.adapter.ActivityListViewAdapter;
-import la.neu.leqi.bean.ShopActivityBean;
+import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.listener.MenuClickListener;
 import la.neu.leqi.tools.builder.BottomNavigationBarBuilder;
 import la.neu.leqi.tools.image.ImageLoader;
@@ -89,10 +90,13 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
         pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
         final ArrayList<String> pics4 = new ArrayList<>();
         pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
-        final ShopActivityBean activityBean1 = new ShopActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1,23);
-        final ShopActivityBean activityBean2 = new ShopActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2,23);
-        final ShopActivityBean activityBean3 = new ShopActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3,100);
-        final ShopActivityBean activityBean4 = new ShopActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4,90);
+        //    public ActivityBean(int activityId, String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int count, String startPlace, String endPlace, String activityPlace, String participateWay, String owner, String requirement) {
+        String des="本次骑行赛车活动规模大、内容丰富、参赛选手众多。我们策划这次活动，一方面，试图通过“骑行”这种形式，倡导绿色出行新风尚，身体力行实践低碳生活，落实国家低碳减排政策。另一方面，这也是一次传播自行车文化，普及大众骑行活动的播种之旅。";
+        String way="联系负责人报名即可";
+        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", des,"2016-11-3", "2016-11-6","2016-11-3", pics1,23,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
+        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", des,"2016-11-3", "2016-11-7","2016-11-3", pics2,23,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
+        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", des,"2016-11-3", "2016-11-3","2016-11-1", pics3,100,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
+        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", des,"2016-11-3", "2016-11-3", "2016-11-1",pics4,90,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
         adapter.add(activityBean1);
         adapter.add(activityBean2);
         adapter.add(activityBean3);
@@ -118,6 +122,12 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
         adapter.add(activityBean3);
         adapter.add(activityBean4);
         activity_list.setAdapter(adapter);
+        activity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                adapter.onItemClick(adapterView,view,i,l);
+            }
+        });
     }
 
     @Override

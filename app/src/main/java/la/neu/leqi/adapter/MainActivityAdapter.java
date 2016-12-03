@@ -1,7 +1,6 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,11 @@ import android.widget.TextView;
 import com.synnapps.carouselview.CarouselView;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import la.neu.leqi.R;
 import la.neu.leqi.bean.Good;
 import la.neu.leqi.bean.Share;
-import la.neu.leqi.bean.ShopActivityBean;
+import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.listener.AdViewListener;
 import la.neu.leqi.tools.image.ImageLoader;
 
@@ -29,7 +27,7 @@ import la.neu.leqi.tools.image.ImageLoader;
 public class MainActivityAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Good> goods;
-    private ArrayList<ShopActivityBean> activities;
+    private ArrayList<ActivityBean> activities;
     private ArrayList<Share> shares;
     private ImageLoader imageLoader;
 
@@ -69,7 +67,7 @@ public class MainActivityAdapter extends BaseAdapter {
     }
 
     //添加活动
-    public void addActivity(ShopActivityBean activity) {
+    public void addActivity(ActivityBean activity) {
         activities.add(activity);
     }
 
@@ -229,7 +227,7 @@ public class MainActivityAdapter extends BaseAdapter {
         TextView activity_start_time = viewHolder.activity_start_time;
         TextView activity_end_time = viewHolder.activity_end_time;
         TextView activity_count = viewHolder.activity_count;
-        final ShopActivityBean activity = activities.get(i);
+        final ActivityBean activity = activities.get(i);
         final ArrayList<String> pic_list = activity.getPic_listp();
         activity_image.setImageResource(R.drawable.default_background);
         if (pic_list.size() != 0) {
