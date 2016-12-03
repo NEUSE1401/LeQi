@@ -1,5 +1,6 @@
 package la.neu.leqi.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import la.neu.leqi.ShopActivity;
@@ -8,7 +9,7 @@ import la.neu.leqi.ShopActivity;
  * Created by lenovo on 2016/11/27.
  */
 
-public class Club {
+public class Club implements Serializable{
     private String title;
     private String owner;
     private String description;

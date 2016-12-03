@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -59,6 +60,9 @@ public class ClubListActivity extends Activity implements BottomNavigationBar.On
         menu = (NavigationView) findViewById(R.id.nav_view);
         menu.setNavigationItemSelectedListener(new MenuClickListener(ClubListActivity.this, drawerLayout));
         clubList= (ListView) findViewById(R.id.club_list);
+
+
+
         final ArrayList<String> pics1 = new ArrayList<>();
         pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
         final ArrayList<String> pics2 = new ArrayList<>();
@@ -69,7 +73,7 @@ public class ClubListActivity extends Activity implements BottomNavigationBar.On
         pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
         //String title, String owner, String description, int level, String contectWay, String province, String city, String district, String addressDetial, ArrayList<String> pics, int participateCount
         String des="旨在通过组织骑行运动，以“分享骑行乐趣”为主题，以“真诚、互助”为宗旨，旨在开展自行车的骑行和极限等活动，促进自行车文化发展，同时积极开拓户外运动，宣传环保，培养挑战自我的信心和勇气，宣传健康、简单的生活方式。";
-        Club club1=new Club("101俱乐部","胡荷缎花",des,5,"暂无","辽宁","沈阳","浑南区","智慧大街",pics1,200);
+        final Club club1=new Club("101俱乐部","胡荷缎花",des,5,"暂无","辽宁","沈阳","浑南区","智慧大街",pics1,200);
         Club club2=new Club("向阳","xxx",des,4,"暂无","辽宁","沈阳","和平区","青年大街",pics2,200);
         Club club3=new Club("追随","xxx",des,7,"暂无","辽宁","沈阳","和平区","青年大街",pics3,200);
         Club club4=new Club("悦骑","xxx",des,7,"暂无","辽宁","沈阳","和平区","青年大街",pics4,200);
@@ -86,8 +90,15 @@ public class ClubListActivity extends Activity implements BottomNavigationBar.On
         clubs.add(club2);
         clubs.add(club3);
         clubs.add(club4);
-        ClubListItemAdapter adapter=new ClubListItemAdapter(clubs,this,new ImageLoader(this));
+        final ClubListItemAdapter adapter=new ClubListItemAdapter(clubs,this,new ImageLoader(this));
         clubList.setAdapter(adapter);
+        clubList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               adapter.onItemClick(adapterView,  view, i,  l);
+
+            }
+        });
     }
 
     @Override

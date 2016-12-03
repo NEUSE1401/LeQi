@@ -1,15 +1,19 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import la.neu.leqi.ConcreteClubActivity;
 import la.neu.leqi.R;
 import la.neu.leqi.bean.Club;
 import la.neu.leqi.tools.image.ImageLoader;
@@ -18,7 +22,7 @@ import la.neu.leqi.tools.image.ImageLoader;
  * Created by lenovo on 2016/12/2.
  */
 
-public class ClubListItemAdapter extends BaseAdapter {
+public class ClubListItemAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
     private ArrayList<Club> clubs;
     private Context context;
     private ImageLoader imageLoader;
@@ -68,11 +72,21 @@ public class ClubListItemAdapter extends BaseAdapter {
         }else {
             imageLoader.bindBitmap(pics.get(0),viewHolder.pic);
         }
+
         return view;
     }
 
     public void add(Club c){
         clubs.add(c);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent=new Intent(context, ConcreteClubActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("club",clubs.get(i));
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     private class ViewHolder{
