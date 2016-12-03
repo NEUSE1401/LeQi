@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 
@@ -59,9 +61,20 @@ public class ClubListActivity extends Activity implements BottomNavigationBar.On
         });
         menu = (NavigationView) findViewById(R.id.nav_view);
         menu.setNavigationItemSelectedListener(new MenuClickListener(ClubListActivity.this, drawerLayout));
-        clubList= (ListView) findViewById(R.id.club_list);
+        final PullToRefreshListView pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.club_list);
+        clubList = pullToRefreshListView.getRefreshableView();
+        pullToRefreshListView.setMode(PullToRefreshListView.Mode.BOTH);
+        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+            }
+        });
 
         final ArrayList<String> pics1 = new ArrayList<>();
         pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
