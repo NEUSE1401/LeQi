@@ -59,7 +59,7 @@ public class Log extends Fragment {
             public void onClick(View view) {
                 final String nameS = name.getText().toString();
                 final String passS = pass.getText().toString();
-                final LoginWebThread loginWebThread = new LoginWebThread(handler, nameS, passS);
+                final LoginWebThread loginWebThread = new LoginWebThread(getString(R.string.WEB_LOGIN),handler, nameS, passS);
                 loginWebThread.start();
             }
         });

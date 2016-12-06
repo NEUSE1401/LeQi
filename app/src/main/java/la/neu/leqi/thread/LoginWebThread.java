@@ -11,52 +11,43 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
+import la.neu.leqi.tools.HttpGet;
+
 
 /**
  * @author HeXunshi
- * 登录接口
+ *         登录接口
  */
 
 public class LoginWebThread extends Thread {
     private Handler handler;
-    private String BASE_URL = "http://neu.la/leqi/login.php";
-    public LoginWebThread(Handler handler,String username,String password){
+    private String BASE_URL;
+
+    public LoginWebThread(String base_url, Handler handler, String username, String password) {
+        BASE_URL = base_url;
         this.handler = handler;
-        BASE_URL+="?username="+username+"&password="+password;
+        BASE_URL += "?username=" + username + "&password=" + password;
     }
 
     @Override
     public void run() {
-        URL url = null;
         try {
-            url = new URL(BASE_URL);
-            URLConnection rulConnection = url.openConnection();
-            HttpURLConnection httpUrlConnection = (HttpURLConnection) rulConnection;
-            httpUrlConnection.setDoInput(true); //允许输入流，即允许下载
-            httpUrlConnection.setDoOutput(true); //允许输出流，即允许上传
-            httpUrlConnection.setUseCaches(false); //不使用缓冲
-            httpUrlConnection.setRequestMethod("GET"); //使用get请求
-            final DataInputStream dis = new DataInputStream(httpUrlConnection.getInputStream());
-            String result ="";
-            byte[] bytes = new byte[1024];
-            int len;
-            while ((len=dis.read(bytes,0,bytes.length))!=-1){
-                result += new String(bytes,0,len);
-            }
+            final String result = HttpGet.send(BASE_URL);
             final JSONObject jsonObject = new JSONObject(result);
             final String state = jsonObject.getString("state");
-            if(state.equals("success")){
+            if (state.equals("success")) {
                 String token = jsonObject.getString("token");
                 final Message message = new Message();
-                message.what=1;
+                message.what = 1;
                 final Bundle bundle = new Bundle();
-                bundle.putString("token",token);
+                bundle.putString("token", token);
                 message.setData(bundle);
                 handler.sendMessage(message);
-            }else{
+            } else {
                 handler.sendEmptyMessage(0);
             }
         } catch (Exception e) {
+            handler.sendEmptyMessage(0);
             e.printStackTrace();
         }
 

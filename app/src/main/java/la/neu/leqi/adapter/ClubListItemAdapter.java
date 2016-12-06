@@ -33,6 +33,17 @@ public class ClubListItemAdapter extends BaseAdapter implements AdapterView.OnIt
         this.imageLoader = imageLoader;
     }
 
+    public ClubListItemAdapter(Context context, ImageLoader imageLoader) {
+        this.clubs = new ArrayList<>();
+        this.context = context;
+        this.imageLoader = imageLoader;
+    }
+
+    public void setData(ArrayList<Club> clubs) {
+        this.clubs = clubs;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return clubs.size();

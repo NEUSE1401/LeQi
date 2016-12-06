@@ -2,4 +2,8 @@
     <string name="app_name">乐骑</string>
     <item name="TAG_KEY_URI" type="id" />
     <string name="separator">--</string>
+    <!--WEB接口-->
+    <string name="WEB_LOGIN">http://neu.la/leqi/login.php</string>
+    <string name="WEB_CLUB_LIST_REFRESH"></string>
+    <string name="WEB_CLUB_LIST_DATA"></string>
 </resources>
