@@ -9,19 +9,19 @@ import java.util.ArrayList;
 
 public class ActivityBean implements Serializable{
     private int activityId;
-    private String title;
-    private String description;
-    private String startTime;
-    private String endTime;
+    private String title;//
+    private String description;//
+    private String startTime;//
+    private String endTime;//
     private String releaseTime;
     private ArrayList<String> pic_listp;
     private int count;
-    private String startPlace;
-    private String endPlace;
+    private String startPlace;//
+    private String endPlace;//
     private String activityPlace;
-    private String participateWay;
+    private String participateWay;//
     private String owner;
-    private String requirement;
+    private String requirement;//
     public ActivityBean(String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int activityId) {
         this.title = title;
         this.description = description;

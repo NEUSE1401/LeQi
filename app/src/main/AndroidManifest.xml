@@ -50,8 +50,14 @@
         <activity
             android:name=".ConcreteClubActivity"
             android:theme="@style/CustomTitleTheme" />
-        <activity android:name=".ConcreteActivityActivity"
-            android:theme="@style/CustomTitleTheme"></activity>
+        <activity
+            android:name=".ConcreteActivityActivity"
+            android:theme="@style/CustomTitleTheme" />
+        <activity
+            android:name=".PersonalShareActivity"
+            android:theme="@style/CustomTitleTheme" />
+        <activity android:name=".ShareReleaseActivity"
+            android:theme="@style/CustomTitleTheme" ></activity>
     </application>
 
 </manifest>
