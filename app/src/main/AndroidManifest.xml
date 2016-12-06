@@ -56,7 +56,10 @@
         <activity
             android:name=".PersonalShareActivity"
             android:theme="@style/CustomTitleTheme" />
-        <activity android:name=".ShareReleaseActivity"
+        <activity
+            android:name=".ShareReleaseActivity"
+            android:theme="@style/CustomTitleTheme" />
+        <activity android:name=".PersonalActivityActivity"
             android:theme="@style/CustomTitleTheme" ></activity>
     </application>
 

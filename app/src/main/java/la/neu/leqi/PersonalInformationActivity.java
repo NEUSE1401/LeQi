@@ -31,9 +31,9 @@ public class PersonalInformationActivity extends Activity{
     private TextView back_title;
     private ImageView imageView;
 
-    private int year=1995;
-    private int month=9;
-    private int day=21;
+    private int year=2016;
+    private int month=11;
+    private int day=5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
