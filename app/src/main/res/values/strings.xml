@@ -6,4 +6,13 @@
     <string name="WEB_LOGIN">http://neu.la/leqi/login.php</string>
     <string name="WEB_CLUB_LIST_REFRESH"></string>
     <string name="WEB_CLUB_LIST_DATA"></string>
+    <string name="release_activity_title">活动标题</string>
+    <string name="release_activity_description">活动概述</string>
+    <string name="release_activity_starttime">活动发起时间</string>
+    <string name="release_activity_endtime">活动结束时间</string>
+    <string name="release_activity_startaddress">活动起始地点</string>
+    <string name="release_activity_endaddress">活动结束地点</string>
+    <string name="release_activity_addtion">参与要求</string>
+    <string name="release_activity_style">参与方式</string>
+    <string name="action_release_activity">发布</string>
 </resources>

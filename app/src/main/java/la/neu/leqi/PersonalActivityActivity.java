@@ -1,6 +1,7 @@
 package la.neu.leqi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -68,6 +69,14 @@ public class PersonalActivityActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter.onItemClick(adapterView,view,i,l);
+            }
+        });
+
+        releaseActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(PersonalActivityActivity.this,ReleaseActivityActivity.class);
+                startActivity(intent);
             }
         });
     }
