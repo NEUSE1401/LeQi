@@ -32,7 +32,7 @@ public class ClubListActivity extends Activity implements BottomNavigationBar.On
     private NavigationView menu;
     private ListView clubList;
     private BottomNavigationBar bottomNavigationBar;
-    private final Class<?>[] classes ={MainActivity.class,BicycleShopListActivity.class,null,null,ActivityListActivity.class};
+    private final Class<?>[] classes ={MainActivity.class,BicycleShopListActivity.class,ShareListActivity.class,null,ActivityListActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +64,7 @@ public class ClubListActivity extends Activity implements BottomNavigationBar.On
         pullToRefreshListView.setMode(PullToRefreshListView.Mode.BOTH);
         final ClubListItemAdapter adapter=new ClubListItemAdapter(this,new ImageLoader(this));
         clubList.setAdapter(adapter);
-        clubList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                adapter.onItemClick(adapterView,  view, i,  l);
-
-            }
-        });
+        clubList.setOnItemClickListener(adapter);
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {

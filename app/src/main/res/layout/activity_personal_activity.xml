@@ -9,13 +9,14 @@
     <LinearLayout
         android:layout_marginTop="3dp"
         android:layout_marginRight="10dp"
-        android:gravity="right"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <Button
             android:id="@+id/personal_activity_release"
             android:background="@drawable/button"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
+            android:textColor="#fff"
             android:layout_height="match_parent"
             android:text="我要发布"/>
     </LinearLayout>

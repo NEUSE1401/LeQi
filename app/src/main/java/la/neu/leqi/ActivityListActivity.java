@@ -3,8 +3,10 @@ package la.neu.leqi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -16,17 +18,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import la.neu.leqi.adapter.ActivityListViewAdapter;
-import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.listener.MenuClickListener;
+import la.neu.leqi.thread.ActivityListDataWebThread;
+import la.neu.leqi.thread.ActivityListRefreshWebThread;
 import la.neu.leqi.tools.builder.BottomNavigationBarBuilder;
 import la.neu.leqi.tools.image.ImageLoader;
 
-public class ActivityListActivity extends Activity implements BottomNavigationBar.OnTabSelectedListener,View.OnClickListener {
+public class ActivityListActivity extends Activity implements BottomNavigationBar.OnTabSelectedListener, View.OnClickListener {
 
     private CircleImageView userFace;
     private DrawerLayout drawerLayout;
@@ -34,7 +38,8 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
     private ImageLoader imageLoader;
     private ListView activity_list;
     private BottomNavigationBar bottomNavigationBar;
-    private final Class<?>[] classes ={MainActivity.class,BicycleShopListActivity.class,null,ClubListActivity.class,null};
+    private PullToRefreshListView pullToRefreshListView;
+    private final Class<?>[] classes = {MainActivity.class, BicycleShopListActivity.class, ShareListActivity.class, ClubListActivity.class, null};
 
     private LinearLayout general_button;
     private LinearLayout hot_button;
@@ -42,11 +47,14 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
     private TextView general_text;
     private TextView hot_text;
     private TextView near_text;
+    private int type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_list);
+        type = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -59,12 +67,12 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
         imageLoader = new ImageLoader(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //分类选择
-        general_button=(LinearLayout)findViewById(R.id.general_button);
-        hot_button=(LinearLayout)findViewById(R.id.hot_button);
-        near_button=(LinearLayout)findViewById(R.id.near_button);
-        general_text=(TextView)findViewById(R.id.general_text);
-        hot_text=(TextView)findViewById(R.id.hot_text);
-        near_text=(TextView)findViewById(R.id.near_text);
+        general_button = (LinearLayout) findViewById(R.id.general_button);
+        hot_button = (LinearLayout) findViewById(R.id.hot_button);
+        near_button = (LinearLayout) findViewById(R.id.near_button);
+        general_text = (TextView) findViewById(R.id.general_text);
+        hot_text = (TextView) findViewById(R.id.hot_text);
+        near_text = (TextView) findViewById(R.id.near_text);
         general_text.setTextColor(Color.parseColor("#FFFF7700"));
         general_button.setOnClickListener(this);
         hot_button.setOnClickListener(this);
@@ -80,54 +88,36 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
         menu = (NavigationView) findViewById(R.id.nav_view);
         menu.setNavigationItemSelectedListener(new MenuClickListener(ActivityListActivity.this, drawerLayout));
         //列表加载
-        activity_list = (ListView)findViewById(R.id.activity_list);
+        pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.activity_list);
+        pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
+        activity_list = pullToRefreshListView.getRefreshableView();
         final ActivityListViewAdapter adapter = new ActivityListViewAdapter(imageLoader, this);
-        final ArrayList<String> pics1 = new ArrayList<>();
-        pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        final ArrayList<String> pics2 = new ArrayList<>();
-        pics2.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
-        final ArrayList<String> pics3 = new ArrayList<>();
-        pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
-        final ArrayList<String> pics4 = new ArrayList<>();
-        pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
-        //    public ActivityBean(int activityId, String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int count, String startPlace, String endPlace, String activityPlace, String participateWay, String owner, String requirement) {
-        String des="本次骑行赛车活动规模大、内容丰富、参赛选手众多。我们策划这次活动，一方面，试图通过“骑行”这种形式，倡导绿色出行新风尚，身体力行实践低碳生活，落实国家低碳减排政策。另一方面，这也是一次传播自行车文化，普及大众骑行活动的播种之旅。";
-        String way="联系负责人报名即可";
-        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", des,"2016-11-3", "2016-11-6","2016-11-3", pics1,23,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
-        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", des,"2016-11-3", "2016-11-7","2016-11-3", pics2,23,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
-        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", des,"2016-11-3", "2016-11-3","2016-11-1", pics3,100,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
-        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", des,"2016-11-3", "2016-11-3", "2016-11-1",pics4,90,"沈阳","沈阳","沈阳XXX",way,"单车101俱乐部","无");
-        adapter.add(activityBean1);
-        adapter.add(activityBean2);
-        adapter.add(activityBean3);
-        adapter.add(activityBean4);
-        adapter.add(activityBean1);
-        adapter.add(activityBean2);
-        adapter.add(activityBean3);
-        adapter.add(activityBean4);
-        adapter.add(activityBean1);
-        adapter.add(activityBean2);
-        adapter.add(activityBean3);
-        adapter.add(activityBean4);
-        adapter.add(activityBean1);
-        adapter.add(activityBean2);
-        adapter.add(activityBean3);
-        adapter.add(activityBean4);
-        adapter.add(activityBean1);
-        adapter.add(activityBean2);
-        adapter.add(activityBean3);
-        adapter.add(activityBean4);
-        adapter.add(activityBean1);
-        adapter.add(activityBean2);
-        adapter.add(activityBean3);
-        adapter.add(activityBean4);
         activity_list.setAdapter(adapter);
         activity_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                adapter.onItemClick(adapterView,view,i,l);
+                adapter.onItemClick(adapterView, view, i, l);
             }
         });
+        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                new ActivityListRefreshWebThread(getString(R.string.WEB_ACTIVITY_LIST_REFRESH), type, refreshView, adapter, ActivityListActivity.this).execute();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                new ActivityListDataWebThread(getString(R.string.WEB_ACTIVITY_LIST_DATA), type, refreshView, adapter, ActivityListActivity.this).execute();
+            }
+        });
+        //延时以完成初始自动下拉刷新
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                pullToRefreshListView.setRefreshing();
+            }
+        }, 500);
     }
 
     @Override
@@ -152,22 +142,32 @@ public class ActivityListActivity extends Activity implements BottomNavigationBa
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.general_button:
                 general_text.setTextColor(Color.parseColor("#FFFF7700"));
                 hot_text.setTextColor(Color.parseColor("#000000"));
                 near_text.setTextColor(Color.parseColor("#000000"));
+                type = 0;
+                pullToRefreshListView.setCurrentMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                pullToRefreshListView.setRefreshing();
                 break;
             case R.id.hot_button:
                 general_text.setTextColor(Color.parseColor("#000000"));
                 hot_text.setTextColor(Color.parseColor("#FFFF7700"));
                 near_text.setTextColor(Color.parseColor("#000000"));
+                type = 1;
+                pullToRefreshListView.setCurrentMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                pullToRefreshListView.setRefreshing();
                 break;
             case R.id.near_button:
                 general_text.setTextColor(Color.parseColor("#000000"));
                 hot_text.setTextColor(Color.parseColor("#000000"));
                 near_text.setTextColor(Color.parseColor("#FFFF7700"));
+                type = 2;
+                pullToRefreshListView.setCurrentMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                pullToRefreshListView.setRefreshing();
                 break;
         }
     }
+
 }

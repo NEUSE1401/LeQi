@@ -8,7 +8,7 @@
     tools:showIn="@layout/activity_activity_list_bar"
     tools:context="la.neu.leqi.ActivityListActivity">
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:layout_below="@+id/type_select"
         android:id="@+id/activity_list"
         android:layout_width="match_parent"

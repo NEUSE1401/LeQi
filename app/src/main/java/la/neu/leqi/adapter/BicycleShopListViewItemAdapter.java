@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,11 +22,17 @@ import la.neu.leqi.tools.image.ImageLoader;
  * Created by lenovo on 2016/11/3.
  */
 
-public class BicycleShopListViewItemAdapter extends BaseAdapter {
+public class BicycleShopListViewItemAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
 
     private ArrayList<BicycleShop> shops;
     private Context context;
     private ImageLoader imageLoader;
+
+    public BicycleShopListViewItemAdapter(Context context, ImageLoader imageLoader) {
+        shops = new ArrayList<>();
+        this.context = context;
+        this.imageLoader = imageLoader;
+    }
 
     public BicycleShopListViewItemAdapter(ArrayList<BicycleShop> shops, Context context, ImageLoader imageLoader) {
         this.shops = shops;
@@ -33,6 +40,14 @@ public class BicycleShopListViewItemAdapter extends BaseAdapter {
         this.imageLoader = imageLoader;
     }
 
+    public void setData(ArrayList<BicycleShop> shops) {
+        this.shops = shops;
+        notifyDataSetChanged();
+    }
+
+    public void add(BicycleShop bicycleShop){
+        shops.add(bicycleShop);
+    }
     @Override
     public int getCount() {
         return shops.size();
@@ -74,18 +89,16 @@ public class BicycleShopListViewItemAdapter extends BaseAdapter {
         }else {
             imageLoader.bindBitmap(pics.get(0),viewHolder.pic);
         }
-        //点击跳转
-        view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent=new Intent(context, ShopActivity.class);
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("shop",shop);
-                        intent.putExtras(bundle);
-                        context.startActivity(intent);
-            }
-        });
         return view;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent=new Intent(context, ShopActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("shop",shops.get(i));
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     class ViewHolder{

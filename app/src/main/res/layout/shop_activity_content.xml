@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/shop_activity_content_linear">
-    <ListView
-        android:id="@+id/shop_activity_content_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#ffffff"
-        android:dividerHeight="10dp">
+    android:orientation="vertical">
 
-    </ListView>
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <la.neu.leqi.customview.NestedListView
+            android:id="@+id/shop_activity_content_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#ffffff"
+            android:dividerHeight="10dp">
+
+        </la.neu.leqi.customview.NestedListView>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

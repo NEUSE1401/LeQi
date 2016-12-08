@@ -61,6 +61,21 @@ public class MainActivityAdapter extends BaseAdapter {
         return context;
     }
 
+    public void setGoods(ArrayList<Good> goods) {
+        this.goods = goods;
+        notifyDataSetChanged();
+    }
+
+    public void setShares(ArrayList<Share> shares) {
+        this.shares = shares;
+        notifyDataSetChanged();
+    }
+
+    public void setActivities(ArrayList<ActivityBean> activities) {
+        this.activities = activities;
+        notifyDataSetChanged();
+    }
+
     //添加商品
     public void addGood(Good good) {
         goods.add(good);

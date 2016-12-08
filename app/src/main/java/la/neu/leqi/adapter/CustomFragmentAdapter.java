@@ -11,12 +11,14 @@ import java.util.ArrayList;
  * @author Hexunshi
  */
 
-public class LogAdapter extends FragmentPagerAdapter {
+public class CustomFragmentAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragmentsList;
+    private ArrayList<String> titleList;
 
-    public LogAdapter(FragmentManager fm, ArrayList<Fragment> fragmentsList) {
+    public CustomFragmentAdapter(FragmentManager fm, ArrayList<Fragment> fragmentsList,ArrayList<String> titleList) {
         super(fm);
         this.fragmentsList = fragmentsList;
+        this.titleList = titleList;
     }
 
     @Override
@@ -37,7 +39,10 @@ public class LogAdapter extends FragmentPagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         super.destroyItem(container, position, object);
-        System.out.println("destroyItem");
     }
 
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titleList.get(position);
+    }
 }

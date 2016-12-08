@@ -153,7 +153,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 		return false;
 	}
-
+	public final void setCurrentMode(Mode mode) {
+		this.mCurrentMode =mode;
+	}
 	@Override
 	public final Mode getCurrentMode() {
 		return mCurrentMode;

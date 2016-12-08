@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import la.neu.leqi.adapter.LogAdapter;
+import la.neu.leqi.adapter.CustomFragmentAdapter;
 import la.neu.leqi.fragment.Log;
 import la.neu.leqi.fragment.Register;
 
@@ -28,7 +28,6 @@ public class LogAndRegisterActivity extends FragmentActivity implements View.OnC
     private LinearLayout registerLinear;
     private ImageView back;
     private FragmentManager fr;
-    private FragmentTransaction ft;
     private ImageView arrow;
     private int bmpW;// 动画图片宽度
     private int currIndex;
@@ -98,7 +97,7 @@ public class LogAndRegisterActivity extends FragmentActivity implements View.OnC
     private void initViewPager() {
 
         mViewPager = (ViewPager) findViewById(R.id.log_and_register_content);
-        mViewPager.setAdapter(new LogAdapter(fr, fragmentArrayList));
+        mViewPager.setAdapter(new CustomFragmentAdapter(fr, fragmentArrayList,null));
         mViewPager.setOffscreenPageLimit(0);
         //设置默认打开第一页
         mViewPager.setCurrentItem(0);

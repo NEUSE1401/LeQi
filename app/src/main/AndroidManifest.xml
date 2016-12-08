@@ -25,18 +25,7 @@
         <activity
             android:name=".ChangePersonalInfoActivity"
             android:theme="@style/CustomTitleTheme" />
-        <activity
-            android:name=".ShopActivity"
-            android:theme="@style/CustomTitleTheme" />
-
-        <!--
- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
+        <activity android:name=".ShopActivity" />
         <activity android:name=".BicycleShopListActivity" />
         <activity
             android:name=".ConcreteGoodActivity"
@@ -62,8 +51,8 @@
         <activity
             android:name=".PersonalActivityActivity"
             android:theme="@style/CustomTitleTheme" />
-        <activity android:name=".ReleaseActivityActivity"
-          ></activity>
+        <activity android:name=".ReleaseActivityActivity" />
+        <activity android:name=".ShareListActivity"></activity>
     </application>
 
 </manifest>

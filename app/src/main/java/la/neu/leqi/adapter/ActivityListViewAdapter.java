@@ -34,6 +34,11 @@ public class ActivityListViewAdapter extends BaseAdapter implements AdapterView.
         this.context = context;
     }
 
+    public void setData(ArrayList<ActivityBean> activities) {
+        this.activities = activities;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return activities.size();

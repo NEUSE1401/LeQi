@@ -10,7 +10,7 @@
     tools:context="la.neu.leqi.MainActivity">
 
     <!-- 主体部分-->
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/activity_main_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

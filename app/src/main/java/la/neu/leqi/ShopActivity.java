@@ -1,158 +1,117 @@
 package la.neu.leqi;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import la.neu.leqi.adapter.CustomFragmentAdapter;
 import la.neu.leqi.fragment.ShopActivityContent;
 import la.neu.leqi.fragment.ShopAllGoodContent;
-import la.neu.leqi.fragment.ShopHomePageContent;
 import la.neu.leqi.fragment.ShopLatestGoodContent;
 
-public class ShopActivity extends Activity implements View.OnClickListener{
-
-    private TextView back_title;
-    private ImageView imageView;
-
-    private LinearLayout homeLinear;
-    private LinearLayout allGoodLinear;
-    private LinearLayout latestLinear;
-    private LinearLayout activityLinear;
-
-    private ImageView shopBarHomePic;
-    private ImageView shopBarAllGoodPic;
-    private ImageView shopBarLatestPic;
-    private ImageView shopBarActivityPic;
-
-    private TextView shopBarHomeText;
-    private TextView shopBarAllGoodText;
-    private TextView shopBarLatestText;
-    private TextView shopBarActivityText;
-
+public class ShopActivity extends AppCompatActivity{
+    //存放Fragment
+    private ArrayList<Fragment> fragmentArrayList;
+    private ArrayList<String> titleList;
+    //实现Tab滑动效果
+    private ViewPager mViewPager;
     private FragmentManager fr;
-    private FragmentTransaction ft;
-
+    private TabLayout tabLayout;
+    private ImageView back;
+    private final int default_icons[]={R.drawable.shop_home_default,R.drawable.all_commodites_default,R.drawable.newest_commodites_default,R.drawable.shop_activities_default};
+    private final int selected_icons[]={R.drawable.shop_home_selected,R.drawable.all_commodites_selected,R.drawable.newest_commodites_selected,R.drawable.shop_activities_selected};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_shop);
-
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_title);
-        back_title = (TextView)findViewById(R.id.back_title);
-        back_title.setText("...");
-        imageView  =(ImageView)findViewById(R.id.back_icon);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.logMainColor));
+        }
+        back = (ImageView) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
-
-        homeLinear= (LinearLayout) findViewById(R.id.shop_home_linear);
-        allGoodLinear= (LinearLayout) findViewById(R.id.shop_all_good_linear);
-        latestLinear= (LinearLayout) findViewById(R.id.shop_latest_linear);
-        activityLinear= (LinearLayout) findViewById(R.id.shop_activity_linear);
-
-        homeLinear.setOnClickListener(this);
-        allGoodLinear.setOnClickListener(this);
-        latestLinear.setOnClickListener(this);
-        activityLinear.setOnClickListener(this);
-
-        shopBarHomePic= (ImageView) findViewById(R.id.shop_home_page_pic);
-        shopBarAllGoodPic= (ImageView) findViewById(R.id.shop_all_good_pic);
-        shopBarLatestPic= (ImageView) findViewById(R.id.shop_latest_good_pic);
-        shopBarActivityPic= (ImageView) findViewById(R.id.shop_activity_pic);
-
-        shopBarHomeText= (TextView) findViewById(R.id.shop_home_text);
-        shopBarAllGoodText= (TextView) findViewById(R.id.shop_allgood_text);
-        shopBarLatestText= (TextView) findViewById(R.id.shop_latest_text);
-        shopBarActivityText= (TextView) findViewById(R.id.shop_activity_text);
-
-        fr=getFragmentManager();
-        ft=fr.beginTransaction();
-
-        ft.replace(R.id.shop_content,new ShopHomePageContent());
-        ft.commit();
+        initFragment();
+        initViewPager();
+        initTab();
     }
 
-    @Override
-    public void onClick(View view) {
-        ft=fr.beginTransaction();
-        switch (view.getId()){
-            case R.id.shop_home_linear:
-                ft.replace(R.id.shop_content,new ShopHomePageContent());
-                changeToShopHomePage();
-                break;
-            case R.id.shop_all_good_linear:
-                ft.replace(R.id.shop_content,new ShopAllGoodContent());
-                changeToShopAllGood();
-                break;
-            case R.id.shop_latest_linear:
-                ft.replace(R.id.shop_content,new ShopLatestGoodContent());
-                changeToShopLatestGood();
-                break;
-            case R.id.shop_activity_linear:
-                ft.replace(R.id.shop_content,new ShopActivityContent());
-                changeToShopActivity();
-                break;
-        }
-        ft.commit();
+    private void initTab() {
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+        final TabLayout.Tab tab1 = tabLayout.getTabAt(0);
+        tab1.setIcon(R.drawable.shop_home_default);
+        final TabLayout.Tab tab2 = tabLayout.getTabAt(1);
+        tab2.setIcon(R.drawable.all_commodites_default);
+        final TabLayout.Tab tab3 = tabLayout.getTabAt(2);
+        tab3.setIcon(R.drawable.newest_commodites_default);
+        final TabLayout.Tab tab4 = tabLayout.getTabAt(3);
+        tab4.setIcon(R.drawable.shop_activities_default);
+        final TabLayout.Tab tabs[]={tab1,tab2,tab3,tab4};
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                System.out.println(tab.getPosition());
+                for (int i = 0; i < 4; i++) {
+                    if(i==tab.getPosition()){
+                        tabs[i].setIcon(selected_icons[i]);
+                    }else{
+                        tabs[i].setIcon(default_icons[i]);
+                    }
+                }
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
-
-    public void changeToShopHomePage(){
-        shopBarHomePic.setImageResource(R.drawable.shop_home_red);
-        shopBarAllGoodPic.setImageResource(R.drawable.all_commodites_gray);
-        shopBarLatestPic.setImageResource(R.drawable.newest_commodites_gray);
-        shopBarActivityPic.setImageResource(R.drawable.shop_activities_gray);
-
-        shopBarHomeText.setTextColor(Color.parseColor("#a00808"));
-        shopBarAllGoodText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarLatestText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarActivityText.setTextColor(Color.parseColor("#999ca9"));
+    /**
+     * 初始化Fragment，并添加到ArrayList中
+     */
+    private void initFragment(){
+        fragmentArrayList = new ArrayList<>();
+        fragmentArrayList.add(new ShopActivityContent());
+        fragmentArrayList.add(new ShopAllGoodContent());
+        fragmentArrayList.add(new ShopLatestGoodContent());
+        fragmentArrayList.add(new ShopActivityContent());
+        titleList = new ArrayList<>();
+        titleList.add("首页");
+        titleList.add("全部商品");
+        titleList.add("最新商品");
+        titleList.add("店铺活动");
+        fr = getSupportFragmentManager();
 
     }
-
-    public void changeToShopAllGood(){
-        shopBarHomePic.setImageResource(R.drawable.shop_home_gray);
-        shopBarAllGoodPic.setImageResource(R.drawable.all_commodites_red);
-        shopBarLatestPic.setImageResource(R.drawable.newest_commodites_gray);
-        shopBarActivityPic.setImageResource(R.drawable.shop_activities_gray);
-
-        shopBarHomeText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarAllGoodText.setTextColor(Color.parseColor("#a00808"));
-        shopBarLatestText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarActivityText.setTextColor(Color.parseColor("#999ca9"));
-    }
-
-    public void changeToShopLatestGood(){
-        shopBarHomePic.setImageResource(R.drawable.shop_home_gray);
-        shopBarAllGoodPic.setImageResource(R.drawable.all_commodites_gray);
-        shopBarLatestPic.setImageResource(R.drawable.newest_commodites_red);
-        shopBarActivityPic.setImageResource(R.drawable.shop_activities_gray);
-
-        shopBarHomeText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarAllGoodText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarLatestText.setTextColor(Color.parseColor("#a00808"));
-        shopBarActivityText.setTextColor(Color.parseColor("#999ca9"));
-    }
-
-    public void changeToShopActivity(){
-        shopBarHomePic.setImageResource(R.drawable.shop_home_gray);
-        shopBarAllGoodPic.setImageResource(R.drawable.all_commodites_gray);
-        shopBarLatestPic.setImageResource(R.drawable.newest_commodites_gray);
-        shopBarActivityPic.setImageResource(R.drawable.shop_activities_red);
-
-        shopBarHomeText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarAllGoodText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarLatestText.setTextColor(Color.parseColor("#999ca9"));
-        shopBarActivityText.setTextColor(Color.parseColor("#a00808"));
+    /**
+     * 初始化页卡内容区
+     */
+    private void initViewPager() {
+        mViewPager = (ViewPager) findViewById(R.id.shop_content);
+        mViewPager.setAdapter(new CustomFragmentAdapter(fr, fragmentArrayList,titleList));
+        mViewPager.setOffscreenPageLimit(0);
+        //设置默认打开第一页
+        mViewPager.setCurrentItem(0);
     }
 }

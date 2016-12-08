@@ -4,26 +4,25 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import la.neu.leqi.adapter.BicycleShopListViewItemAdapter;
-import la.neu.leqi.bean.BicycleShop;
-import la.neu.leqi.customview.SquareImageView;
 import la.neu.leqi.listener.MenuClickListener;
+import la.neu.leqi.thread.BicycleShopListDataWebThread;
+import la.neu.leqi.thread.BicycleShopListRefreshWebThread;
 import la.neu.leqi.tools.builder.BottomNavigationBarBuilder;
 import la.neu.leqi.tools.image.ImageLoader;
 
@@ -32,21 +31,10 @@ public class BicycleShopListActivity extends Activity implements BottomNavigatio
     private DrawerLayout drawerLayout;
     private CircleImageView userFace;
     private NavigationView menu;
-
+    private ListView listView;
     private BottomNavigationBar bottomNavigationBar;
-    private final Class<?>[] classes ={MainActivity.class,null,null,ClubListActivity.class,ActivityListActivity.class};
-
-//    private SquareImageView bicycleShopPic;
-//    private SquareImageView firstPagePic;
-//    private SquareImageView sharePic;
-//    private SquareImageView clubPic;
-//    private SquareImageView activityPic;
-
-//    private TextView bicycleShopText;
-//    private TextView firstPageText;
-//    private TextView shareText;
-//    private TextView clubText;
-//    private TextView activityText;
+    private BicycleShopListViewItemAdapter adapter;
+    private final Class<?>[] classes ={MainActivity.class,null,ShareListActivity.class,ClubListActivity.class,ActivityListActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +62,32 @@ public class BicycleShopListActivity extends Activity implements BottomNavigatio
         menu.setNavigationItemSelectedListener(new MenuClickListener(BicycleShopListActivity.this, drawerLayout));
 
 
-        ListView listView= (ListView) findViewById(R.id.bicycle_listview);
+        final PullToRefreshListView pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.bicycle_listview);
+        listView = pullToRefreshListView.getRefreshableView();
         ImageLoader imageLoader=new ImageLoader(this);
-        BicycleShop shop1=new BicycleShop("2b101","槲荷缎花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
-        BicycleShop shop2=new BicycleShop("2b102","花花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
-        ArrayList<String> pic=new ArrayList<>();
-        pic.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        shop1.setShopPics(pic);
-        ArrayList<BicycleShop> shops=new ArrayList<>();
-        shops.add(shop1);
-        shops.add(shop2);
-        shops.add(shop1);
-        shops.add(shop2);
-        shops.add(shop1);
-        shops.add(shop2);
-        shops.add(shop1);
-        shops.add(shop2);
-        BicycleShopListViewItemAdapter adapter=new BicycleShopListViewItemAdapter(shops,this,imageLoader);
+        adapter=new BicycleShopListViewItemAdapter(this,imageLoader);
+        listView.setOnItemClickListener(adapter);
         listView.setAdapter(adapter);
+        pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
+        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                new BicycleShopListRefreshWebThread(getString(R.string.WEB_BICYCLE_SHOP_LIST_REFRESH), refreshView, adapter, BicycleShopListActivity.this).execute();
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                new BicycleShopListDataWebThread(getString(R.string.WEB_BICYCLE_SHOP_LIST_DATA), refreshView, adapter, BicycleShopListActivity.this).execute();
+            }
+        });
+        //延时以完成初始自动下拉刷新
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                pullToRefreshListView.setRefreshing();
+            }
+        }, 500);
     }
 
     @Override
@@ -115,23 +110,4 @@ public class BicycleShopListActivity extends Activity implements BottomNavigatio
 
     }
 
-//    private void findBarComponent(){
-//        firstPageLinear= (LinearLayout) findViewById(R.id.bar_first_page_linear);
-//        bicycleShopLinear= (LinearLayout) findViewById(R.id.bar_bicycle_shop_linear);
-//        shareLinear= (LinearLayout) findViewById(R.id.bar_share_linear);
-//        clubLinear= (LinearLayout) findViewById(R.id.bar_club_linear);
-//        activityLinear= (LinearLayout) findViewById(R.id.bar_activity_linear);
-//
-//        firstPagePic= (SquareImageView) findViewById(R.id.bar_first_page_pic);
-//        bicycleShopPic= (SquareImageView) findViewById(R.id.bar_bicycle_shop_pic);
-//        sharePic= (SquareImageView) findViewById(R.id.bar_share_pic);
-//        clubPic= (SquareImageView) findViewById(R.id.bar_club_pic);
-//        activityPic= (SquareImageView) findViewById(R.id.bar_activity_pic);
-//
-//        firstPageText= (TextView) findViewById(R.id.bar_first_page_text);
-//        bicycleShopText= (TextView) findViewById(R.id.bar_bicycle_shop_text);
-//        shareText= (TextView) findViewById(R.id.bar_share_text);
-//        clubText= (TextView) findViewById(R.id.bar_club_text);
-//        activityText= (TextView) findViewById(R.id.bar_activity_text);
-//    }
 }
