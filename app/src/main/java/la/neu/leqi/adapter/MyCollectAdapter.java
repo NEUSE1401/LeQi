@@ -17,6 +17,7 @@ import com.baoyz.swipemenulistview.SwipeMenuAdapter;
 import java.util.ArrayList;
 
 import la.neu.leqi.ConcreteActivityActivity;
+import la.neu.leqi.ConcreteClubActivity;
 import la.neu.leqi.R;
 import la.neu.leqi.ShopActivity;
 import la.neu.leqi.bean.BicycleShop;
@@ -202,6 +203,7 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
             viewHolder.activity_start_time = (TextView) view.findViewById(R.id.activity_start_time);
             viewHolder.activity_end_time = (TextView) view.findViewById(R.id.activity_end_time);
             viewHolder.activity_count = (TextView) view.findViewById(R.id.activity_count);
+            viewHolder.eye= (LinearLayout) view.findViewById(R.id.activity_item_eye);
             view.setTag(viewHolder);
         }else{
             final Object tag = view.getTag();
@@ -215,6 +217,7 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
                 viewHolder.activity_start_time = (TextView) view.findViewById(R.id.activity_start_time);
                 viewHolder.activity_end_time = (TextView) view.findViewById(R.id.activity_end_time);
                 viewHolder.activity_count = (TextView) view.findViewById(R.id.activity_count);
+                viewHolder.eye= (LinearLayout) view.findViewById(R.id.activity_item_eye);
                 view.setTag(viewHolder);
             }
         }
@@ -228,7 +231,8 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
         viewHolder.activity_start_time.setText(activity.getStartTime());
         viewHolder.activity_end_time.setText(activity.getEndTime());
         viewHolder.activity_count.setText(String.valueOf(activity.getCount()));
-
+        viewHolder.eye.setVisibility(LinearLayout.GONE);
+        viewHolder.activity_count.setVisibility(LinearLayout.GONE);
         return view;
     }
 
@@ -275,7 +279,7 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        if(i<=collectShops.size()){
+        if(getItemViewType(i)==1){
             //shop
             Intent intent=new Intent(context, ShopActivity.class);
             Bundle bundle=new Bundle();
@@ -283,14 +287,18 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
             intent.putExtras(bundle);
             context.startActivity(intent);
 
-        }else if(i<=collectShops.size()+collectShopActivities.size()+1){
+        }else if(getItemViewType(i)==3){
             Intent intent=new Intent(context, ConcreteActivityActivity.class);
             Bundle bundle=new Bundle();
             bundle.putSerializable("activity",collectShopActivities.get(i-collectShops.size()-2));
             intent.putExtras(bundle);
             context.startActivity(intent);
-        }else if(i>collectShops.size()+collectShopActivities.size()+2){
-
+        }else if(getItemViewType(i)==5){
+            Intent intent=new Intent(context, ConcreteClubActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("club",collectClubs.get(i-collectShops.size()-collectShopActivities.size()-3));
+            intent.putExtras(bundle);
+            context.startActivity(intent);
         }
     }
 
@@ -302,6 +310,7 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
         TextView address;
     }
     private  class ActivityViewHolder {
+        LinearLayout eye;
         ImageView activity_image;
         TextView activity_title;
         TextView activity_start_time;
