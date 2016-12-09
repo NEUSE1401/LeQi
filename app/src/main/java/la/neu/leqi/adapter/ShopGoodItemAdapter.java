@@ -65,6 +65,7 @@ public class ShopGoodItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        final int j=i;
         BicycleViewHolder viewHolder;
         if (view == null) {
             view = inflater.inflate(R.layout.bicycle_item, viewGroup, false);
@@ -97,7 +98,16 @@ public class ShopGoodItemAdapter extends BaseAdapter {
         if (good_left.getPic_list().size() != 0) {
             imageLoader.bindBitmap(good_left.getPic_list().get(0), image_left);
         }
-
+        image_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(inflater.getContext(), ConcreteGoodActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("good",allGoods.get(2*j));
+                intent.putExtras(bundle);
+                inflater.getContext().startActivity(intent);
+            }
+        });
 
 //        if (getItemViewType(i)==0) {
 //            title_right.setVisibility(LinearLayout.GONE);
@@ -116,6 +126,17 @@ public class ShopGoodItemAdapter extends BaseAdapter {
             if (good_right.getPic_list().size() != 0) {
                 imageLoader.bindBitmap(good_right.getPic_list().get(0), image_right);
             }
+
+            image_right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(inflater.getContext(), ConcreteGoodActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("good",allGoods.get(2*j+1));
+                    intent.putExtras(bundle);
+                    inflater.getContext().startActivity(intent);
+                }
+            });
         }
 
 
