@@ -78,10 +78,9 @@ public class MainListRefreshWebThread extends AsyncTask<Void, Void,MainBean> {
 
     @Override
     protected void onPostExecute(MainBean mainBean) {
+        pullToRefreshView.onRefreshComplete();
         mainActivityAdapter.setGoods(mainBean.getGoods());
         mainActivityAdapter.setActivities(mainBean.getActivities());
         mainActivityAdapter.setShares(mainBean.getShares());
-        pullToRefreshView.onRefreshComplete();
-        super.onPostExecute(mainBean);
     }
 }

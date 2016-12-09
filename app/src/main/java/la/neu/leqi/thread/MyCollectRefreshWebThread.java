@@ -74,6 +74,11 @@ public class MyCollectRefreshWebThread extends AsyncTask<Void, Void, MainBean> {
         clubs.add(club3);
         clubs.add(club4);
         mainBean.setClubs(clubs);
+        final ArrayList<String> strings = new ArrayList<>();
+        strings.add("收藏的店铺");
+        strings.add("收藏的活动");
+        strings.add("加入的俱乐部");
+        mainBean.setTitles(strings);
         return mainBean;
     }
 
@@ -83,6 +88,6 @@ public class MyCollectRefreshWebThread extends AsyncTask<Void, Void, MainBean> {
         mainActivityAdapter.setCollectClubs(mainBean.getClubs());
         mainActivityAdapter.setCollectShopActivities(mainBean.getActivities());
         mainActivityAdapter.setCollectShops(mainBean.getShops());
-        super.onPostExecute(mainBean);
+        mainActivityAdapter.setTitles(mainBean.getTitles());
     }
 }

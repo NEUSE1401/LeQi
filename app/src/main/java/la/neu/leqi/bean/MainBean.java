@@ -12,6 +12,15 @@ public class MainBean {
     private ArrayList<Share> shares;
     private ArrayList<BicycleShop> shops;
     private ArrayList<Club> clubs;
+    private ArrayList<String> titles;
+
+    public ArrayList<String> getTitles() {
+        return titles;
+    }
+
+    public void setTitles(ArrayList<String> titles) {
+        this.titles = titles;
+    }
 
     public ArrayList<BicycleShop> getShops() {
         return shops;

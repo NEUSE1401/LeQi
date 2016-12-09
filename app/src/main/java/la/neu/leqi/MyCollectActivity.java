@@ -8,7 +8,6 @@ import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +54,7 @@ public class MyCollectActivity extends Activity {
 
             @Override
             public void create(SwipeMenu menu) {
-                if (menu.getViewType()==1) {
+                if (menu.getViewType()==1||menu.getViewType()==3||menu.getViewType()==5) {
                     SwipeMenuItem openItem = new SwipeMenuItem(
                             getApplicationContext());
                     openItem.setBackground(R.color.RED);
@@ -101,7 +100,8 @@ public class MyCollectActivity extends Activity {
         content.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-               // new RemoveSelfActivityWebThread(getString(R.string.WEB_REMOVE_SELF_ACTIVITY), adapter.getItem(position), position, handler).start();
+               //s
+                // new RemoveSelfActivityWebThread(getString(R.string.WEB_REMOVE_SELF_ACTIVITY), adapter.getItem(position), position, handler).start();
                 // false : close the menu; true : not close the menu
                 return false;
             }

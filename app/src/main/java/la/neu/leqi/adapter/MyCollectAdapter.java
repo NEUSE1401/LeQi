@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenuAdapter;
+
 import java.util.ArrayList;
 
 import la.neu.leqi.ConcreteActivityActivity;
@@ -27,6 +29,7 @@ import la.neu.leqi.tools.image.ImageLoader;
  */
 
 public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
+    private ArrayList<String> titles;
     private ArrayList<BicycleShop> collectShops;
     private ArrayList<Club> collectClubs;
     private ArrayList<ActivityBean> collectShopActivities;
@@ -38,8 +41,13 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
         collectShops=new ArrayList<>();
         collectClubs=new ArrayList<>();
         collectShopActivities=new ArrayList<>();
+        titles = new ArrayList<>();
         this.imageLoader = imageLoader;
         this.context = context;
+    }
+
+    public void setTitles(ArrayList<String> titles) {
+        this.titles = titles;
     }
 
     public void setCollectShops(ArrayList<BicycleShop> collectShops) {
@@ -68,6 +76,7 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
     }
     @Override
     public Object getItem(int i) {
+        System.out.println("getItem");
         return null;
     }
 
@@ -78,7 +87,7 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
 
     @Override
     public int getViewTypeCount() {
-        return 2;
+        return 6;
     }
 
     @Override
@@ -88,45 +97,52 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
         }else if(position<=collectShops.size()){
             return 1;
         }else if(position==collectShops.size()+1){
-            return 0;
+            return 2;
         }else if(position<=collectShops.size()+collectShopActivities.size()+1){
-            return 1;
+            return 3;
         }else if(position==collectShops.size()+collectShopActivities.size()+2){
-            return 0;
+            return 4;
+        }else if(position<=collectShops.size()+collectShopActivities.size()+collectClubs.size()+3){
+            return 5;
         }
         return 0;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        System.out.println("getView"+i);
-        if(i==0){
-            System.out.println("收藏的店铺");
-            return getTitle("收藏的店铺",view,viewGroup);
-        }else if(i<=collectShops.size()){
-            System.out.println("店铺"+(i-collectShops.size()));
-            return getShopItem(i,view,viewGroup);
-        }else if(i==collectShops.size()+1){
-            System.out.println("收藏的活动");
-            return getTitle("收藏的活动",view,viewGroup);
-        }else if(i<=collectShops.size()+collectShopActivities.size()+1){
-            System.out.println("活动"+(i-(collectShops.size()+collectShopActivities.size()+1)));
-            return getShopActivityItem(i,view,viewGroup);
-        }else if(i==collectShops.size()+collectShopActivities.size()+2){
-            System.out.println("加入的俱乐部");
-            return getTitle("加入的俱乐部",view,viewGroup);
-        }else{
-            System.out.println("俱乐部");
-            return getClubItem(i,view,viewGroup);
+//        if(i==0){
+//            return getTitle("收藏的店铺",view,viewGroup);
+//        }else if(i<=collectShops.size()){
+//            return getShopItem(i,view,viewGroup);
+//        }else if(i==collectShops.size()+1){
+//            return getTitle("收藏的活动",view,viewGroup);
+//        }else if(i<=collectShops.size()+collectShopActivities.size()+1){
+//            return getShopActivityItem(i,view,viewGroup);
+//        }else if(i==collectShops.size()+collectShopActivities.size()+2){
+//            return getTitle("加入的俱乐部",view,viewGroup);
+//        }else if(i<=collectShops.size()+collectShopActivities.size()+collectClubs.size()+3){
+//            return getClubItem(i,view,viewGroup);
+//        }
+        switch (getItemViewType(i)){
+            case 0:
+                return getTitle("收藏的店铺",view,viewGroup);
+            case 1:
+                return getShopItem(i,view,viewGroup);
+            case 2:
+                return getTitle("收藏的活动",view,viewGroup);
+            case 3:
+                return getShopActivityItem(i,view,viewGroup);
+            case 4:
+                return getTitle("加入的俱乐部",view,viewGroup);
+            case 5:
+                return getClubItem(i,view,viewGroup);
         }
-
+        return view;
     }
 
     private View getTitle(String title, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(getContext()).inflate(R.layout.activity_main_title_item, viewGroup, false);
         TextView title_view = (TextView) view.findViewById(R.id.title);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.title_head);
-        final ViewGroup.LayoutParams layoutParams = linearLayout.getLayoutParams();
         title_view.setText(title);
         return view;
     }
@@ -175,7 +191,7 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
     }
 
     //加载收藏活动项
-    public View getShopActivityItem(int i, View view, ViewGroup viewGroup){
+    private View getShopActivityItem(int i, View view, ViewGroup viewGroup){
         i=i-collectShops.size()-2;
         ActivityViewHolder viewHolder;
         if (view == null) {
@@ -217,7 +233,8 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
     }
 
     //加载加入的俱乐部
-    public View getClubItem(int i,View view,ViewGroup viewGroup){
+    private View getClubItem(int i,View view,ViewGroup viewGroup){
+        System.out.println("getClubItem");
         i=i-collectShops.size()-collectShopActivities.size()-3;
         ClubHolder viewHolder;
         if(view==null){
