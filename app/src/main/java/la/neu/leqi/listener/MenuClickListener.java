@@ -12,6 +12,7 @@ import la.neu.leqi.LogAndRegisterActivity;
 import la.neu.leqi.MyCollectActivity;
 import la.neu.leqi.PersonalActivityActivity;
 import la.neu.leqi.PersonalInformationActivity;
+import la.neu.leqi.PersonalShareActivity;
 import la.neu.leqi.R;
 
 /**
@@ -41,7 +42,8 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
             Intent intent=new Intent(context, MyCollectActivity.class);
             context.startActivity(intent);
         }else if(id==R.id.personal_share){
-
+            Intent intent=new Intent(context, PersonalShareActivity.class);
+            context.startActivity(intent);
         }else if(id==R.id.setting){
             Intent intent=new Intent(context, ConcreteGoodActivity.class);
             context.startActivity(intent);
