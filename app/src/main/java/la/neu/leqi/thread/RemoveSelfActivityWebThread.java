@@ -35,6 +35,6 @@ public class RemoveSelfActivityWebThread extends Thread{
         final Bundle bundle = new Bundle();
         bundle.putInt("position",position);
         message.setData(bundle);
-        handler.sendEmptyMessage(1);
+        handler.sendMessage(message);
     }
 }

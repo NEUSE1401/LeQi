@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +22,7 @@ import la.neu.leqi.tools.image.ImageLoader;
  * Created by lenovo on 2016/11/27.
  */
 
-public class MyCollectAdapter extends BaseAdapter {
+public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
     private ArrayList<BicycleShop> collectShops;
     private ArrayList<Club> collectClubs;
     private ArrayList<ActivityBean> collectShopActivities;
@@ -36,11 +37,31 @@ public class MyCollectAdapter extends BaseAdapter {
         this.imageLoader = imageLoader;
         this.context = context;
     }
+
+    public void setCollectShops(ArrayList<BicycleShop> collectShops) {
+        this.collectShops = collectShops;
+        notifyDataSetChanged();
+
+    }
+
+    public void setCollectClubs(ArrayList<Club> collectClubs) {
+        this.collectClubs = collectClubs;
+        notifyDataSetChanged();
+    }
+
+    public void setCollectShopActivities(ArrayList<ActivityBean> collectShopActivities) {
+        this.collectShopActivities = collectShopActivities;
+        notifyDataSetChanged();
+
+    }
+
     @Override
     public int getCount() {
         return collectClubs.size()+collectShopActivities.size()+collectShops.size()+3;
     }
+    public void remove(int position){
 
+    }
     @Override
     public Object getItem(int i) {
         return null;
@@ -180,6 +201,11 @@ public class MyCollectAdapter extends BaseAdapter {
         viewHolder.activity_count.setText(String.valueOf(activity.getCount()));
 
         return view;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
     }
 
     private class ShopViewHolder{

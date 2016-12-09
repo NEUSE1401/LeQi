@@ -3,23 +3,26 @@ package la.neu.leqi;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 
-import java.util.ArrayList;
 
 import la.neu.leqi.adapter.MyCollectAdapter;
-import la.neu.leqi.bean.BicycleShop;
-import la.neu.leqi.bean.ActivityBean;
+
 import la.neu.leqi.customview.PullToRefreshSwipeMenuListView;
+import la.neu.leqi.thread.MyCollectRefreshWebThread;
 import la.neu.leqi.tools.image.ImageLoader;
 
 public class MyCollectActivity extends Activity {
@@ -28,6 +31,8 @@ public class MyCollectActivity extends Activity {
 
     private SwipeMenuListView content;
     private ImageLoader imageLoader;
+    private Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +49,7 @@ public class MyCollectActivity extends Activity {
             }
         });
 
-        PullToRefreshSwipeMenuListView pullToRefreshSwipeMenuListView= (PullToRefreshSwipeMenuListView) findViewById(R.id.my_collect_content);
+        final PullToRefreshSwipeMenuListView pullToRefreshSwipeMenuListView= (PullToRefreshSwipeMenuListView) findViewById(R.id.my_collect_content);
         content = pullToRefreshSwipeMenuListView.getRefreshableView();
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -65,33 +70,41 @@ public class MyCollectActivity extends Activity {
         content.setMenuCreator(creator);
         content.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         imageLoader = new ImageLoader(this);
-        MyCollectAdapter adapter=new MyCollectAdapter(imageLoader,this);
-        final ArrayList<String> pics1 = new ArrayList<>();
-        pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        final ArrayList<String> pics2 = new ArrayList<>();
-        pics2.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
-        final ArrayList<String> pics3 = new ArrayList<>();
-        pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
-        final ArrayList<String> pics4 = new ArrayList<>();
-        pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
-
-        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1,10);
-        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2,100);
-        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3,45);
-        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4,20);
-        adapter.addShopActivity(activityBean1);
-        adapter.addShopActivity(activityBean2);
-        adapter.addShopActivity(activityBean3);
-        adapter.addShopActivity(activityBean4);
-
-        BicycleShop shop1=new BicycleShop("2b101","槲荷缎花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
-        BicycleShop shop2=new BicycleShop("2b102","花花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
-        ArrayList<String> pic=new ArrayList<>();
-        pic.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        shop1.setShopPics(pic);
-        adapter.addShop(shop1);
-        adapter.addShop(shop2);
-        adapter.addShop(shop1);
+        final MyCollectAdapter adapter=new MyCollectAdapter(imageLoader,this);
         content.setAdapter(adapter);
+        content.setOnItemClickListener(adapter);
+        pullToRefreshSwipeMenuListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<SwipeMenuListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<SwipeMenuListView> refreshView) {
+                new MyCollectRefreshWebThread(getString(R.string.WEB_MY_COLLECTION_LIST_REFRESH),pullToRefreshSwipeMenuListView,adapter,MyCollectActivity.this).execute();
+            }
+        });
+        //延时以完成初始自动下拉刷新
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                pullToRefreshSwipeMenuListView.setRefreshing();
+            }
+        }, 500);
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    adapter.remove(msg.getData().getInt("position"));
+                    Toast.makeText(MyCollectActivity.this, "删除发布的活动成功", Toast.LENGTH_SHORT).show();
+                } else if (msg.what == 0) {
+                    Toast.makeText(MyCollectActivity.this, "删除发布的活动失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        content.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+               // new RemoveSelfActivityWebThread(getString(R.string.WEB_REMOVE_SELF_ACTIVITY), adapter.getItem(position), position, handler).start();
+                // false : close the menu; true : not close the menu
+                return false;
+            }
+        });
     }
 }

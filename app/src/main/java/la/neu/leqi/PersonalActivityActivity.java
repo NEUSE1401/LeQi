@@ -38,7 +38,7 @@ public class PersonalActivityActivity extends Activity {
     private TextView back_title;
     private ImageView imageView;
     private ImageLoader imageLoader;
-    private static Handler handler;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class PersonalActivityActivity extends Activity {
         listView.setMenuCreator(creator);
         listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         pullToRefreshSwipeMenuListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        pullToRefreshSwipeMenuListView.setScrollingWhileRefreshingEnabled(true);
         imageLoader = new ImageLoader(this);
         final ActivityListViewAdapter adapter = new ActivityListViewAdapter(imageLoader, this);
         listView.setAdapter(adapter);

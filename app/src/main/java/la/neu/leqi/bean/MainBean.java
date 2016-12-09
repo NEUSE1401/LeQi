@@ -10,6 +10,24 @@ public class MainBean {
     private ArrayList<Good> goods;
     private ArrayList<ActivityBean> activities;
     private ArrayList<Share> shares;
+    private ArrayList<BicycleShop> shops;
+    private ArrayList<Club> clubs;
+
+    public ArrayList<BicycleShop> getShops() {
+        return shops;
+    }
+
+    public void setShops(ArrayList<BicycleShop> shops) {
+        this.shops = shops;
+    }
+
+    public ArrayList<Club> getClubs() {
+        return clubs;
+    }
+
+    public void setClubs(ArrayList<Club> clubs) {
+        this.clubs = clubs;
+    }
 
     public ArrayList<Good> getGoods() {
         return goods;

@@ -38,7 +38,7 @@ public class ActivityListViewAdapter extends BaseAdapter implements AdapterView.
         this.activities = activities;
         notifyDataSetChanged();
     }
-    public void remove(int position){
+    synchronized public void  remove(int position){
         activities.remove(position);
         notifyDataSetChanged();
     }
