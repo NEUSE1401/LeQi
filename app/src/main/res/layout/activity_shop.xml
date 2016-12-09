@@ -9,18 +9,18 @@
     tools:context=".ShopActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:paddingTop="@dimen/title_padding_top"
         android:id="@+id/appbarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -82,7 +82,6 @@
                 app:tabIndicatorColor="#ffffff"
                 app:tabTextColor="#9de3ff"
                 app:tabSelectedTextColor="#ffffff"
-                app:layout_collapseMode="pin"
                 app:tabPaddingTop="15dp"
                 app:tabMode="fixed"
                 app:tabGravity="fill" />

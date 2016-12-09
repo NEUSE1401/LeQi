@@ -1,8 +1,7 @@
 package la.neu.leqi.customview;
 
+
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.view.NestedScrollingChild;
 import android.support.v4.view.NestedScrollingChildHelper;
 import android.util.AttributeSet;
@@ -11,20 +10,18 @@ import android.widget.ListView;
 /**
  * @author HXS
  */
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class NestedListView extends ListView implements NestedScrollingChild {
     private final NestedScrollingChildHelper mScrollingChildHelper;
+
 
     public NestedListView(Context context) {
         super(context);
         mScrollingChildHelper = new NestedScrollingChildHelper(this);
-        setNestedScrollingEnabled(true);
     }
 
     public NestedListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mScrollingChildHelper = new NestedScrollingChildHelper(this);
-        setNestedScrollingEnabled(true);
     }
 
     @Override

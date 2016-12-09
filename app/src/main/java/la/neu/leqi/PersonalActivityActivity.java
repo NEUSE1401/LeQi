@@ -19,7 +19,7 @@ import la.neu.leqi.bean.ActivityBean;
 import la.neu.leqi.tools.image.ImageLoader;
 
 public class PersonalActivityActivity extends Activity {
-    private Button releaseActivity;
+    private ImageView releaseActivity;
     private ListView listView;
     private TextView back_title;
     private ImageView imageView;
@@ -29,7 +29,7 @@ public class PersonalActivityActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_personal_activity);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_title);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.back_add_title);
         back_title = (TextView)findViewById(R.id.back_title);
         back_title.setText("我的发布");
         imageView  =(ImageView)findViewById(R.id.back_icon);
@@ -40,7 +40,7 @@ public class PersonalActivityActivity extends Activity {
             }
         });
 
-        releaseActivity= (Button) findViewById(R.id.personal_activity_release);
+        releaseActivity= (ImageView) findViewById(R.id.add);
         listView= (ListView) findViewById(R.id.personal_activity_list);
         imageLoader=new ImageLoader(this);
         final ActivityListViewAdapter adapter = new ActivityListViewAdapter(imageLoader, this);

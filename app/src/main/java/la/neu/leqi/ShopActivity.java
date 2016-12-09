@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import la.neu.leqi.adapter.CustomFragmentAdapter;
 import la.neu.leqi.fragment.ShopActivityContent;
 import la.neu.leqi.fragment.ShopAllGoodContent;
+import la.neu.leqi.fragment.ShopHomePageContent;
 import la.neu.leqi.fragment.ShopLatestGoodContent;
 
 public class ShopActivity extends AppCompatActivity{
@@ -92,7 +93,7 @@ public class ShopActivity extends AppCompatActivity{
      */
     private void initFragment(){
         fragmentArrayList = new ArrayList<>();
-        fragmentArrayList.add(new ShopActivityContent());
+        fragmentArrayList.add(new ShopHomePageContent());
         fragmentArrayList.add(new ShopAllGoodContent());
         fragmentArrayList.add(new ShopLatestGoodContent());
         fragmentArrayList.add(new ShopActivityContent());

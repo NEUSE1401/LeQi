@@ -45,6 +45,14 @@ public class ShopAllGoodContent extends Fragment {
         adapter.addGood(good2);
         adapter.addGood(good3);
         adapter.addGood(good4);
+        adapter.addGood(good1);
+        adapter.addGood(good2);
+        adapter.addGood(good3);
+        adapter.addGood(good4);
+        adapter.addGood(good1);
+        adapter.addGood(good2);
+        adapter.addGood(good3);
+        adapter.addGood(good4);
         list.setAdapter(adapter);
         return view;
     }

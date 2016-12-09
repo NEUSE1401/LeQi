@@ -54,6 +54,9 @@ public class AdViewListener implements ImageListener, ViewPager.OnPageChangeList
     }
     @Override
     public void setImageForPosition(int position, ImageView imageView) {
+        if (imageView==null){
+            imageView = imageViews.get(position);
+        }
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setBackgroundResource(R.drawable.default_background);
         if(!imageViews.containsKey(position)) {
