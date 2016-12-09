@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="活动展示"
             android:textColor="#ff8000"
             android:textSize="16sp" />
     </LinearLayout>

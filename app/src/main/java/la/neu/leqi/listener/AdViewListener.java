@@ -2,7 +2,6 @@ package la.neu.leqi.listener;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.synnapps.carouselview.CarouselView;
@@ -56,6 +55,9 @@ public class AdViewListener implements ImageListener, ViewPager.OnPageChangeList
     public void setImageForPosition(int position, ImageView imageView) {
         if (imageView==null){
             imageView = imageViews.get(position);
+        }
+        if (imageView==null){
+            imageView = new ImageView(carouselView.getContext());
         }
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setBackgroundResource(R.drawable.default_background);

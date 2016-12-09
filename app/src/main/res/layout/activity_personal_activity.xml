@@ -6,14 +6,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="la.neu.leqi.PersonalActivityActivity">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我发布的活动"/>
-    <ListView
+        android:layout_height="58dp"
+        android:orientation="vertical"
+        android:baselineAligned="false">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:background="@drawable/view_shadow"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="发布的活动"
+                android:textColor="#ff8000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/personal_activity_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent">
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 </LinearLayout>
