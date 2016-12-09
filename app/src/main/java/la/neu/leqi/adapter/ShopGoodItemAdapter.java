@@ -83,7 +83,7 @@ public class ShopGoodItemAdapter  extends BaseAdapter{
 
         image_right.setImageResource(R.drawable.default_background);
         if((2 * i + 1)==allGoods.size()){
-            System.out.println("超出"+(2 * i + 1)+"大小"+allGoods.size());
+
             title_right.setVisibility(LinearLayout.GONE);
             original_price_right.setVisibility(LinearLayout.GONE);
             current_price_right.setVisibility(LinearLayout.GONE);
