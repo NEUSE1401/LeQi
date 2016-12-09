@@ -12,6 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import la.neu.leqi.bean.Clinet;
+
 /**
  * Created by lenovo on 2016/11/2.
  */
@@ -30,6 +35,7 @@ public class PersonalInformationActivity extends Activity{
     private TextView contactWay;
     private TextView back_title;
     private ImageView imageView;
+    private TextView signature;
 
     private int year=2016;
     private int month=11;
@@ -60,7 +66,20 @@ public class PersonalInformationActivity extends Activity{
         contactWay= (TextView) findViewById(R.id.contact_way);
         district= (TextView) findViewById(R.id.district);
         sex= (TextView) findViewById(R.id.sex);
-        age.setText(year+"-"+month+"-"+day);
+        signature= (TextView) findViewById(R.id.signature);
+
+        Calendar mycalendar=Calendar.getInstance();
+        year=mycalendar.get(Calendar.YEAR);
+        month=mycalendar.get(Calendar.MONTH);
+        day=mycalendar.get(Calendar.DAY_OF_MONTH);
+
+        Clinet clinet=new Clinet("胡何缎花",Calendar.getInstance(),"男","709265369@qq.com","我的签名","辽宁","沈阳","浑南区","东北大学浑南校区");
+        nickName.setText(clinet.getNick_name());
+        age.setText(clinet.getBirthday().toString());
+        contactWay.setText(clinet.getContactWay());
+        district.setText(clinet.getAddress());
+        sex.setText(clinet.getGender());
+        signature.setText(clinet.getSignature());
 
         changeNickName.setOnClickListener(new ChangePersonalInfoListener(nickName.getText().toString()));
         changeSex.setOnClickListener(new ChangePersonalInfoListener(sex.getText().toString()));
