@@ -1,6 +1,8 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import la.neu.leqi.ConcreteActivityActivity;
 import la.neu.leqi.R;
+import la.neu.leqi.ShopActivity;
 import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.bean.Club;
 import la.neu.leqi.bean.ActivityBean;
@@ -95,18 +99,27 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        System.out.println("getView"+i);
         if(i==0){
+            System.out.println("收藏的店铺");
             return getTitle("收藏的店铺",view,viewGroup);
         }else if(i<=collectShops.size()){
+            System.out.println("店铺"+(i-collectShops.size()));
             return getShopItem(i,view,viewGroup);
         }else if(i==collectShops.size()+1){
+            System.out.println("收藏的活动");
             return getTitle("收藏的活动",view,viewGroup);
         }else if(i<=collectShops.size()+collectShopActivities.size()+1){
+            System.out.println("活动"+(i-(collectShops.size()+collectShopActivities.size()+1)));
             return getShopActivityItem(i,view,viewGroup);
         }else if(i==collectShops.size()+collectShopActivities.size()+2){
-            return getTitle("收藏的俱乐部",view,viewGroup);
+            System.out.println("加入的俱乐部");
+            return getTitle("加入的俱乐部",view,viewGroup);
+        }else{
+            System.out.println("俱乐部");
+            return getClubItem(i,view,viewGroup);
         }
-        return null;
+
     }
 
     private View getTitle(String title, View view, ViewGroup viewGroup) {
@@ -203,10 +216,67 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
         return view;
     }
 
+    //加载加入的俱乐部
+    public View getClubItem(int i,View view,ViewGroup viewGroup){
+        i=i-collectShops.size()-collectShopActivities.size()-3;
+        ClubHolder viewHolder;
+        if(view==null){
+            view = LayoutInflater.from(context).inflate(R.layout.club_list_item, viewGroup, false);
+            viewHolder=new ClubHolder();
+            viewHolder.pic= (ImageView) view.findViewById(R.id.club_list_item_pic);
+            viewHolder.name=(TextView) view.findViewById(R.id.club_list_item_title);
+            viewHolder.level=(TextView) view.findViewById(R.id.club_list_item_level);
+            viewHolder.address=(TextView) view.findViewById(R.id.club_list_item_address);
+            view.setTag(viewHolder );
+        }else{
+            final Object tag = view.getTag();
+            if (tag != null && tag instanceof ClubHolder) {
+                viewHolder = (ClubHolder) tag;
+            }else {
+                view = LayoutInflater.from(context).inflate(R.layout.club_list_item, viewGroup, false);
+                viewHolder=new ClubHolder();
+                viewHolder.pic= (ImageView) view.findViewById(R.id.club_list_item_pic);
+                viewHolder.name=(TextView) view.findViewById(R.id.club_list_item_title);
+                viewHolder.level=(TextView) view.findViewById(R.id.club_list_item_level);
+                viewHolder.address=(TextView) view.findViewById(R.id.club_list_item_address);
+                view.setTag(viewHolder );
+            }
+        }
+        final Club club=collectClubs.get(i);
+        viewHolder.name.setText(club.getTitle());
+        viewHolder.level.setText(club.getLevel()+"");
+        viewHolder.address.setText(club.getProvince()+" "+club.getCity()+" "+club.getDistrict());
+        ArrayList<String> pics=club.getPics();
+        if(pics.size()==0){
+            viewHolder.pic.setImageResource(R.drawable.default_background);
+        }else {
+            imageLoader.bindBitmap(pics.get(0),viewHolder.pic);
+        }
+        return view;
+    }
+
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if(i<=collectShops.size()){
+            //shop
+            Intent intent=new Intent(context, ShopActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("shop",collectShops.get(i-1));
+            intent.putExtras(bundle);
+            context.startActivity(intent);
 
+        }else if(i<=collectShops.size()+collectShopActivities.size()+1){
+            Intent intent=new Intent(context, ConcreteActivityActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("activity",collectShopActivities.get(i-collectShops.size()-2));
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        }else if(i>collectShops.size()+collectShopActivities.size()+2){
+
+        }
     }
+
 
     private class ShopViewHolder{
         ImageView pic;
@@ -220,6 +290,12 @@ public class MyCollectAdapter extends BaseAdapter implements AdapterView.OnItemC
         TextView activity_start_time;
         TextView activity_end_time;
         TextView activity_count;
+    }
+    private class ClubHolder{
+        ImageView pic;
+        TextView name;
+        TextView level;
+        TextView address;
     }
 
     public void addShop(BicycleShop shop){
