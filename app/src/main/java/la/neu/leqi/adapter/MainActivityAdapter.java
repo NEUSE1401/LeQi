@@ -1,9 +1,12 @@
 package la.neu.leqi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +15,8 @@ import com.synnapps.carouselview.CarouselView;
 
 import java.util.ArrayList;
 
+import la.neu.leqi.ConcreteActivityActivity;
+import la.neu.leqi.ConcreteGoodActivity;
 import la.neu.leqi.R;
 import la.neu.leqi.bean.Good;
 import la.neu.leqi.bean.Share;
@@ -151,6 +156,7 @@ public class MainActivityAdapter extends BaseAdapter {
     //加载商品列表
     private View getBicycleView(int i, View view, ViewGroup viewGroup) {
         i = i - 1 - 1;
+        final int j=i;
         BicycleViewHolder viewHolder;
         if (view == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.bicycle_item, viewGroup, false);
@@ -206,12 +212,33 @@ public class MainActivityAdapter extends BaseAdapter {
         if (good_right.getPic_list().size() != 0) {
             imageLoader.bindBitmap(good_right.getPic_list().get(0), image_right);
         }
+        image_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, ConcreteGoodActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("good",goods.get(2*j));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+        image_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, ConcreteGoodActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("good",goods.get(2*j+1));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 
     //加载活动列表
     private View getActivityView(int i, View view, ViewGroup viewGroup) {
         i = i - goods.size() / 2 - 1 - 2;
+        final int j =i;
         ActivityViewHolder viewHolder;
         if (view == null) {
             viewHolder = new ActivityViewHolder();
@@ -252,6 +279,17 @@ public class MainActivityAdapter extends BaseAdapter {
         activity_start_time.setText(activity.getStartTime());
         activity_end_time.setText(activity.getEndTime());
         activity_count.setText(String.valueOf(activity.getCount()));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, ConcreteActivityActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("activity",activities.get(j));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -301,6 +339,34 @@ public class MainActivityAdapter extends BaseAdapter {
         title_right.setText(share_right.getTheme());
         return view;
     }
+
+
+    //这里传进来的i是第几行，从1开始
+//    @Override
+//    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//        if(i>2&& i <=(goods.size() / 2 + 2) ){
+//            //跳转商品  需要考虑左右sout
+//            System.out.println("首页商品"+i);
+//            i = i - 1 - 1-1;
+//            Intent intent=new Intent(context, ConcreteGoodActivity.class);
+//            Bundle bundle=new Bundle();
+//            bundle.putSerializable("good",goods.get(i));
+//            intent.putExtras(bundle);
+//            context.startActivity(intent);
+//        }else if(i>(goods.size() / 2 + 3)&&i<=( goods.size() / 2 + activities.size() + 3)){
+//            //跳转到活动
+//            System.out.println("首页活动"+i);
+//            i = i - goods.size() / 2 - 1 - 2;
+//            Intent intent=new Intent(context, ConcreteActivityActivity.class);
+//            Bundle bundle=new Bundle();
+//            bundle.putSerializable("activity",activities.get(i));
+//            intent.putExtras(bundle);
+//            context.startActivity(intent);
+//        }else if(i>(goods.size() / 2 + activities.size() + 4)&&i<=(goods.size() / 2 + activities.size() + shares.size() / 2 + 4)){
+//            //跳转到分享 需要考虑左右
+//            i = i - goods.size() / 2 - activities.size() - 1 - 3;
+//        }
+//    }
 
     private static class BicycleViewHolder {
         ImageView image_left;

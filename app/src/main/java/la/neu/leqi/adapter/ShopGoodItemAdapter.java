@@ -1,8 +1,11 @@
 package la.neu.leqi.adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import la.neu.leqi.ConcreteGoodActivity;
 import la.neu.leqi.R;
 import la.neu.leqi.bean.Good;
 import la.neu.leqi.tools.image.ImageLoader;
@@ -18,7 +22,7 @@ import la.neu.leqi.tools.image.ImageLoader;
  * Created by lenovo on 2016/11/6.
  */
 
-public class ShopGoodItemAdapter  extends BaseAdapter{
+public class ShopGoodItemAdapter  extends BaseAdapter {
     private ArrayList<Good> allGoods;
     private LayoutInflater inflater;
     private ImageLoader imageLoader;
@@ -104,6 +108,15 @@ public class ShopGoodItemAdapter  extends BaseAdapter{
 
         return view;
     }
+
+//    @Override
+//    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//        Intent intent=new Intent(inflater.getContext(), ConcreteGoodActivity.class);
+//        Bundle bundle=new Bundle();
+//        bundle.putSerializable("good",allGoods.get(i));
+//        intent.putExtras(bundle);
+//        inflater.getContext().startActivity(intent);
+//    }
 
     private  class BicycleViewHolder {
         ImageView image_left;

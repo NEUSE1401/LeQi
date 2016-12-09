@@ -86,6 +86,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         activity_main_list = pullToRefreshListView.getRefreshableView();
         mainActivityAdapter = new MainActivityAdapter(imageLoader, this);
         activity_main_list.setAdapter(mainActivityAdapter);
+        //activity_main_list.setOnItemClickListener(mainActivityAdapter);
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override

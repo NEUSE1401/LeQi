@@ -29,19 +29,17 @@ public class ShopLatestGoodContent extends Fragment {
 
         final ArrayList<String> pics1 = new ArrayList<>();
         pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-
+        Good good1 = new Good(1,  "自行车", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics1);
         final ArrayList<String> pics2 = new ArrayList<>();
         pics2.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
-
+        Good good2 = new Good(2, "自行车",  "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null, pics2);
         final ArrayList<String> pics3 = new ArrayList<>();
         pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
-
+        Good good3 = new Good(3,  "自行车", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics3);
         final ArrayList<String> pics4 = new ArrayList<>();
         pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
-        Good good1 = new Good(1, "山地自行车", 20, 18.8, pics4);
-        Good good2 = new Good(2, "自行车", 19.9, 18.8, pics3);
-        Good good3 = new Good(3, "自行车", 19.9, 18.8, pics2);
-        Good good4 = new Good(4, "骑客", 19.9, 18.8, pics1);
+        Good good4 = new Good(4,  "自行车", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics4);
+
 
         ShopGoodItemAdapter adapter=new ShopGoodItemAdapter(inflater,imageLoader);
         adapter.addGood(good4);
@@ -49,6 +47,7 @@ public class ShopLatestGoodContent extends Fragment {
         adapter.addGood(good2);
 
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(adapter);
         return view;
 
     }

@@ -45,8 +45,7 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
             Intent intent=new Intent(context, PersonalShareActivity.class);
             context.startActivity(intent);
         }else if(id==R.id.setting){
-            Intent intent=new Intent(context, ConcreteGoodActivity.class);
-            context.startActivity(intent);
+
         }else if(id==R.id.log_out){
             Intent intent=new Intent(context, LogAndRegisterActivity.class);
             context.startActivity(intent);

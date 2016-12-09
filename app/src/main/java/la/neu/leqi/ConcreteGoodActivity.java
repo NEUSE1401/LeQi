@@ -1,6 +1,7 @@
 package la.neu.leqi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,6 @@ public class ConcreteGoodActivity extends Activity {
     private TextView originalPrice;
     private TextView goodParameter;
     private TextView goodDescription;
-    private TextView shopAddress;
     private Button contactSeller;
     private LinearLayout share;
 
@@ -61,13 +61,15 @@ public class ConcreteGoodActivity extends Activity {
         originalPrice= (TextView) findViewById(R.id.concrete_good_original_price);
         goodParameter= (TextView) findViewById(R.id.concrete_good_parameter);
         goodDescription= (TextView) findViewById(R.id.concrete_good_description);
-        shopAddress= (TextView) findViewById(R.id.concrete_good_shop_address);
         contactSeller= (Button) findViewById(R.id.concrete_good_contact_saller);
         share= (LinearLayout) findViewById(R.id.concrete_good_share_linear);
 
-        final ArrayList<String> pics1 = new ArrayList<>();
-        pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        Good good = new Good(1, "自行车", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null, pics1);
+       // final ArrayList<String> pics1 = new ArrayList<>();
+        //pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
+        //Good good = new Good(1, "自行车", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null, pics1);
+
+        Intent intent=getIntent();
+        Good good= (Good) intent.getSerializableExtra("good");
 
         imageLoader=new ImageLoader(this);
         ArrayList<String> pics=good.getPic_list();
@@ -88,12 +90,11 @@ public class ConcreteGoodActivity extends Activity {
         goodDescription.setText(good.getDescription());
 
         String para="";
-//        ArrayList<String> parametersList=good.getParemeters();
-        ArrayList<String> parametersList=new ArrayList<>();
+        ArrayList<String> parametersList=good.getParemeters();
         for (String a:parametersList){
             para=para+a+"  ";
         }
         goodParameter.setText(para);
-        shopAddress.setText("东北大学浑南校区");
+
     }
 }

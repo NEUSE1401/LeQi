@@ -1,9 +1,10 @@
 package la.neu.leqi.bean;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Good {
+public class Good implements Serializable {
     private int id;
     private String name;
     private String brand;
@@ -32,6 +33,7 @@ public class Good {
         this.hit = hit;
         this.onsale_time = onsale_time;
         this.pic_list = pic_list;
+        paremeters=new ArrayList<>();
     }
 
     public Good(int id, String name, double original_price, double current_price, ArrayList<String> pic_list) {
@@ -40,6 +42,7 @@ public class Good {
         this.original_price = original_price;
         this.current_price = current_price;
         this.pic_list = pic_list;
+        paremeters=new ArrayList<>();
     }
 
     public int getHit() {
