@@ -26,4 +26,6 @@
     <color name="logMainColor">#03a9f4</color>
     <color name="logLightColor">#46c0ff</color>
     <color name="logTextColor">#ffffff</color>
+    <!--颜色-->
+    <color name="RED">#ff2d2d</color>
 </resources>

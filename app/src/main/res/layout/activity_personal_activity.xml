@@ -28,10 +28,10 @@
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <la.neu.leqi.customview.PullToRefreshSwipeMenuListView
         android:id="@+id/personal_activity_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="@android:color/transparent">
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+    </la.neu.leqi.customview.PullToRefreshSwipeMenuListView>
 </LinearLayout>

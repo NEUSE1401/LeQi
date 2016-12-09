@@ -1,6 +1,7 @@
 package la.neu.leqi;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -8,18 +9,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+
 import java.util.ArrayList;
 
 import la.neu.leqi.adapter.MyCollectAdapter;
 import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.bean.ActivityBean;
+import la.neu.leqi.customview.PullToRefreshSwipeMenuListView;
 import la.neu.leqi.tools.image.ImageLoader;
 
 public class MyCollectActivity extends Activity {
     private TextView back_title;
     private ImageView imageView;
 
-    private ListView content;
+    private SwipeMenuListView content;
     private ImageLoader imageLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +44,28 @@ public class MyCollectActivity extends Activity {
             }
         });
 
-        content= (ListView) findViewById(R.id.my_collect_content);
+        PullToRefreshSwipeMenuListView pullToRefreshSwipeMenuListView= (PullToRefreshSwipeMenuListView) findViewById(R.id.my_collect_content);
+        content = pullToRefreshSwipeMenuListView.getRefreshableView();
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                if (menu.getViewType()==1) {
+                    SwipeMenuItem openItem = new SwipeMenuItem(
+                            getApplicationContext());
+                    openItem.setBackground(R.color.RED);
+                    openItem.setWidth((int) getResources().getDimension(R.dimen.activity_item_height));
+                    openItem.setTitle("删除");
+                    openItem.setTitleSize(18);
+                    openItem.setTitleColor(Color.WHITE);
+                    menu.addMenuItem(openItem);
+                }
+            }
+        };
+        content.setMenuCreator(creator);
+        content.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         imageLoader = new ImageLoader(this);
         MyCollectAdapter adapter=new MyCollectAdapter(imageLoader,this);
-
         final ArrayList<String> pics1 = new ArrayList<>();
         pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
         final ArrayList<String> pics2 = new ArrayList<>();

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="58dp"
+    android:layout_height="wrap_content"
     android:paddingTop="8dp"
     android:orientation="vertical"
     android:baselineAligned="false">
     <LinearLayout
+        android:id="@+id/title_head"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
         android:background="@drawable/view_shadow"
         android:orientation="horizontal">

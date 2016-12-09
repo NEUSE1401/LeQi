@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="la.neu.leqi.MyCollectActivity">
-    <ListView
+    <la.neu.leqi.customview.PullToRefreshSwipeMenuListView
         android:id="@+id/my_collect_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent">
 
-    </ListView>
+    </la.neu.leqi.customview.PullToRefreshSwipeMenuListView>
 </LinearLayout>

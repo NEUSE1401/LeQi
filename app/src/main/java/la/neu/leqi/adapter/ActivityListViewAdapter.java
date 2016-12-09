@@ -38,14 +38,17 @@ public class ActivityListViewAdapter extends BaseAdapter implements AdapterView.
         this.activities = activities;
         notifyDataSetChanged();
     }
-
+    public void remove(int position){
+        activities.remove(position);
+        notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         return activities.size();
     }
 
     @Override
-    public Object getItem(int i) {
+    public ActivityBean getItem(int i) {
         return activities.get(i);
     }
 

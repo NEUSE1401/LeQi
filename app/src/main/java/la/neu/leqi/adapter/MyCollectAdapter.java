@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,15 +52,36 @@ public class MyCollectAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position==0){
+            return 0;
+        }else if(position<=collectShops.size()){
+            return 1;
+        }else if(position==collectShops.size()+1){
+            return 0;
+        }else if(position<=collectShops.size()+collectShopActivities.size()+1){
+            return 1;
+        }else if(position==collectShops.size()+collectShopActivities.size()+2){
+            return 0;
+        }
+        return 0;
+    }
+
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(i==0){
             return getTitle("收藏的店铺",view,viewGroup);
         }else if(i<=collectShops.size()){
-            return getShopItme(i,view,viewGroup);
+            return getShopItem(i,view,viewGroup);
         }else if(i==collectShops.size()+1){
             return getTitle("收藏的活动",view,viewGroup);
         }else if(i<=collectShops.size()+collectShopActivities.size()+1){
-            return getShopAcyivityItem(i,view,viewGroup);
+            return getShopActivityItem(i,view,viewGroup);
         }else if(i==collectShops.size()+collectShopActivities.size()+2){
             return getTitle("收藏的俱乐部",view,viewGroup);
         }
@@ -69,6 +91,8 @@ public class MyCollectAdapter extends BaseAdapter {
     private View getTitle(String title, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(getContext()).inflate(R.layout.activity_main_title_item, viewGroup, false);
         TextView title_view = (TextView) view.findViewById(R.id.title);
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.title_head);
+        final ViewGroup.LayoutParams layoutParams = linearLayout.getLayoutParams();
         title_view.setText(title);
         return view;
     }
@@ -77,7 +101,7 @@ public class MyCollectAdapter extends BaseAdapter {
     }
 
     //加载收藏的店铺项
-    private View getShopItme(int i, View view, ViewGroup viewGroup){
+    private View getShopItem(int i, View view, ViewGroup viewGroup){
         i = i - 1;
         ShopViewHolder viewHolder;
         if(view==null){
@@ -117,7 +141,7 @@ public class MyCollectAdapter extends BaseAdapter {
     }
 
     //加载收藏活动项
-    public View getShopAcyivityItem(int i, View view, ViewGroup viewGroup){
+    public View getShopActivityItem(int i, View view, ViewGroup viewGroup){
         i=i-collectShops.size()-2;
         ActivityViewHolder viewHolder;
         if (view == null) {

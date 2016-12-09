@@ -2,8 +2,8 @@ package la.neu.leqi.thread;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.ListView;
 
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ import la.neu.leqi.bean.ActivityBean;
 
 public class PersonalActivityDataRefresh extends AsyncTask<Void,Void,ArrayList<ActivityBean>>{
     private String BASE_URL;
-    private PullToRefreshBase<ListView> pullToRefreshView;
+    private PullToRefreshBase<SwipeMenuListView> pullToRefreshView;
     private ActivityListViewAdapter activityListViewAdapter;
     private Context context;
 
-    public PersonalActivityDataRefresh(String base_url, PullToRefreshBase<ListView> paramPullToRefreshListView, ActivityListViewAdapter paramMyAdapter, Context paramContext) {
+    public PersonalActivityDataRefresh(String base_url, PullToRefreshBase<SwipeMenuListView> paramPullToRefreshListView, ActivityListViewAdapter paramMyAdapter, Context paramContext) {
         BASE_URL = base_url;
         this.pullToRefreshView = paramPullToRefreshListView;
         this.activityListViewAdapter = paramMyAdapter;
