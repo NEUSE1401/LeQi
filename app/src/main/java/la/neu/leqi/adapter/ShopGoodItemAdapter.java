@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,27 +23,39 @@ import la.neu.leqi.tools.image.ImageLoader;
  * Created by lenovo on 2016/11/6.
  */
 
-public class ShopGoodItemAdapter  extends BaseAdapter {
+public class ShopGoodItemAdapter extends BaseAdapter {
     private ArrayList<Good> allGoods;
     private LayoutInflater inflater;
     private ImageLoader imageLoader;
 
-    public ShopGoodItemAdapter(LayoutInflater inflater,ImageLoader imageLoader){
-        this.inflater=inflater;
-        this.imageLoader=imageLoader;
-        allGoods=new ArrayList<>();
+    public ShopGoodItemAdapter(LayoutInflater inflater, ImageLoader imageLoader) {
+        this.inflater = inflater;
+        this.imageLoader = imageLoader;
+        allGoods = new ArrayList<>();
     }
+
     @Override
     public int getCount() {
-        if((allGoods.size()%2)==1){
-            return allGoods.size()/2+1;
+        return (int) Math.ceil((double) allGoods.size() / 2);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (2 * position + 1 == allGoods.size()) {
+            return 0;
+        } else {
+            return 1;
         }
-        return allGoods.size()/2;
     }
 
     @Override
     public Object getItem(int i) {
-        return allGoods.get(i);
+        return allGoods.get(2 * i);
     }
 
     @Override
@@ -65,8 +78,8 @@ public class ShopGoodItemAdapter  extends BaseAdapter {
             viewHolder.original_price_right = (TextView) view.findViewById(R.id.original_price_right);
             viewHolder.current_price_right = (TextView) view.findViewById(R.id.current_price_right);
             view.setTag(viewHolder);
-        }else{
-            viewHolder = (BicycleViewHolder)view.getTag();
+        } else {
+            viewHolder = (BicycleViewHolder) view.getTag();
         }
         ImageView image_left = viewHolder.image_left;
         TextView title_left = viewHolder.title_left;
@@ -86,8 +99,7 @@ public class ShopGoodItemAdapter  extends BaseAdapter {
         }
 
         image_right.setImageResource(R.drawable.default_background);
-        if((2 * i + 1)==allGoods.size()){
-
+        if (getItemViewType(i)==0) {
             title_right.setVisibility(LinearLayout.GONE);
             original_price_right.setVisibility(LinearLayout.GONE);
             current_price_right.setVisibility(LinearLayout.GONE);
@@ -95,7 +107,7 @@ public class ShopGoodItemAdapter  extends BaseAdapter {
             return view;
         }
 
-        if((2 * i + 1)<allGoods.size()){
+        if (getItemViewType(i)==1) {
             Good good_right = allGoods.get(2 * i + 1);
             title_right.setText(good_right.getName());
             original_price_right.setText(String.valueOf("￥" + good_right.getOriginal_price()));
@@ -118,7 +130,7 @@ public class ShopGoodItemAdapter  extends BaseAdapter {
 //        inflater.getContext().startActivity(intent);
 //    }
 
-    private  class BicycleViewHolder {
+    private class BicycleViewHolder {
         ImageView image_left;
         TextView title_left;
         TextView original_price_left;

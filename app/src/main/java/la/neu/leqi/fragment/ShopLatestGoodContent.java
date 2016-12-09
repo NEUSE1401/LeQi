@@ -47,7 +47,7 @@ public class ShopLatestGoodContent extends Fragment {
         adapter.addGood(good2);
 
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(adapter);
+        //listView.setOnItemClickListener(adapter);
         return view;
 
     }
