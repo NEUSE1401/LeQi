@@ -51,8 +51,6 @@ public class ShopAllGoodContent extends Fragment {
         adapter.addGood(good4);
         adapter.addGood(good1);
 
-
-
         list.setAdapter(adapter);
         //list.setOnItemClickListener(adapter);
         return view;

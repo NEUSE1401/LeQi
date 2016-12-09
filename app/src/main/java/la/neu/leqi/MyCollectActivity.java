@@ -100,7 +100,7 @@ public class MyCollectActivity extends Activity {
         content.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-               //s
+                Toast.makeText(MyCollectActivity.this,position+":"+index,Toast.LENGTH_SHORT).show();
                 // new RemoveSelfActivityWebThread(getString(R.string.WEB_REMOVE_SELF_ACTIVITY), adapter.getItem(position), position, handler).start();
                 // false : close the menu; true : not close the menu
                 return false;

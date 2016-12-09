@@ -98,16 +98,17 @@ public class ShopGoodItemAdapter extends BaseAdapter {
             imageLoader.bindBitmap(good_left.getPic_list().get(0), image_left);
         }
 
-        image_right.setImageResource(R.drawable.default_background);
-        if (getItemViewType(i)==0) {
-            title_right.setVisibility(LinearLayout.GONE);
-            original_price_right.setVisibility(LinearLayout.GONE);
-            current_price_right.setVisibility(LinearLayout.GONE);
-            image_right.setVisibility(LinearLayout.GONE);
-            return view;
-        }
+
+//        if (getItemViewType(i)==0) {
+//            title_right.setVisibility(LinearLayout.GONE);
+//            original_price_right.setVisibility(LinearLayout.GONE);
+//            current_price_right.setVisibility(LinearLayout.GONE);
+//            image_right.setVisibility(LinearLayout.GONE);
+//            return view;
+//        }
 
         if (getItemViewType(i)==1) {
+            image_right.setImageResource(R.drawable.default_background);
             Good good_right = allGoods.get(2 * i + 1);
             title_right.setText(good_right.getName());
             original_price_right.setText(String.valueOf("￥" + good_right.getOriginal_price()));
