@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class ShopGoodItemAdapter  extends BaseAdapter{
     }
     @Override
     public int getCount() {
+        if((allGoods.size()%2)==1){
+            return allGoods.size()/2+1;
+        }
         return allGoods.size()/2;
     }
 
@@ -69,7 +73,6 @@ public class ShopGoodItemAdapter  extends BaseAdapter{
         TextView original_price_right = viewHolder.original_price_right;
         TextView current_price_right = viewHolder.current_price_right;
         Good good_left = allGoods.get(2 * i);
-        Good good_right = allGoods.get(2 * i + 1);
         title_left.setText(good_left.getName());
         original_price_left.setText(String.valueOf("￥" + good_left.getOriginal_price()));
         current_price_left.setText(String.valueOf("￥" + good_left.getCurrent_price()));
@@ -77,13 +80,28 @@ public class ShopGoodItemAdapter  extends BaseAdapter{
         if (good_left.getPic_list().size() != 0) {
             imageLoader.bindBitmap(good_left.getPic_list().get(0), image_left);
         }
-        title_right.setText(good_right.getName());
-        original_price_right.setText(String.valueOf("￥" + good_right.getOriginal_price()));
-        current_price_right.setText(String.valueOf("￥" + good_right.getCurrent_price()));
+
         image_right.setImageResource(R.drawable.default_background);
-        if (good_right.getPic_list().size() != 0) {
-            imageLoader.bindBitmap(good_right.getPic_list().get(0), image_right);
+        if((2 * i + 1)==allGoods.size()){
+
+            title_right.setVisibility(LinearLayout.GONE);
+            original_price_right.setVisibility(LinearLayout.GONE);
+            current_price_right.setVisibility(LinearLayout.GONE);
+            image_right.setVisibility(LinearLayout.GONE);
+            return view;
         }
+
+        if((2 * i + 1)<allGoods.size()){
+            Good good_right = allGoods.get(2 * i + 1);
+            title_right.setText(good_right.getName());
+            original_price_right.setText(String.valueOf("￥" + good_right.getOriginal_price()));
+            current_price_right.setText(String.valueOf("￥" + good_right.getCurrent_price()));
+            if (good_right.getPic_list().size() != 0) {
+                imageLoader.bindBitmap(good_right.getPic_list().get(0), image_right);
+            }
+        }
+
+
         return view;
     }
 

@@ -47,7 +47,7 @@ public class ShopLatestGoodContent extends Fragment {
         adapter.addGood(good4);
         adapter.addGood(good3);
         adapter.addGood(good2);
-        adapter.addGood(good1);
+
         listView.setAdapter(adapter);
         return view;
 
