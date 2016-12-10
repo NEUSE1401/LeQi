@@ -50,10 +50,10 @@ public class ActivityListRefreshWebThread extends AsyncTask<Void, Void, ArrayLis
         //    public ActivityBean(int activityId, String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int count, String startPlace, String endPlace, String activityPlace, String participateWay, String owner, String requirement) {
         String des = "本次骑行赛车活动规模大、内容丰富、参赛选手众多。我们策划这次活动，一方面，试图通过“骑行”这种形式，倡导绿色出行新风尚，身体力行实践低碳生活，落实国家低碳减排政策。另一方面，这也是一次传播自行车文化，普及大众骑行活动的播种之旅。";
         String way = "联系负责人报名即可";
-        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", des, "2016-11-3", "2016-11-6", "2016-11-3", pics1, 23, "沈阳", "沈阳", "沈阳XXX", way, "单车101俱乐部", "无");
-        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", des, "2016-11-3", "2016-11-7", "2016-11-3", pics2, 23, "沈阳", "沈阳", "沈阳XXX", way, "单车101俱乐部", "无");
-        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", des, "2016-11-3", "2016-11-3", "2016-11-1", pics3, 100, "沈阳", "沈阳", "沈阳XXX", way, "单车101俱乐部", "无");
-        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", des, "2016-11-3", "2016-11-3", "2016-11-1", pics4, 90, "沈阳", "沈阳", "沈阳XXX", way, "单车101俱乐部", "无");
+        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", des, "2016-11-3", "2016-11-6", "2016-11-3", pics1, 23, "沈阳", "沈阳", way, "单车101俱乐部", "无");
+        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", des, "2016-11-3", "2016-11-7", "2016-11-3", pics2, 23, "沈阳", "沈阳",  way, "单车101俱乐部", "无");
+        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", des, "2016-11-3", "2016-11-3", "2016-11-1", pics3, 100, "沈阳", "沈阳",  way, "单车101俱乐部", "无");
+        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", des, "2016-11-3", "2016-11-3", "2016-11-1", pics4, 90, "沈阳", "沈阳",  way, "单车101俱乐部", "无");
         final ArrayList<ActivityBean> activityBeen = new ArrayList<>();
         activityBeen.add(activityBean1);
         activityBeen.add(activityBean2);
