@@ -3,44 +3,50 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:weightSum="2"
     android:layout_height="@dimen/share_item_height">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/item_left"
         android:padding="@dimen/item_padding"
+        android:layout_margin="@dimen/item_margin"
         android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/image_left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
         <TextView
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:background="#9ad9d9d9"
             android:id="@+id/title_left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="@dimen/item_main_text_size"/>
-        <ImageView
-            android:id="@+id/image_left"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/item_left"
+        android:layout_margin="@dimen/item_margin"
         android:padding="@dimen/item_padding"
         android:layout_weight="1">
-        <TextView
-            android:id="@+id/title_right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textSize="@dimen/item_main_text_size"/>
+
         <ImageView
             android:id="@+id/image_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"/>
-    </LinearLayout>
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:background="#9ad9d9d9"
+            android:id="@+id/title_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/item_main_text_size"/>
+    </RelativeLayout>
 </LinearLayout>

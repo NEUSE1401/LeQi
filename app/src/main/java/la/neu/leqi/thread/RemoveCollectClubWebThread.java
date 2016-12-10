@@ -36,6 +36,7 @@ public class RemoveCollectClubWebThread extends Thread {
         message.what = 1;
         final Bundle bundle = new Bundle();
         bundle.putInt("position", position);
+        bundle.putString("info","俱乐部");
         message.setData(bundle);
         handler.sendMessage(message);
     }

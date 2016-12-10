@@ -20,8 +20,14 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 
 import la.neu.leqi.adapter.MyCollectAdapter;
 
+import la.neu.leqi.bean.ActivityBean;
+import la.neu.leqi.bean.BicycleShop;
+import la.neu.leqi.bean.Club;
 import la.neu.leqi.customview.PullToRefreshSwipeMenuListView;
 import la.neu.leqi.thread.MyCollectRefreshWebThread;
+import la.neu.leqi.thread.RemoveCollectActivityWebThread;
+import la.neu.leqi.thread.RemoveCollectClubWebThread;
+import la.neu.leqi.thread.RemoveCollectShopWebThread;
 import la.neu.leqi.tools.image.ImageLoader;
 
 public class MyCollectActivity extends Activity {
@@ -91,17 +97,26 @@ public class MyCollectActivity extends Activity {
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     adapter.remove(msg.getData().getInt("position"));
-                    Toast.makeText(MyCollectActivity.this, "删除发布的活动成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyCollectActivity.this, "删除"+msg.getData().getString("info")+"成功", Toast.LENGTH_SHORT).show();
                 } else if (msg.what == 0) {
-                    Toast.makeText(MyCollectActivity.this, "删除发布的活动失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyCollectActivity.this, "删除"+msg.getData().getString("info")+"失败", Toast.LENGTH_SHORT).show();
                 }
             }
         };
         content.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                Toast.makeText(MyCollectActivity.this,position+":"+index,Toast.LENGTH_SHORT).show();
-                // new RemoveSelfActivityWebThread(getString(R.string.WEB_REMOVE_SELF_ACTIVITY), adapter.getItem(position), position, handler).start();
+                switch (adapter.getItemViewType(position)){
+                    case 1:
+                        new RemoveCollectShopWebThread(getString(R.string.WEB_REMOVE_COLLECT_SHOP),(BicycleShop) adapter.getItem(position),position,handler).start();
+                        break;
+                    case 3:
+                        new RemoveCollectActivityWebThread(getString(R.string.WEB_REMOVE_COLLECT_ACTIVITY),(ActivityBean) adapter.getItem(position),position,handler).start();
+                        break;
+                    case 5:
+                        new RemoveCollectClubWebThread(getString(R.string.WEB_REMOVE_COLLECT_CLUB),(Club) adapter.getItem(position),position,handler).start();
+                        break;
+                }
                 // false : close the menu; true : not close the menu
                 return false;
             }

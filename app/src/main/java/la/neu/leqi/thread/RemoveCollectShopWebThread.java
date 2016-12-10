@@ -35,6 +35,7 @@ public class RemoveCollectShopWebThread extends Thread {
         message.what=1;
         final Bundle bundle = new Bundle();
         bundle.putInt("position",position);
+        bundle.putString("info","店铺");
         message.setData(bundle);
         handler.sendMessage(message);
     }

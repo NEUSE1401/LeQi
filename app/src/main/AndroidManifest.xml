@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -52,7 +53,9 @@
             android:name=".PersonalActivityActivity"
             android:theme="@style/CustomTitleTheme" />
         <activity android:name=".ReleaseActivityActivity" />
-        <activity android:name=".ShareListActivity"></activity>
+        <activity android:name=".ShareListActivity" />
+        <activity android:name=".ShareWebActivity"
+            android:theme="@style/CustomTitleTheme"/>
     </application>
 
 </manifest>

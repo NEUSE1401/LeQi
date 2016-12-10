@@ -19,6 +19,7 @@
     <string name="WEB_REMOVE_COLLECT_ACTIVITY"></string>
     <string name="WEB_REMOVE_COLLECT_CLUB"></string>
     <string name="WEB_REMOVE_COLLECT_SHOP"></string>
+    <string name="WEB_SHARE_SEND_VIEW">http://neu.la/leqi/post.html</string>
     <string name="release_activity_title">活动标题</string>
     <string name="release_activity_description">活动概述</string>
     <string name="release_activity_starttime">活动发起时间</string>

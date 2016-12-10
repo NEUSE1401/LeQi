@@ -2,6 +2,7 @@ package la.neu.leqi.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +20,8 @@ import la.neu.leqi.MainActivity;
 import la.neu.leqi.R;
 import la.neu.leqi.thread.LoginWebThread;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Log extends Fragment {
     private EditText name;
     private EditText pass;
@@ -27,7 +30,7 @@ public class Log extends Fragment {
     private boolean isCreate=false;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         isCreate = true;
         View view = inflater.inflate(R.layout.log, null);
         name = (EditText) view.findViewById(R.id.user_name);
@@ -47,6 +50,9 @@ public class Log extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
+                    final SharedPreferences user = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+                    user.edit().putString("username",msg.getData().getString("username")).apply();
+                    user.edit().putString("token",msg.getData().getString("token")).apply();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 } else {

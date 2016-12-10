@@ -17,10 +17,12 @@ import la.neu.leqi.tools.HttpGet;
 public class LoginWebThread extends Thread {
     private Handler handler;
     private String BASE_URL;
+    private String username;
 
     public LoginWebThread(String base_url, Handler handler, String username, String password) {
         BASE_URL = base_url;
         this.handler = handler;
+        this.username=username;
         BASE_URL += "?username=" + username + "&password=" + password;
     }
 
@@ -36,6 +38,7 @@ public class LoginWebThread extends Thread {
                 message.what = 1;
                 final Bundle bundle = new Bundle();
                 bundle.putString("token", token);
+                bundle.putString("username",username);
                 message.setData(bundle);
                 handler.sendMessage(message);
             } else {

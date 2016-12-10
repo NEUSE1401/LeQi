@@ -35,6 +35,7 @@ public class RemoveCollectActivityWebThread extends Thread {
         message.what = 1;
         final Bundle bundle = new Bundle();
         bundle.putInt("position", position);
+        bundle.putString("info","活动");
         message.setData(bundle);
         handler.sendMessage(message);
     }

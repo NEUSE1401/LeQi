@@ -8,12 +8,31 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="la.neu.leqi.MainActivity">
 
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:layout_below="@+id/search_layout"
+        android:id="@+id/club_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation_bar">
+
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom" />
+
     <TableLayout
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:id="@+id/search_layout"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <TableRow
             android:background="#03a9f4"
             android:paddingTop="5dp"
@@ -42,20 +61,4 @@
                 />
         </TableRow>
     </TableLayout>
-
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:layout_below="@+id/search_layout"
-        android:id="@+id/club_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation_bar">
-
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
-
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/bottom_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom" />
 </RelativeLayout>

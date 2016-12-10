@@ -2,6 +2,7 @@ package la.neu.leqi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -47,6 +49,13 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
     private final Class<?>[] classes ={null,BicycleShopListActivity.class,ShareListActivity.class,ClubListActivity.class,ActivityListActivity.class};
 
     @Override
+    protected void onStart() {
+        initHead();
+        super.onStart();
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //自定义title
@@ -60,7 +69,6 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         BottomNavigationBarBuilder.build(bottomNavigationBar,0);
         bottomNavigationBar.setTabSelectedListener(this);
-
         imageLoader = new ImageLoader(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        findBarComponent();
@@ -97,6 +105,28 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         pullToRefreshListView.setRefreshing();
     }
 
+    private void initHead(){
+        final View headerView = menu.getHeaderView(0);
+        final TextView name = (TextView) headerView.findViewById(R.id.name);
+        final TextView textView = (TextView) headerView.findViewById(R.id.textView);
+        final SharedPreferences user = getSharedPreferences("user", MODE_PRIVATE);
+        final String username = user.getString("username", "");
+        String token = user.getString("token","");
+        if (!username.isEmpty()&&!token.isEmpty()) {
+            headerView.setClickable(false);
+        }else{
+            name.setText("登录/注册");
+            textView.setText("Hello,leqi!");
+            headerView.setClickable(true);
+            headerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, LogAndRegisterActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
     //处理滑动后操作
     public void doResult(int action) {
         System.out.println(action);

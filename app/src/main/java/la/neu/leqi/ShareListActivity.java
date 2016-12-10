@@ -2,6 +2,7 @@ package la.neu.leqi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -36,6 +38,13 @@ public class ShareListActivity extends Activity implements BottomNavigationBar.O
     private NavigationView menu;
     private BottomNavigationBar bottomNavigationBar;
     private final Class<?>[] classes ={MainActivity.class,BicycleShopListActivity.class,null,ClubListActivity.class,ActivityListActivity.class};
+
+    @Override
+    protected void onStart() {
+        initHead();
+        super.onStart();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +101,28 @@ public class ShareListActivity extends Activity implements BottomNavigationBar.O
             }
         }, 500);
     }
-
+    private void initHead(){
+        final View headerView = menu.getHeaderView(0);
+        final TextView name = (TextView) headerView.findViewById(R.id.name);
+        final TextView textView = (TextView) headerView.findViewById(R.id.textView);
+        final SharedPreferences user = getSharedPreferences("user", MODE_PRIVATE);
+        final String username = user.getString("username", "");
+        String token = user.getString("token","");
+        if (!username.isEmpty()&&!token.isEmpty()) {
+            headerView.setClickable(false);
+        }else{
+            name.setText("登录/注册");
+            textView.setText("Hello,leqi!");
+            headerView.setClickable(true);
+            headerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ShareListActivity.this, LogAndRegisterActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
     @Override
     public void onTabSelected(int position) {
         if(classes[position]!=null){
