@@ -18,7 +18,7 @@ public class ActivityBean implements Serializable{
     private int count;
     private String startPlace;//
     private String endPlace;//
-    private String activityPlace;
+
     private String participateWay;//
     private String owner;
     private String requirement;//
@@ -44,7 +44,7 @@ public class ActivityBean implements Serializable{
     public ActivityBean() {
     }
 
-    public ActivityBean(int activityId, String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int count, String startPlace, String endPlace, String activityPlace, String participateWay, String owner, String requirement) {
+    public ActivityBean(int activityId, String title, String description, String startTime, String endTime, String releaseTime, ArrayList<String> pic_listp, int count, String startPlace, String endPlace,  String participateWay, String owner, String requirement) {
         this.activityId = activityId;
         this.title = title;
         this.description = description;
@@ -55,7 +55,7 @@ public class ActivityBean implements Serializable{
         this.count = count;
         this.startPlace = startPlace;
         this.endPlace = endPlace;
-        this.activityPlace = activityPlace;
+
         this.participateWay = participateWay;
         this.owner = owner;
         this.requirement = requirement;
@@ -142,13 +142,8 @@ public class ActivityBean implements Serializable{
     }
 
     public String getActivityPlace() {
-        return activityPlace;
+        return startPlace;
     }
-
-    public void setActivityPlace(String activityPlace) {
-        this.activityPlace = activityPlace;
-    }
-
     public String getParticipateWay() {
         return participateWay;
     }
