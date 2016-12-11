@@ -6,7 +6,7 @@
 
     <ImageView
         android:layout_width="@dimen/activity_item_height"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_height="@dimen/activity_item_height"
         android:id="@+id/club_list_item_pic" />
     <LinearLayout

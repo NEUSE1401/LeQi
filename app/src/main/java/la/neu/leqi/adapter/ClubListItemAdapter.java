@@ -95,7 +95,7 @@ public class ClubListItemAdapter extends BaseAdapter implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent=new Intent(context, ConcreteClubActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putSerializable("club",clubs.get(i));
+        bundle.putSerializable("club",clubs.get(i-1));
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
