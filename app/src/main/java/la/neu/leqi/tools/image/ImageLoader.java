@@ -147,7 +147,7 @@ public class ImageLoader {
                 Bitmap bitmap=null;
                 try {
                     bitmap = loadBitmap(uri, reqWidth, reqHeight);
-                }catch (OutOfMemoryError e){
+                }catch (OutOfMemoryError|IllegalStateException e){
                     Log.e("error",e.getMessage());
                 }
 

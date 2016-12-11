@@ -91,6 +91,11 @@ public class PersonalShareAdapter extends BaseAdapter {
         return view;
     }
 
+    public void setData(ArrayList<Share> data) {
+        this.shares = data;
+        notifyDataSetChanged();
+    }
+
     private static class ShareViewHolder {
         private TextView title_left;
         private ImageView image_left;

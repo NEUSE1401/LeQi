@@ -23,11 +23,11 @@
             android:text="我的分享" />
     </LinearLayout>
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/personal_share_list"
         android:listSelector="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 </LinearLayout>
