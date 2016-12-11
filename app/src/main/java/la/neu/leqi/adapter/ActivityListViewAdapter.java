@@ -102,7 +102,7 @@ public class ActivityListViewAdapter extends BaseAdapter implements AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent=new Intent(context, ConcreteActivityActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putSerializable("activity",activities.get(i));
+        bundle.putSerializable("activity",activities.get(i-1));
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
