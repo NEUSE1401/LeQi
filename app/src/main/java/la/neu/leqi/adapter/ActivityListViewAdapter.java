@@ -27,11 +27,17 @@ public class ActivityListViewAdapter extends BaseAdapter implements AdapterView.
     private ArrayList<ActivityBean> activities;
     private ImageLoader imageLoader;
     private Context context;
+    private boolean flag;
 
     public ActivityListViewAdapter(ImageLoader imageLoader, Context context) {
         this.activities = new ArrayList<>();
         this.imageLoader = imageLoader;
         this.context = context;
+        flag = true;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     public void setData(ArrayList<ActivityBean> activities) {
@@ -102,7 +108,12 @@ public class ActivityListViewAdapter extends BaseAdapter implements AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent=new Intent(context, ConcreteActivityActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putSerializable("activity",activities.get(i-1));
+        if(flag) {
+            bundle.putSerializable("activity", activities.get(i - 1));
+        }else {
+            bundle.putSerializable("activity", activities.get(i));
+
+        }
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
