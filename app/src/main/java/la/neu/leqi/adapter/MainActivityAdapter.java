@@ -147,7 +147,7 @@ public class MainActivityAdapter extends BaseAdapter {
             //乐骑活动显示
             final ImageView activity_pic = (ImageView) view.findViewById(R.id.activity_pic);
             activity_pic.setImageResource(R.drawable.default_background);
-            imageLoader.bindBitmap("http://neu.la/leqi/img/slider/Homeslider4.jpg", activity_pic);
+            imageLoader.bindBitmap("http://neu.la/leqi/img/slider/HomeBanner1.jpg", activity_pic);
             head_view = view;
         }
         return head_view;

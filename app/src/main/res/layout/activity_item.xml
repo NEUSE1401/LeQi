@@ -8,7 +8,7 @@
         android:id="@+id/activity_image"
         android:layout_width="@dimen/activity_item_height"
         android:layout_height="@dimen/activity_item_height"
-        android:scaleType="fitXY" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"

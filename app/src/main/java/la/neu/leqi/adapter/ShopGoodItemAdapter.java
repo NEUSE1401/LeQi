@@ -34,6 +34,11 @@ public class ShopGoodItemAdapter extends BaseAdapter {
         allGoods = new ArrayList<>();
     }
 
+    public void setData(ArrayList<Good> allGoods) {
+        this.allGoods = allGoods;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return (int) Math.ceil((double) allGoods.size() / 2);

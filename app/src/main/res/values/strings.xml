@@ -7,8 +7,8 @@
     <string name="WEB_LOGIN">http://neu.la/leqi/login.php</string>
     <string name="WEB_CLUB_LIST_REFRESH"></string>
     <string name="WEB_CLUB_LIST_DATA"></string>
-    <string name="WEB_ACTIVITY_LIST_REFRESH"></string>
-    <string name="WEB_ACTIVITY_LIST_DATA"></string>
+    <string name="WEB_ACTIVITY_LIST_REFRESH">http://neu.la/leqi/list_activities.php</string>
+    <string name="WEB_ACTIVITY_LIST_DATA">http://neu.la/leqi/list_activities.php</string>
     <string name="WEB_BICYCLE_SHOP_LIST_REFRESH"></string>
     <string name="WEB_BICYCLE_SHOP_LIST_DATA"></string>
     <string name="WEB_BICYCLE_SHARE_LIST_REFRESH">http://neu.la/leqi/share_list.php</string>

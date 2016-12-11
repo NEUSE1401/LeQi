@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 import la.neu.leqi.R;
 import la.neu.leqi.adapter.ShopGoodItemAdapter;
-import la.neu.leqi.bean.Good;
+import la.neu.leqi.thread.AllGoodListRefreshWebThread;
 import la.neu.leqi.tools.image.ImageLoader;
 
 /**
@@ -20,41 +18,52 @@ import la.neu.leqi.tools.image.ImageLoader;
  */
 
 public class ShopAllGoodContent extends Fragment {
+    private boolean isCreate=false;
+    private  ShopGoodItemAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        isCreate = true;
         View view=inflater.inflate(R.layout.shop_all_good_content, null);
         ListView list= (ListView) view.findViewById(R.id.shop_all_good_content);
         ImageLoader imageLoader=new ImageLoader(container.getContext());
 
-        final ArrayList<String> pics1 = new ArrayList<>();
-        pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        Good good1 = new Good(1,  "自行车1", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics1);
-        final ArrayList<String> pics2 = new ArrayList<>();
-        pics2.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
-        Good good2 = new Good(2, "自行车2",  "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null, pics2);
-        final ArrayList<String> pics3 = new ArrayList<>();
-        pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
-        Good good3 = new Good(3,  "自行车3", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics3);
-        final ArrayList<String> pics4 = new ArrayList<>();
-        pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
-        Good good4 = new Good(4,  "自行车4", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics4);
+//        final ArrayList<String> pics1 = new ArrayList<>();
+//        pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
+//        Good good1 = new Good(1,  "自行车1", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics1);
+//        final ArrayList<String> pics2 = new ArrayList<>();
+//        pics2.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
+//        Good good2 = new Good(2, "自行车2",  "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null, pics2);
+//        final ArrayList<String> pics3 = new ArrayList<>();
+//        pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
+//        Good good3 = new Good(3,  "自行车3", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics3);
+//        final ArrayList<String> pics4 = new ArrayList<>();
+//        pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
+//        Good good4 = new Good(4,  "自行车4", "XXpinp",19.9, 18.8,"拥有最新设计，S级液压减震",false,null,0,null,  pics4);
 
-        ShopGoodItemAdapter adapter=new ShopGoodItemAdapter(inflater,imageLoader);
-        adapter.addGood(good1);
-        adapter.addGood(good2);
-        adapter.addGood(good3);
-        adapter.addGood(good4);
-        adapter.addGood(good1);
-        adapter.addGood(good2);
-        adapter.addGood(good3);
-        adapter.addGood(good4);
-        adapter.addGood(good1);
+          adapter=new ShopGoodItemAdapter(inflater,imageLoader);
+
+//        adapter.addGood(good1);
+//        adapter.addGood(good2);
+//        adapter.addGood(good3);
+//        adapter.addGood(good4);
+//        adapter.addGood(good1);
+//        adapter.addGood(good2);
+//        adapter.addGood(good3);
+//        adapter.addGood(good4);
+//        adapter.addGood(good1);
 
         list.setAdapter(adapter);
+        new AllGoodListRefreshWebThread(getString(R.string.WEB_BASE),adapter,getContext()).execute();
         //list.setOnItemClickListener(adapter);
         return view;
     }
 
-
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(!isVisibleToUser&&isCreate){
+            new AllGoodListRefreshWebThread(getString(R.string.WEB_BASE),adapter,getContext()).execute();
+        }
+    }
 }

@@ -86,7 +86,6 @@ public class ShareListActivity extends Activity implements BottomNavigationBar.O
         pullToRefreshRecycleView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-                System.out.println("aaaa");
                 new ShareListRefreshWebThread(getResources().getString(R.string.WEB_BICYCLE_SHARE_LIST_REFRESH),pullToRefreshRecycleView,shareListAdapter,ShareListActivity.this).execute();
             }
 
@@ -104,13 +103,6 @@ public class ShareListActivity extends Activity implements BottomNavigationBar.O
                 pullToRefreshRecycleView.setRefreshing();
             }
         }, 500);
-        pullToRefreshRecycleView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("erwer");
-                pullToRefreshRecycleView.setRefreshing();
-            }
-        });
     }
     private void initHead(){
         final View headerView = menu.getHeaderView(0);

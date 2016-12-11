@@ -80,15 +80,33 @@ public class MainListRefreshWebThread extends AsyncTask<Void, Void,MainBean> {
 //        goods.add(good2);
 //        goods.add(good3);
 //        goods.add(good4);
-        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1,10);
-        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2,100);
-        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3,45);
-        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4,20);
-        final ArrayList<ActivityBean> activityBeen = new ArrayList<>();
-        activityBeen.add(activityBean1);
-        activityBeen.add(activityBean2);
-        activityBeen.add(activityBean3);
-        activityBeen.add(activityBean4);
+//        final ActivityBean activityBean1 = new ActivityBean(1, "活动1", "2016-11-3", "2016-11-3", pics1,10);
+//        final ActivityBean activityBean2 = new ActivityBean(2, "活动2", "2016-11-3", "2016-11-3", pics2,100);
+//        final ActivityBean activityBean3 = new ActivityBean(3, "活动3", "2016-11-3", "2016-11-3", pics3,45);
+//        final ActivityBean activityBean4 = new ActivityBean(4, "活动4", "2016-11-3", "2016-11-3", pics4,20);
+        final ArrayList<ActivityBean> activityBeans = new ArrayList<>();
+        try {
+            final String result = HttpGet.send(BASE_URL+"list_activities.php");
+            final JSONArray jsonArray = new JSONArray(result);
+            for (int i = 0;i<jsonArray.length();i++){
+                if(i<4){
+                    final JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    final ArrayList<String> pics = new ArrayList<>();
+                    final JSONArray picsAl = jsonObject.getJSONArray("pics");
+                    for (int j = 0; j < picsAl.length(); j++) {
+                        pics.add(BASE_URL+picsAl.getString(j));
+                    }
+                    final ActivityBean activityBean = new ActivityBean(jsonObject.getInt("activity_id"),
+                            jsonObject.getString("title"),jsonObject.getString("start_time"),jsonObject.getString("end_time"),pics,(int)(1+Math.random()*(100-1+1)));
+                    activityBeans.add(activityBean);
+                }else {
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         final Share share1 = new Share(1, "分享1", pics1);
         final Share share2 = new Share(2, "分享2", pics2);
         final Share share3 = new Share(3, "分享3", pics3);
@@ -116,7 +134,7 @@ public class MainListRefreshWebThread extends AsyncTask<Void, Void,MainBean> {
         }
         final MainBean mainBean = new MainBean();
         mainBean.setGoods(goods);
-        mainBean.setActivities(activityBeen);
+        mainBean.setActivities(activityBeans);
         mainBean.setShares(shares);
         return mainBean;
     }
