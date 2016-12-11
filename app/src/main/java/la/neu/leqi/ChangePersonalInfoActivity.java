@@ -2,6 +2,7 @@ package la.neu.leqi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class ChangePersonalInfoActivity extends Activity {
     private Button changeCommit;
     private TextView back_title;
     private ImageView imageView;
-
+    private EditText changeEditText;
 
     private String contentAfterChange;
     private int id;
@@ -40,6 +41,8 @@ public class ChangePersonalInfoActivity extends Activity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              // Intent intent=new Intent(ChangePersonalInfoActivity.this,PersonalInformationActivity.class);
+               // startActivity(intent);
                 onBackPressed();
             }
         });
@@ -67,18 +70,25 @@ public class ChangePersonalInfoActivity extends Activity {
             private String changeRemind="";
             @Override
             public void onClick(View view) {
+                final SharedPreferences user = getSharedPreferences("user", MODE_PRIVATE);
+                if(id==R.id.change_nickname){
+
+                    contentAfterChange=changeEditText.getText().toString();
+                    user.edit().putString("nick",contentAfterChange).commit();
+                     changeRemind="昵称已改为"+contentAfterChange;
+                }else if(id==R.id.change_contact){
+                    contentAfterChange=changeEditText.getText().toString();
+                    user.edit().putString("contact",contentAfterChange).commit();
+                    changeRemind="联系方式已改为"+contentAfterChange;
+                }else if(id==R.id.change_sex){
+                    changeRemind="性别已改为"+contentAfterChange;
+                    user.edit().putString("sex",contentAfterChange).commit();
+                }
                 if(contentAfterChange.equals(contentBeforeChange)){
                     changeRemind="未改变";
                     Toast toast=Toast.makeText(ChangePersonalInfoActivity.this,changeRemind,Toast.LENGTH_LONG);
                     toast.show();
                     return;
-                }
-                if(id==R.id.change_nickname){
-                     changeRemind="昵称已改为"+contentAfterChange;
-                }else if(id==R.id.change_contact){
-                    changeRemind="联系方式已改为"+contentAfterChange;
-                }else if(id==R.id.change_sex){
-                    changeRemind="性别已改为"+contentAfterChange;
                 }
                 Toast toast=Toast.makeText(ChangePersonalInfoActivity.this,changeRemind,Toast.LENGTH_LONG);
                 toast.show();
@@ -89,9 +99,9 @@ public class ChangePersonalInfoActivity extends Activity {
 
     public void setChangeEditText(String remind){
         changeSexArea.setVisibility(LinearLayout.GONE);
-        EditText changeEditText= (EditText) findViewById(R.id.change_editText);
+        changeEditText= (EditText) findViewById(R.id.change_editText);
         changeEditText.setText(remind);
-        contentAfterChange=changeEditText.getText().toString();
+        //contentAfterChange=changeEditText.getText().toString();
     }
 
     public void setSexChooseRadioButton(String content){

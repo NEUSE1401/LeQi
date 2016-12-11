@@ -19,7 +19,8 @@ public class Clinet {
     private String city;
     private String distract;
     private String detial;
-
+    private String address;
+    //private String birthday;
     public Clinet(String nick_name,Calendar birthday, String gender, String contactWay, String signature, String province, String city, String distract, String detial) {
         this.nick_name = nick_name;
         this.birthday=birthday;
@@ -30,6 +31,16 @@ public class Clinet {
         this.city = city;
         this.distract = distract;
         this.detial = detial;
+    }
+
+    public Clinet(String nick_name, String gender, Calendar birthday, String contactWay, String signature, String address) {
+
+        this.nick_name = nick_name;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.contactWay = contactWay;
+        this.signature = signature;
+        this.address = address;
     }
 
     public int getUserId() {
@@ -57,7 +68,7 @@ public class Clinet {
     }
 
     public String getBirthday() {
-        return birthday.get(Calendar.YEAR)+"-"+birthday.get(Calendar.MONTH)+"-"+birthday.get(Calendar.DAY_OF_MONTH);
+        return birthday.YEAR+"-"+birthday.MONTH+"-"+birthday.DAY_OF_MONTH;
     }
 
     public void setBirthday(Calendar birthday) {

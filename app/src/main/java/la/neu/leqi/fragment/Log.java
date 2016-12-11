@@ -52,6 +52,7 @@ public class Log extends Fragment {
                 if (msg.what == 1) {
                     final SharedPreferences user = getActivity().getSharedPreferences("user", MODE_PRIVATE);
                     user.edit().putString("username",msg.getData().getString("username")).apply();
+
                     user.edit().putString("token",msg.getData().getString("token")).apply();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
