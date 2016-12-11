@@ -6,10 +6,15 @@ import android.support.v7.widget.RecyclerView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import la.neu.leqi.R;
 import la.neu.leqi.adapter.ShareListAdapter;
 import la.neu.leqi.bean.Share;
+import la.neu.leqi.tools.HttpGet;
 
 /**
  * @author hxs
@@ -31,30 +36,25 @@ public class ShareListDataWebThread extends AsyncTask<Void, Void, ArrayList<Shar
 
     @Override
     protected ArrayList<Share> doInBackground(Void... voids) {
-        //        try {
-//            final String result = HttpGet.send(BASE_URL);
-//            final JSONObject jsonObject = new JSONObject(result);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        final ArrayList<String> pics1 = new ArrayList<>();
-        pics1.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        final ArrayList<String> pics2 = new ArrayList<>();
-        pics2.add("http://neu.la/leqi/img/slider/Homeslider2.jpg");
-        final ArrayList<String> pics3 = new ArrayList<>();
-        pics3.add("http://neu.la/leqi/img/slider/Homeslider3.jpg");
-        final ArrayList<String> pics4 = new ArrayList<>();
-        pics4.add("http://neu.la/leqi/img/slider/Homeslider4.jpg");
         final ArrayList<Share> shares = new ArrayList<>();
-        final Share share1 = new Share(1, "分享1", pics1);
-        final Share share2 = new Share(2, "分享2", pics2);
-        final Share share3 = new Share(3, "分享3", pics3);
-        final Share share4 = new Share(4, "分享4", pics4);
-        shares.add(share1);
-        shares.add(share2);
-        shares.add(share3);
-        shares.add(share4);
+        try {
+            final String result = HttpGet.send(BASE_URL);
+            final JSONArray jsonArray = new JSONArray(result);
+            for (int i = 0; i < jsonArray.length()&&i<4; i++) {
+                final JSONObject jsonObject = jsonArray.getJSONObject(i);
+                final ArrayList<String> pics = new ArrayList<>();
+                final JSONArray picsAl = jsonObject.getJSONArray("pics");
+                for (int j = 0; j < picsAl.length(); j++) {
+                    pics.add(context.getString(R.string.WEB_BASE) + picsAl.getString(j));
+                }
+                final Share share = new Share(jsonObject.getInt("share_id"), jsonObject.getString("theme"), pics);
+                shares.add(share);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return shares;
+
     }
 
     @Override

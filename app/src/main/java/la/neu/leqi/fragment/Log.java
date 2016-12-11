@@ -55,6 +55,7 @@ public class Log extends Fragment {
                     user.edit().putString("token",msg.getData().getString("token")).apply();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
                 } else {
                     Toast.makeText(container.getContext(), "账号密码错误", Toast.LENGTH_SHORT).show();
                 }

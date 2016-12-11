@@ -21,21 +21,23 @@ import la.neu.leqi.R;
  * Created by lenovo on 2016/11/2.
  */
 
-public class MenuClickListener  implements NavigationView.OnNavigationItemSelectedListener {
+public class MenuClickListener implements NavigationView.OnNavigationItemSelectedListener {
 
     private Context context;
     private DrawerLayout drawerLayout;
-    public MenuClickListener(Context context,DrawerLayout drawerLayout){
-        this.context=context;
-        this.drawerLayout=drawerLayout;
+
+    public MenuClickListener(Context context, DrawerLayout drawerLayout) {
+        this.context = context;
+        this.drawerLayout = drawerLayout;
     }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
         final SharedPreferences user = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         final String username = user.getString("username", "");
-        String token = user.getString("token","");
-        if (!username.isEmpty()&&!token.isEmpty()) {
+        String token = user.getString("token", "");
+        if (!username.isEmpty() && !token.isEmpty()) {
             drawerLayout.closeDrawer(Gravity.LEFT);
             if (id == R.id.personal_information) {
                 Intent intent = new Intent(context, PersonalInformationActivity.class);
@@ -53,11 +55,12 @@ public class MenuClickListener  implements NavigationView.OnNavigationItemSelect
             } else if (id == R.id.setting) {
 
             } else if (id == R.id.log_out) {
+                user.edit().clear().apply();
                 Intent intent = new Intent(context, LogAndRegisterActivity.class);
                 context.startActivity(intent);
             }
-        }else{
-            Toast.makeText(context,"请先登入",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "请先登入", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawer(Gravity.LEFT);
         }
 

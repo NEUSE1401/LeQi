@@ -55,7 +55,7 @@ public class ShareListAdapter extends RecyclerView.Adapter<ShareListAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv.setText(shares.get(position).getTheme());
-        holder.im.setImageResource(R.drawable.default_background);
+      /// holder.im.setImageResource(R.drawable.default_background);
         if (shares.get(position).getPic_list().size()!=0) {
             imageLoader.bindBitmap(shares.get(position).getPic_list().get(0), holder.im);
         }

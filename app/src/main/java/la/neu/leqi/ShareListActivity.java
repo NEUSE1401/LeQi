@@ -15,6 +15,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -54,6 +56,7 @@ public class ShareListActivity extends Activity implements BottomNavigationBar.O
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
         //导航栏
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         BottomNavigationBarBuilder.build(bottomNavigationBar,2);
@@ -83,6 +86,7 @@ public class ShareListActivity extends Activity implements BottomNavigationBar.O
         pullToRefreshRecycleView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+                System.out.println("aaaa");
                 new ShareListRefreshWebThread(getResources().getString(R.string.WEB_BICYCLE_SHARE_LIST_REFRESH),pullToRefreshRecycleView,shareListAdapter,ShareListActivity.this).execute();
             }
 
@@ -100,19 +104,31 @@ public class ShareListActivity extends Activity implements BottomNavigationBar.O
                 pullToRefreshRecycleView.setRefreshing();
             }
         }, 500);
+        pullToRefreshRecycleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("erwer");
+                pullToRefreshRecycleView.setRefreshing();
+            }
+        });
     }
     private void initHead(){
         final View headerView = menu.getHeaderView(0);
         final TextView name = (TextView) headerView.findViewById(R.id.name);
         final TextView textView = (TextView) headerView.findViewById(R.id.textView);
+        final ImageView user_icon = (ImageView) headerView.findViewById(R.id.imageView);
         final SharedPreferences user = getSharedPreferences("user", MODE_PRIVATE);
         final String username = user.getString("username", "");
         String token = user.getString("token","");
         if (!username.isEmpty()&&!token.isEmpty()) {
             headerView.setClickable(false);
+            user_icon.setImageResource(R.drawable.deault_icon2);
+            userFace.setImageResource(R.drawable.default_icon);
         }else{
             name.setText("登录/注册");
             textView.setText("Hello,leqi!");
+            user_icon.setImageResource(R.drawable.user);
+            userFace.setImageResource(R.drawable.user);
             headerView.setClickable(true);
             headerView.setOnClickListener(new View.OnClickListener() {
                 @Override

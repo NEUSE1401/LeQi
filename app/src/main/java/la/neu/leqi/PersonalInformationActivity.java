@@ -3,6 +3,7 @@ package la.neu.leqi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -88,7 +89,10 @@ public class PersonalInformationActivity extends Activity{
         changeAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(PersonalInformationActivity.this, Datelistener, year, month, day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(PersonalInformationActivity.this,android.R.style.Theme_Holo_Light_Dialog_NoActionBar, Datelistener, year, month, day);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    datePickerDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_back));
+                }
                 datePickerDialog.show();
             }
         });

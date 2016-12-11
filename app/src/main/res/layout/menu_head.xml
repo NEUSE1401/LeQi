@@ -13,11 +13,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:padding="5dp"
+        android:padding="8dp"
         android:layout_width="@dimen/title_icon_max_size"
         android:layout_height="@dimen/title_icon_max_size"
         android:background="@drawable/circle_icon"
-        android:src="@drawable/deault_icon2" />
+        android:src="@drawable/user" />
 
     <TextView
         android:id="@+id/name"

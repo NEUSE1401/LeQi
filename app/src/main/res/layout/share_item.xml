@@ -14,11 +14,12 @@
             android:id="@+id/image_left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
+            android:scaleType="centerCrop"/>
         <TextView
             android:layout_alignParentBottom="true"
             android:textAlignment="center"
-            android:background="#9ad9d9d9"
+            android:background="#a4000000"
+            android:textColor="#ffffff"
             android:id="@+id/title_left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,11 +38,12 @@
             android:id="@+id/image_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
+            android:scaleType="centerCrop"/>
         <TextView
             android:layout_alignParentBottom="true"
             android:textAlignment="center"
-            android:background="#9ad9d9d9"
+            android:background="#a4000000"
+            android:textColor="#ffffff"
             android:id="@+id/title_right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

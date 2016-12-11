@@ -3,6 +3,7 @@
     <item name="TAG_KEY_URI" type="id" />
     <string name="separator">--</string>
     <!--WEB接口-->
+    <string name="WEB_BASE">http://neu.la/leqi/</string>
     <string name="WEB_LOGIN">http://neu.la/leqi/login.php</string>
     <string name="WEB_CLUB_LIST_REFRESH"></string>
     <string name="WEB_CLUB_LIST_DATA"></string>
@@ -10,9 +11,9 @@
     <string name="WEB_ACTIVITY_LIST_DATA"></string>
     <string name="WEB_BICYCLE_SHOP_LIST_REFRESH"></string>
     <string name="WEB_BICYCLE_SHOP_LIST_DATA"></string>
-    <string name="WEB_BICYCLE_SHARE_LIST_REFRESH"></string>
-    <string name="WEB_BICYCLE_SHARE_LIST_DATA"></string>
-    <string name="WEB_MAIN_LIST_REFRESH"></string>
+    <string name="WEB_BICYCLE_SHARE_LIST_REFRESH">http://neu.la/leqi/share_list.php</string>
+    <string name="WEB_BICYCLE_SHARE_LIST_DATA">http://neu.la/leqi/share_list.php</string>
+    <string name="WEB_MAIN_LIST_REFRESH">http://neu.la/leqi/</string>
     <string name="WEB_PERSONAL_ACTIVITY_LIST_REFRESH"></string>
     <string name="WEB_MY_COLLECTION_LIST_REFRESH"></string>
     <string name="WEB_REMOVE_SELF_ACTIVITY"></string>

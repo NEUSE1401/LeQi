@@ -9,6 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:paddingRight="1dp"
         android:background="@drawable/item_left"
         android:orientation="vertical">
 
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/content_left"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:id="@+id/content_left"
@@ -60,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/item_left"
+        android:paddingLeft="1dp"
         android:orientation="vertical">
 
         <ImageView
@@ -68,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/content_right"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:id="@+id/content_right"

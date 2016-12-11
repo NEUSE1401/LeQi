@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -109,14 +110,19 @@ public class MainActivity extends Activity implements View.OnTouchListener, Gest
         final View headerView = menu.getHeaderView(0);
         final TextView name = (TextView) headerView.findViewById(R.id.name);
         final TextView textView = (TextView) headerView.findViewById(R.id.textView);
+        final ImageView user_icon = (ImageView) headerView.findViewById(R.id.imageView);
         final SharedPreferences user = getSharedPreferences("user", MODE_PRIVATE);
         final String username = user.getString("username", "");
         String token = user.getString("token","");
         if (!username.isEmpty()&&!token.isEmpty()) {
             headerView.setClickable(false);
+            user_icon.setImageResource(R.drawable.deault_icon2);
+            userFace.setImageResource(R.drawable.default_icon);
         }else{
             name.setText("登录/注册");
             textView.setText("Hello,leqi!");
+            user_icon.setImageResource(R.drawable.user);
+            userFace.setImageResource(R.drawable.user);
             headerView.setClickable(true);
             headerView.setOnClickListener(new View.OnClickListener() {
                 @Override

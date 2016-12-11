@@ -144,7 +144,13 @@ public class ImageLoader {
 
             @Override
             public void run() {
-                Bitmap bitmap = loadBitmap(uri, reqWidth, reqHeight);
+                Bitmap bitmap=null;
+                try {
+                    bitmap = loadBitmap(uri, reqWidth, reqHeight);
+                }catch (OutOfMemoryError e){
+                    Log.e("error",e.getMessage());
+                }
+
                 if (bitmap != null) {
                     LoaderResult result = new LoaderResult(imageView, uri, bitmap);
                     mMainHandler.obtainMessage(MESSAGE_POST_RESULT, result).
