@@ -96,7 +96,7 @@ public class BicycleShopListViewItemAdapter extends BaseAdapter implements Adapt
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent=new Intent(context, ShopActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putSerializable("shop",shops.get(i));
+        bundle.putSerializable("shop",shops.get(i-1));
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

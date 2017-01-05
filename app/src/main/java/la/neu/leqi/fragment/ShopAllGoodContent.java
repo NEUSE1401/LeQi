@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import la.neu.leqi.R;
 import la.neu.leqi.adapter.ShopGoodItemAdapter;
+import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.thread.AllGoodListRefreshWebThread;
 import la.neu.leqi.tools.image.ImageLoader;
 
@@ -20,6 +21,8 @@ import la.neu.leqi.tools.image.ImageLoader;
 public class ShopAllGoodContent extends Fragment {
     private boolean isCreate=false;
     private  ShopGoodItemAdapter adapter;
+    private int shopID;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

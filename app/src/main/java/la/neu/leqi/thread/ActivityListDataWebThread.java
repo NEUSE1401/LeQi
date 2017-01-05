@@ -40,17 +40,22 @@ public class ActivityListDataWebThread extends AsyncTask<Void, Void, ArrayList<A
     protected ArrayList<ActivityBean> doInBackground(Void... voids) {
         final ArrayList<ActivityBean> activityBeans = new ArrayList<>();
         try {
+            BASE_URL="http://huyumi.cn/leqi/mobileForAllActivities.action";
             final String result = HttpGet.send(BASE_URL);
             final JSONArray jsonArray = new JSONArray(result);
             for (int i = 0; i < jsonArray.length()&&i<5; i++) {
                 final JSONObject jsonObject = jsonArray.getJSONObject(i);
                 final ArrayList<String> pics = new ArrayList<>();
-                final JSONArray picsAl = jsonObject.getJSONArray("pics");
+                final JSONArray picsAl = jsonObject.getJSONArray("clubActivityPicEntitySet");
                 for (int j = 0; j < picsAl.length(); j++) {
-                    pics.add(context.getString(R.string.WEB_BASE) + picsAl.getString(j));
+                    pics.add("http://huyumi.cn/leqi/" + picsAl.getJSONObject(j).getString("path"));
                 }
-                final ActivityBean activityBean = new ActivityBean(jsonObject.getInt("activity_id"),
-                        jsonObject.getString("title"), jsonObject.getString("start_time"), jsonObject.getString("end_time"), pics, (int) (1 + Math.random() * (100 - 1 + 1)));
+                final ActivityBean activityBean = new ActivityBean(jsonObject.getInt("activityId"),
+                        jsonObject.getString("title"), jsonObject.getString("startTime"), jsonObject.getString("endTime"), pics, (int) (1 + Math.random() * (100 - 1 + 1)));
+                activityBean.setStartPlace(jsonObject.getString("startPlace"));
+                activityBean.setParticipateWay(jsonObject.getString("participateWay"));
+                activityBean.setRequirement(jsonObject.getString("requirement"));
+                activityBean.setDescription(jsonObject.getString("description"));
                 activityBeans.add(activityBean);
             }
         } catch (Exception e) {

@@ -38,14 +38,17 @@ public class ClubListRefreshWebThread extends AsyncTask<Void, Void, ArrayList<Cl
     protected ArrayList<Club> doInBackground(Void... voids) {
         ArrayList<Club> clubs=new ArrayList<>();
         try {
-            final String result = HttpGet.send(BASE_URL);
+            BASE_URL="http://huyumi.cn/leqi/mobileForAllClubs.action";
+            String result = HttpGet.send(BASE_URL);
+
+            //JSONParser parser_obj = new JSONParser();
             final JSONArray jsonArray = new JSONArray(result);
             for (int i = 0; i < jsonArray.length(); i++) {
                 final JSONObject jsonObject = jsonArray.getJSONObject(i);
                 final ArrayList<String> pics = new ArrayList<>();
                 final JSONArray picsAl = jsonObject.getJSONArray("pics");
                 for (int j = 0; j < picsAl.length(); j++) {
-                    pics.add(context.getString(R.string.WEB_BASE) + picsAl.getString(j));
+                    pics.add("http://huyumi.cn/leqi/" + picsAl.getJSONObject(j).getString("path"));
                 }
                 final Club club = new Club(jsonObject.getString("title"), jsonObject.getString("owner"), jsonObject.getString("description"),
                         5, jsonObject.getString("contact"), jsonObject.getString("province"),

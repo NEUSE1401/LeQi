@@ -6,10 +6,14 @@ import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import la.neu.leqi.adapter.BicycleShopListViewItemAdapter;
 import la.neu.leqi.bean.BicycleShop;
+import la.neu.leqi.tools.HttpGet;
 
 /**
  * @author HeXunshi
@@ -30,26 +34,35 @@ public class BicycleShopListRefreshWebThread extends AsyncTask<Void, Void, Array
     }
     @Override
     protected ArrayList<BicycleShop> doInBackground(Void... voids) {
-        //        try {
-//            final String result = HttpGet.send(BASE_URL);
-//            final JSONObject jsonObject = new JSONObject(result);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        BicycleShop shop1=new BicycleShop("2b101","槲荷缎花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
-        BicycleShop shop2=new BicycleShop("2b102","花花","超值优惠",5,"1878117xxxx",101,"东北大学浑南校区");
-        ArrayList<String> pic=new ArrayList<>();
-        pic.add("http://neu.la/leqi/img/slider/Homeslider1.jpg");
-        shop1.setShopPics(pic);
         ArrayList<BicycleShop> shops=new ArrayList<>();
-        shops.add(shop1);
-        shops.add(shop2);
-        shops.add(shop1);
-        shops.add(shop2);
-        shops.add(shop1);
-        shops.add(shop2);
-        shops.add(shop1);
-        shops.add(shop2);
+        try {
+            BASE_URL="http://huyumi.cn/leqi/mobileForAllShops.action";
+            final String result = HttpGet.send(BASE_URL);
+            final JSONArray jsonArray = new JSONArray(result);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                final JSONObject jsonObject = jsonArray.getJSONObject(i);
+                final ArrayList<String> pics = new ArrayList<>();
+                final JSONArray picsAl = jsonObject.getJSONArray("pics");
+                for (int j = 0; j < picsAl.length(); j++) {
+                    pics.add("http://huyumi.cn/leqi/" + picsAl.getJSONObject(j).getString("path"));
+                }
+                BicycleShop shop=new BicycleShop();
+                shop.setShopPics(pics);
+                shop.setAddress(jsonObject.getString("province")+jsonObject.getString("city")+jsonObject.getString("district")+
+                        jsonObject.getString("detail"));
+                shop.setShopName(jsonObject.getString("shopName"));
+                shop.setTele(jsonObject.getString("tel"));
+                shop.setDeccription(jsonObject.getString("description"));
+                shop.setShopId(jsonObject.getInt("shopId"));
+                shop.setOwnerName(jsonObject.getString("ownerName"));
+
+                shops.add(shop);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return shops;
     }
 

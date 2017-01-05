@@ -1,5 +1,6 @@
 package la.neu.leqi;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import la.neu.leqi.adapter.CustomFragmentAdapter;
+import la.neu.leqi.bean.BicycleShop;
 import la.neu.leqi.fragment.ShopActivityContent;
 import la.neu.leqi.fragment.ShopAllGoodContent;
 import la.neu.leqi.fragment.ShopHomePageContent;
@@ -30,10 +32,16 @@ public class ShopActivity extends AppCompatActivity{
     private ImageView back;
     private final int default_icons[]={R.drawable.shop_home_default,R.drawable.all_commodites_default,R.drawable.newest_commodites_default,R.drawable.shop_activities_default};
     private final int selected_icons[]={R.drawable.shop_home_selected,R.drawable.all_commodites_selected,R.drawable.newest_commodites_selected,R.drawable.shop_activities_selected};
+
+    private BicycleShop shop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+
+        Intent intent=getIntent();
+        shop= (BicycleShop) intent.getSerializableExtra("shop");
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -93,7 +101,11 @@ public class ShopActivity extends AppCompatActivity{
      */
     private void initFragment(){
         fragmentArrayList = new ArrayList<>();
-        fragmentArrayList.add(new ShopHomePageContent());
+        ShopHomePageContent shopHomePageContent=new ShopHomePageContent();
+        Bundle shopData=new Bundle();
+        shopData.putSerializable("shop",shop);
+        shopHomePageContent.setArguments(shopData);
+        fragmentArrayList.add(shopHomePageContent);
         fragmentArrayList.add(new ShopAllGoodContent());
         fragmentArrayList.add(new ShopLatestGoodContent());
         fragmentArrayList.add(new ShopActivityContent());
