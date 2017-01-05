@@ -78,6 +78,7 @@ public class PersonalActivityActivity extends Activity {
         pullToRefreshSwipeMenuListView.setScrollingWhileRefreshingEnabled(true);
         imageLoader = new ImageLoader(this);
         final ActivityListViewAdapter adapter = new ActivityListViewAdapter(imageLoader, this);
+        adapter.setFlag(false);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(adapter);
         pullToRefreshSwipeMenuListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<SwipeMenuListView>() {
